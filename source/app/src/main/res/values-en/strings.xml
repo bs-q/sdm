@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">SDM</string>
+    <string name="msg_loading">Please wait...</string>
+
+    <!--Network error-->
+    <string name="newtwork_error">Unable to connect, please check your network connection.</string>
+    <string name="newtwork_error_button_retry">Retry</string>
+    <string name="newtwork_error_button_exit">Quit</string>
+    <string name="home">Home</string>
+    <string name="cart">Cart</string>
+    <string name="account">Account</string>
+    <string name="message">Message</string>
+</resources>
