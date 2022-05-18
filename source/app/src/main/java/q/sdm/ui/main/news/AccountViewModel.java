@@ -4,9 +4,9 @@ import q.sdm.MVVMApplication;
 import q.sdm.data.Repository;
 import q.sdm.ui.base.fragment.BaseFragmentViewModel;
 
-public class NewsViewModel extends BaseFragmentViewModel {
+public class AccountViewModel extends BaseFragmentViewModel {
 
-    public NewsViewModel(Repository repository, MVVMApplication application) {
+    public AccountViewModel(Repository repository, MVVMApplication application) {
         super(repository, application);
     }
 

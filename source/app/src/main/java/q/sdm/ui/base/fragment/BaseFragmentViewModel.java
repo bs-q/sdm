@@ -13,7 +13,7 @@ import lombok.Setter;
 public class BaseFragmentViewModel extends ViewModel {
 
     protected final Repository repository;
-    protected final MVVMApplication application;
+    public final MVVMApplication application;
     protected final MutableLiveData<ToastMessage> mErrorMessage = new MutableLiveData<>();
     protected final ObservableBoolean mIsLoading = new ObservableBoolean();
     protected final CompositeDisposable compositeDisposable = new CompositeDisposable();

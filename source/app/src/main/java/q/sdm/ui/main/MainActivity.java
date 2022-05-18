@@ -12,7 +12,7 @@ import q.sdm.R;
 import q.sdm.databinding.ActivityMainBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
-import q.sdm.ui.main.news.NewsFragment;
+import q.sdm.ui.main.news.AccountFragment;
 import q.sdm.ui.main.revenue.RevenueFragment;
 import q.sdm.ui.main.setting.SettingFragment;
 import q.sdm.ui.main.store.StoreFragment;
@@ -28,7 +28,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     private StoreFragment storeFragment;
     private RevenueFragment revenueFragment;
-    private NewsFragment newsFragment;
+    private AccountFragment accountFragment;
     private SettingFragment settingFragment;
     private FragmentManager fm;
 
@@ -57,13 +57,13 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                     active = revenueFragment;
                     return true;
                 case R.id.news:
-                    if (newsFragment == null){
-                        newsFragment = new NewsFragment();
-                        fm.beginTransaction().add(R.id.nav_host_fragment, newsFragment, NEWS).hide(active).commit();
+                    if (accountFragment == null){
+                        accountFragment = new AccountFragment();
+                        fm.beginTransaction().add(R.id.nav_host_fragment, accountFragment, NEWS).hide(active).commit();
                     } else {
-                        fm.beginTransaction().hide(active).show(newsFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                        fm.beginTransaction().hide(active).show(accountFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
                     }
-                    active = newsFragment;
+                    active = accountFragment;
                     return true;
                 case R.id.settings:
                     if (settingFragment == null){

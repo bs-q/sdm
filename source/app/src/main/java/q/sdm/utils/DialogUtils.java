@@ -1,10 +1,13 @@
 package q.sdm.utils;
 
+import static android.view.Gravity.CENTER;
+
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -53,13 +56,14 @@ public class DialogUtils {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
 
         View layout = inflater.inflate(R.layout.layout_progressbar, null);
-        if(msg!=null) {
-            TextView progressbarMsg = (TextView) layout.findViewById(R.id.progressbar_msg);
-            progressbarMsg.setText(msg);
-        }
 
         builder.setCancelable(false); // if you want user to wait for some process to finish,
         builder.setView(layout);
-        return builder.create();
+        Dialog dialog = builder.create();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.getWindow().setGravity(CENTER);
+        dialog.getWindow().setDimAmount(0f);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        return dialog;
     }
 }

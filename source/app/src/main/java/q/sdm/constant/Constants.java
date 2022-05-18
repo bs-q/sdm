@@ -1,5 +1,7 @@
 package q.sdm.constant;
 
+import java.util.regex.Pattern;
+
 public class Constants {
     public static final String DB_NAME = "mvvm.db";
     public static final String PREF_NAME = "mvvm.prefs";
@@ -14,6 +16,9 @@ public class Constants {
     public static final int DONE=1;
     public static final int CANCEL=2;
 
+
+    public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
+            Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
 
     private Constants(){
 

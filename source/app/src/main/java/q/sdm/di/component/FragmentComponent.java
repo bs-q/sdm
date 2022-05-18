@@ -4,7 +4,7 @@ package q.sdm.di.component;
 import dagger.Component;
 import q.sdm.di.module.FragmentModule;
 import q.sdm.di.scope.FragmentScope;
-import q.sdm.ui.main.news.NewsFragment;
+import q.sdm.ui.main.news.AccountFragment;
 import q.sdm.ui.main.revenue.RevenueFragment;
 import q.sdm.ui.main.setting.SettingFragment;
 import q.sdm.ui.main.store.StoreFragment;
@@ -16,7 +16,7 @@ public interface FragmentComponent {
 
     void inject(StoreFragment fragment);
 
-    void inject(NewsFragment fragment);
+    void inject(AccountFragment fragment);
 
     void inject(SettingFragment fragment);
 }

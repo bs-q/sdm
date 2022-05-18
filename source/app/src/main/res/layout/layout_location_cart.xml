@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="total"
+            type="androidx.databinding.ObservableInt" />
+        <variable
+            name="location"
+            type="androidx.databinding.ObservableField&lt;String>" />
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:clipToPadding="false"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:onClick="@{(v)->click.onClick(v)}"
+            android:id="@+id/location"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="@dimen/_15ssp"
+            app:layout_constraintEnd_toStartOf="@id/cart"
+            android:drawablePadding="@dimen/_3sdp"
+            android:drawableStart="@drawable/location"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:textColor="@color/black"
+            android:text="Khu Chế Xuất Tân Thuận"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_marginVertical="@dimen/_6sdp"
+            android:onClick="@{(v)->click.onClick(v)}"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:id="@+id/cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/cart_notification"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <ImageView
+            android:translationY="@dimen/_minus1sdp"
+            android:translationX="@dimen/_2sdp"
+            app:layout_constraintTop_toTopOf="@id/cart"
+            app:layout_constraintEnd_toEndOf="@id/cart"
+            android:id="@+id/cart_indicator"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:src="@drawable/indicator"
+            />
+        <TextView
+            android:translationY="@dimen/_minus1sdp"
+            android:translationX="@dimen/_2sdp"
+            android:textColor="@color/white"
+            android:text="9"
+            app:layout_constraintTop_toTopOf="@id/cart_indicator"
+            app:layout_constraintStart_toStartOf="@id/cart_indicator"
+            app:layout_constraintEnd_toEndOf="@id/cart_indicator"
+            app:layout_constraintBottom_toBottomOf="@id/cart_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/_8ssp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

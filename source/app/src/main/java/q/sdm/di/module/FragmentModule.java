@@ -14,7 +14,7 @@ import q.sdm.ViewModelProviderFactory;
 import q.sdm.data.Repository;
 import q.sdm.di.scope.FragmentScope;
 import q.sdm.ui.base.fragment.BaseFragment;
-import q.sdm.ui.main.news.NewsViewModel;
+import q.sdm.ui.main.news.AccountViewModel;
 import q.sdm.ui.main.revenue.RevenueViewModel;
 import q.sdm.ui.main.setting.SettingViewModel;
 import q.sdm.ui.main.store.StoreViewModel;
@@ -62,10 +62,10 @@ public class FragmentModule {
 
     @Provides
     @FragmentScope
-    NewsViewModel provideNewsViewModel(Repository repository, Context application) {
-        Supplier<NewsViewModel> supplier = () -> new NewsViewModel(repository, (MVVMApplication)application);
-        ViewModelProviderFactory<NewsViewModel> factory = new ViewModelProviderFactory<>(NewsViewModel.class, supplier);
-        return new ViewModelProvider(fragment, factory).get(NewsViewModel.class);
+    AccountViewModel provideNewsViewModel(Repository repository, Context application) {
+        Supplier<AccountViewModel> supplier = () -> new AccountViewModel(repository, (MVVMApplication)application);
+        ViewModelProviderFactory<AccountViewModel> factory = new ViewModelProviderFactory<>(AccountViewModel.class, supplier);
+        return new ViewModelProvider(fragment, factory).get(AccountViewModel.class);
     }
     @Provides
     @FragmentScope

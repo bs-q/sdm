@@ -5,15 +5,16 @@
 
         <variable
             name="a"
-            type="q.sdm.ui.main.news.NewsFragment" />
+            type="q.sdm.ui.main.news.AccountFragment" />
 
         <variable
             name="vm"
-            type="q.sdm.ui.main.news.NewsViewModel" />
+            type="q.sdm.ui.main.news.AccountViewModel" />
         <import type="android.view.View"/>
     </data>
 
     <RelativeLayout
+        android:onClick="@{(v)->a.onClick(v)}"
         android:visibility="visible"
         android:id="@+id/with_restaurant"
         android:background="#222222"

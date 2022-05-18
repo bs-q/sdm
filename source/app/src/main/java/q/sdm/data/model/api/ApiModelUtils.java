@@ -32,7 +32,7 @@ public class ApiModelUtils {
         }
     }
 
-    public static <T> T fromJson(String json, Class<T> classOfT) {
+    public static <T> T fromJson(String json, Type classOfT) {
         if (json == null || "".equals(json) || !isJSONValid(json)) {
             return null;
         } else {

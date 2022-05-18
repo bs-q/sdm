@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="thumbnail"
+            type="String" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        app:cardPreventCornerOverlap="true"
+        app:cardCornerRadius="@dimen/_6sdp"
+        app:cardBackgroundColor="@android:color/transparent"
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_64sdp">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                app:online_image="@{thumbnail}"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/white"
+                android:text="Category"
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

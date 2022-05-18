@@ -3,7 +3,9 @@ package q.sdm.data.remote;
 import io.reactivex.rxjava3.core.Observable;
 import q.sdm.data.model.api.ResponseWrapper;
 import q.sdm.data.model.api.request.LoginRequest;
+import q.sdm.data.model.api.request.register.RegisterRequest;
 import q.sdm.data.model.api.response.LoginResponse;
+import q.sdm.data.model.api.response.register.RegisterResponse;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
@@ -18,6 +20,8 @@ public interface ApiService {
     @GET("v1/account/profile")
     Observable<ResponseWrapper<LoginResponse>> profile();
 
+    @POST("v1/account/login")
 
+    Observable<ResponseWrapper<RegisterResponse>> register(@Body RegisterRequest request);
 
 }

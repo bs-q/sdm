@@ -19,6 +19,14 @@
     <color name="activity_item_name">#4E5D78</color>
     <color name="primary_color">#18A0FB</color>
     <color name="text_color">#999999</color>
-    <color name="primary">#277CFB</color>
+    <color name="primary">#E92F48</color>
     <color name="text_title_color">#35364F</color>
+    <color name="gray">#999999</color>
+    <color name="line_inactive">#E2E2E2</color>
+    <color name="line_active">#AFAFAF</color>
+    <color name="login_active">#E92F48</color>
+    <color name="login_inactive">#C4C4C4</color>
+    <color name="login_text_active">#FFF9FF</color>
+    <color name="login_text_inactive">#333333</color>
+    <color name="wrong">#E92F48</color>
 </resources>
