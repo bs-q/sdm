@@ -12,24 +12,21 @@ import q.sdm.R;
 import q.sdm.databinding.ActivityMainBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
-import q.sdm.ui.main.news.AccountFragment;
-import q.sdm.ui.main.revenue.RevenueFragment;
-import q.sdm.ui.main.setting.SettingFragment;
-import q.sdm.ui.main.store.StoreFragment;
+import q.sdm.ui.main.account.AccountFragment;
+import q.sdm.ui.main.cart.CartFragment;
+import q.sdm.ui.main.home.HomeFragment;
 
 
 public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewModel> {
 
     private Fragment active;
-    private static final String STORE = "STORE";
-    private static final String REVENUE = "REVENUE";
-    private static final String NEWS = "NEWS";
-    private static final String SETTING = "SETTING";
+    private static final String HOME = "HOME";
+    private static final String CART = "CART";
+    private static final String ACCOUNT = "ACCOUNT";
 
-    private StoreFragment storeFragment;
-    private RevenueFragment revenueFragment;
+    private HomeFragment homeFragment;
+    private CartFragment cartFragment;
     private AccountFragment accountFragment;
-    private SettingFragment settingFragment;
     private FragmentManager fm;
 
     @Override
@@ -38,41 +35,32 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         viewBinding.setMainActivity(this);
         viewBinding.setMainViewModel(viewModel);
         fm = getSupportFragmentManager();
-        storeFragment = new StoreFragment();
-        active = storeFragment;
-        fm.beginTransaction().add(R.id.nav_host_fragment,storeFragment,STORE).commitNow();
+        homeFragment = new HomeFragment();
+        active = homeFragment;
+        fm.beginTransaction().add(R.id.nav_host_fragment,homeFragment,HOME).commitNow();
         viewBinding.bottomNav.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
-                case R.id.store:
-                    fm.beginTransaction().hide(active).show(storeFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
-                    active = storeFragment;
+                case R.id.home:
+                    fm.beginTransaction().hide(active).show(homeFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                    active = homeFragment;
                     return true;
-                case R.id.revenue:
-                    if (revenueFragment == null){
-                        revenueFragment = new RevenueFragment();
-                        fm.beginTransaction().add(R.id.nav_host_fragment, revenueFragment, REVENUE).hide(active).commit();
+                case R.id.cart:
+                    if (cartFragment == null){
+                        cartFragment = new CartFragment();
+                        fm.beginTransaction().add(R.id.nav_host_fragment, cartFragment, CART).hide(active).commit();
                     }  else {
-                        fm.beginTransaction().hide(active).show(revenueFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
+                        fm.beginTransaction().hide(active).show(cartFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
                     }
-                    active = revenueFragment;
+                    active = cartFragment;
                     return true;
-                case R.id.news:
+                case R.id.account:
                     if (accountFragment == null){
                         accountFragment = new AccountFragment();
-                        fm.beginTransaction().add(R.id.nav_host_fragment, accountFragment, NEWS).hide(active).commit();
+                        fm.beginTransaction().add(R.id.nav_host_fragment, accountFragment, ACCOUNT).hide(active).commit();
                     } else {
                         fm.beginTransaction().hide(active).show(accountFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
                     }
                     active = accountFragment;
-                    return true;
-                case R.id.settings:
-                    if (settingFragment == null){
-                        settingFragment = new SettingFragment();
-                        fm.beginTransaction().add(R.id.nav_host_fragment, settingFragment, SETTING).hide(active).commit();
-                    } else {
-                        fm.beginTransaction().hide(active).show(settingFragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE).commit();
-                    }
-                    active = settingFragment;
                     return true;
                 default:
                     break;

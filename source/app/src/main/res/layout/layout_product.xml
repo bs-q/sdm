@@ -1,6 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <variable
+            name="thumbnail"
+            type="String" />
+        <variable
+            name="name"
+            type="String" />
+        <variable
+            name="money"
+            type="Long" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_7sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:layout_marginStart="@dimen/_3sdp"
+        android:layout_marginEnd="@dimen/_3sdp"
+        android:layout_width="match_parent"
+        app:cardPreventCornerOverlap="true"
+        android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:scaleType="centerCrop"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:id="@+id/lp_iv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_80sdp"
+                online_image="@{thumbnail}"/>
+            <TextView
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginHorizontal="@dimen/_4sdp"
+                app:layout_constraintTop_toBottomOf="@id/lp_iv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:maxLines="2"
+                android:id="@+id/lp_name"
+                android:textSize="@dimen/_14ssp"
+                android:textColor="@color/black"
+                style="@style/sfbold"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{name}"/>
+            <TextView
+                style="@style/sfmedium"
+                android:layout_marginHorizontal="@dimen/_4sdp"
+                app:layout_constraintTop_toBottomOf="@id/lp_name"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginBottom="@dimen/_4sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:maxLines="2"
+                android:id="@+id/lp_money"
+                android:textSize="@dimen/_16ssp"
+                android:textColor="@color/primary"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{@string/money_format(money.longValue())}"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

@@ -10,6 +10,10 @@
 
     <com.google.android.material.card.MaterialCardView
         app:cardPreventCornerOverlap="true"
+        android:layout_marginTop="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_3sdp"
+        android:layout_marginEnd="@dimen/_3sdp"
         app:cardCornerRadius="@dimen/_6sdp"
         app:cardBackgroundColor="@android:color/transparent"
         android:layout_width="@dimen/_100sdp"
@@ -18,11 +22,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
+                android:scaleType="centerCrop"
                 app:online_image="@{thumbnail}"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+            <View
+                android:background="@drawable/gray_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"    />
             <TextView
-                android:textSize="@dimen/_10sdp"
+                style="@style/sfbold"
+                android:textSize="@dimen/_12sdp"
                 android:textColor="@color/white"
                 android:text="Category"
                 android:textStyle="bold"

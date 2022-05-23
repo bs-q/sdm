@@ -55,6 +55,7 @@
             android:launchMode="singleTask"
             />
         <activity android:name=".ui.register.RegisterActivity" />
+        <activity android:name=".ui.register.verify.VerifyActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"

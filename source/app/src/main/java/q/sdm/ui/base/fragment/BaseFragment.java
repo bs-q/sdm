@@ -26,7 +26,8 @@ import q.sdm.utils.DialogUtils;
 import timber.log.Timber;
 
 
-public abstract class BaseFragment <B extends ViewDataBinding,V extends BaseFragmentViewModel> extends Fragment {
+public abstract class BaseFragment <B extends ViewDataBinding,V extends BaseFragmentViewModel> extends Fragment
+implements View.OnClickListener {
     @Named("device_id")
     @Inject
     protected String deviceId;

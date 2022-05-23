@@ -21,6 +21,7 @@
         android:layout_height="wrap_content">
 
         <TextView
+            style="@style/sfmedium"
             android:onClick="@{(v)->click.onClick(v)}"
             android:id="@+id/location"
             app:layout_constraintTop_toTopOf="parent"
@@ -58,6 +59,7 @@
             android:src="@drawable/indicator"
             />
         <TextView
+            android:includeFontPadding="false"
             android:translationY="@dimen/_minus1sdp"
             android:translationX="@dimen/_2sdp"
             android:textColor="@color/white"

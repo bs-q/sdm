@@ -9,6 +9,7 @@
     <string name="home">Home</string>
     <string name="cart">Cart</string>
     <string name="account">Account</string>
-    <string name="message">Message</string>
     <string name="term">Bằng cách tiếp tục, bạn đồng ý với <font fgcolor="#E92F48">Điều khoản dịch vụ của chúng tôi</font> và <font fgcolor="#E92F48">Chính sách quyền riêng tư.</font></string>
+    <string name="me">Tôi</string>
+    <string name="money_format" translatable="false">%1$,d đ</string>
 </resources>

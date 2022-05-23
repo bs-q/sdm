@@ -1,16 +1,14 @@
-package q.sdm.ui.main.revenue;
+package q.sdm.ui.main.account;
 
 import android.view.View;
 
 import q.sdm.BR;
 import q.sdm.R;
-import q.sdm.databinding.FragmentRevenueBinding;
+import q.sdm.databinding.FragmentHomeBinding;
 import q.sdm.di.component.FragmentComponent;
 import q.sdm.ui.base.fragment.BaseFragment;
 
-public class RevenueFragment extends BaseFragment<FragmentRevenueBinding,RevenueViewModel>
-        implements View.OnClickListener{
-
+public class AccountFragment extends BaseFragment<FragmentHomeBinding, AccountViewModel> {
     @Override
     public int getBindingVariable() {
         return BR.vm;
@@ -18,7 +16,7 @@ public class RevenueFragment extends BaseFragment<FragmentRevenueBinding,Revenue
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_revenue;
+        return R.layout.fragment_account;
     }
 
     @Override
@@ -30,7 +28,6 @@ public class RevenueFragment extends BaseFragment<FragmentRevenueBinding,Revenue
     protected void performDependencyInjection(FragmentComponent buildComponent) {
         buildComponent.inject(this);
     }
-
 
     @Override
     public void onClick(View v) {

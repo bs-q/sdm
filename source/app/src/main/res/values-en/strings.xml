@@ -9,6 +9,6 @@
     <string name="home">Home</string>
     <string name="cart">Cart</string>
     <string name="account">Account</string>
-    <string name="message">Message</string>
     <string name="term">Bằng cách tiếp tục, bạn đồng ý với Điều khoản dịch vụ của chúng tôi và Chính sách quyền riêng tư.</string>
+    <string name="me">Tôi</string>
 </resources>

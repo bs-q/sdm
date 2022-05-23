@@ -17,6 +17,7 @@ import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.login.LoginViewModel;
 import q.sdm.ui.main.MainViewModel;
 import q.sdm.ui.register.RegisterViewModel;
+import q.sdm.ui.register.verify.VerifyViewModel;
 import q.sdm.utils.GetInfo;
 
 @Module
@@ -65,6 +66,14 @@ public class ActivityModule {
         Supplier<RegisterViewModel> supplier = () -> new RegisterViewModel(repository, (MVVMApplication) application);
         ViewModelProviderFactory<RegisterViewModel> factory = new ViewModelProviderFactory<>(RegisterViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(RegisterViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    VerifyViewModel provideVerifyViewModel(Repository repository, Context application) {
+        Supplier<VerifyViewModel> supplier = () -> new VerifyViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<VerifyViewModel> factory = new ViewModelProviderFactory<>(VerifyViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(VerifyViewModel.class);
     }
 
 }

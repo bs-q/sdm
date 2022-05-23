@@ -1,16 +1,14 @@
-package q.sdm.ui.main.setting;
+package q.sdm.ui.main.cart;
 
 import android.view.View;
 
-import androidx.databinding.library.baseAdapters.BR;
-
+import q.sdm.BR;
 import q.sdm.R;
-import q.sdm.databinding.FragmentSettingBinding;
+import q.sdm.databinding.FragmentHomeBinding;
 import q.sdm.di.component.FragmentComponent;
 import q.sdm.ui.base.fragment.BaseFragment;
 
-public class SettingFragment extends BaseFragment<FragmentSettingBinding,SettingViewModel> implements
-        View.OnClickListener {
+public class CartFragment extends BaseFragment<FragmentHomeBinding, CartViewModel> {
     @Override
     public int getBindingVariable() {
         return BR.vm;
@@ -18,7 +16,7 @@ public class SettingFragment extends BaseFragment<FragmentSettingBinding,Setting
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_setting;
+        return R.layout.fragment_cart;
     }
 
     @Override
@@ -35,6 +33,4 @@ public class SettingFragment extends BaseFragment<FragmentSettingBinding,Setting
     public void onClick(View v) {
 
     }
-
-
 }

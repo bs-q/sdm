@@ -1,23 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/store"
+        android:id="@+id/home"
         android:enabled="true"
-        android:icon="@drawable/_online_shop"
+        android:icon="@drawable/home"
         android:title="@string/home"/>
     <item
-        android:id="@+id/revenue"
+        android:id="@+id/cart"
         android:enabled="true"
-        android:icon="@drawable/news"
-        android:title="@string/message"/>
-    <item
-        android:id="@+id/settings"
-        android:enabled="true"
-        android:icon="@drawable/_remote_control"
+        android:icon="@drawable/cart"
         android:title="@string/cart"/>
     <item
-        android:id="@+id/news"
+        android:id="@+id/account"
         android:enabled="true"
-        android:icon="@drawable/_news"
-        android:title="@string/account"/>
-
+        android:icon="@drawable/account"
+        android:title="@string/me"/>
 </menu>
