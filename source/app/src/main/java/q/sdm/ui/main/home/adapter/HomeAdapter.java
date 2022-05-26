@@ -23,9 +23,23 @@ import q.sdm.databinding.LayoutProductBinding;
 
 public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterViewHolder> {
 
+    public interface HomeAdapterClick{
+        void productItemClick(ProductResponse productResponse);
+    }
+
     List<ProductResponse> productResponseList = new ArrayList<>();
     List<CategoryResponse> categoryResponseList = new ArrayList<>();
-    CategoryAdapter categoryAdapter = new CategoryAdapter();
+    CategoryAdapter categoryAdapter;
+
+    private HomeAdapterClick productCallback;
+    private CategoryAdapter.CategoryAdapterClick categoryCallback;
+
+    public HomeAdapter(HomeAdapterClick productCallback, CategoryAdapter.CategoryAdapterClick categoryCallback){
+        this.productCallback = productCallback;
+        this.categoryCallback = categoryCallback;
+        categoryAdapter = new CategoryAdapter(categoryCallback);
+        createTestData();
+    }
 
     public HomeAdapter(){
         createTestData();
@@ -41,6 +55,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
             productResponse.setProductName(String.valueOf(i%3));
             productResponse.setId((long) i);
             productResponse.setProductPrice(100000L);
+            productResponse.setDescription("Cá viên từ lâu đã là một trong những món ăn yêu thích của giới trẻ, không những thế mà hiện nay, cá viên còn nhận được sự yêu thích của nhiều người ở mọi lứa tuổi. Cá viên Ô-Ngon được chế biến từ thịt cá tươi, không tạp chất, sự kết hợp đậm đà của một số loại gia vị đặc trưng giúp cho cá không những dai giòn mà còn thơm ngon đặc biệt. Tất cả nguyên liệu được lựa chọn và kiểm tra kỹ trước khi mang vào sản xuất, kết hợp với dây chuyền hiện đại tạo nên một sản phẩm Cá viên Ô-Ngon đạt chất lượng tốt nhất khi đến tay người tiêu dùng. Trong Cá viên Ô-Ngon hàm lượng protein cao, đảm bảo cung cấp đủ dưỡng chất cho cơ thể. Khi chiên lớp vỏ bên ngoài có màu vàng và giòn làm dậy lên mùi thơm đặc biệt của chả cá, giúp kích thích vị giác của người ăn. Đây sẽ là một món ăn vặt tuyệt vời khi kết hợp với một số loại nước chấm như tương cà, tương ớt, tương đen kết hợp với một ít sa tế.");
             productResponseList.add(productResponse);
 
             CategoryResponse categoryResponse = new CategoryResponse();
@@ -78,6 +93,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
             holder.layoutProductBinding.setName(productResponseList.get(position-1).getProductName());
             holder.layoutProductBinding.setThumbnail(productResponseList.get(position-1).getProductImage());
             holder.layoutProductBinding.setMoney(productResponseList.get(position-1).getProductPrice());
+            holder.layoutProductBinding.getRoot().setOnClickListener((v)->{
+                productCallback.productItemClick(productResponseList.get(position));
+            });
         }
     }
 

@@ -13,9 +13,14 @@ import q.sdm.data.model.api.response.category.CategoryResponse;
 import q.sdm.databinding.LayoutCategoryBinding;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.CategoryAdapterViewHolder> {
-
+    public interface CategoryAdapterClick{
+        void categoryItemClick(CategoryResponse categoryResponse);
+    }
     List<CategoryResponse> categoryResponseList;
-
+    private CategoryAdapterClick callback;
+    public CategoryAdapter(CategoryAdapterClick categoryAdapterClick) {
+        this.callback = categoryAdapterClick;
+    }
     @NonNull
     @Override
     public CategoryAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -28,6 +33,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapterViewHolder holder, int position) {
         holder.layoutCategoryBinding.setThumbnail(categoryResponseList.get(position).getThumbnail());
+        holder.layoutCategoryBinding.getRoot().setOnClickListener((v)->{
+            callback.categoryItemClick(categoryResponseList.get(position));
+        });
         holder.layoutCategoryBinding.executePendingBindings();
     }
 

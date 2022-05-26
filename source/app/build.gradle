@@ -21,7 +21,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "String", "BASE_URL", "\"https://remview-api.developteam.net\""
+            buildConfigField "String", "BASE_URL", "\"http://156.67.219.34:3000/\""
             buildConfigField "String", "WS_URL", "\"wss://remview-socket.developteam.net/ws\""
             buildConfigField "String", "WEB_URL", "\"https://remview-admin.developteam.net/\""
 
@@ -38,7 +38,7 @@ android {
         }
 
         release {
-            buildConfigField "String", "BASE_URL", "\"https://mobile.remview.de\""
+            buildConfigField "String", "BASE_URL", "\"http://156.67.219.34:3000/\""
             buildConfigField "String", "WS_URL", "\"wss://remview.de/websocket\""
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

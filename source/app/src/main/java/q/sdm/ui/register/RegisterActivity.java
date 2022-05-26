@@ -9,6 +9,7 @@ import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.activity.BaseCallback;
 import q.sdm.ui.login.LoginActivity;
+import q.sdm.ui.register.verify.VerifyActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -50,7 +51,7 @@ implements View.OnClickListener {
         setupForm();
     }
     private void setupForm(){
-        viewBinding.email.input.requestFocus();
+        viewBinding.name.input.requestFocus();
     }
     private void listenFormFocus(){
         viewBinding.email.input.setOnFocusChangeListener((v, hasFocus) -> {
@@ -98,10 +99,20 @@ implements View.OnClickListener {
         if (v.getId() == R.id.toggle){
             viewModel.toggle.set(!viewModel.toggle.get());
         } else if (v.getId() == R.id.register_btn){
-
+            viewModel.register(new BaseCallback() {
+                @Override
+                public void doSuccess() {
+                    navigateToVerify();
+                }
+            });
         } else if (v.getId() == R.id.login_btn){
             navigateToLogin();
         }
+    }
+    private void navigateToVerify(){
+        Intent it = new Intent(this, VerifyActivity.class);
+        startActivity(it);
+        finish();
     }
     private void navigateToLogin(){
         Intent it = new Intent(this, LoginActivity.class);

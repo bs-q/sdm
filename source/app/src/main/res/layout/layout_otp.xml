@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="q.sdm.ui.register.verify.VerifyViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:maxLength="1"
+            
+            
+            android:gravity="center"
+            android:text="@={vm.otp1}"
+            android:id="@+id/otp_1"
+            style="@style/sfbold"
+            android:layout_width="@dimen/_39sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/otp_background"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/otp_2"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:clickable="false"
+            android:maxLength="1"
+
+            android:gravity="center"
+            android:text="@={vm.otp2}"
+            android:id="@+id/otp_2"
+            style="@style/sfbold"
+            android:layout_width="@dimen/_39sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/otp_background"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/otp_3"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/otp_1"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+
+
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:clickable="false"
+            android:maxLength="1"
+
+            android:gravity="center"
+            android:text="@={vm.otp3}"
+            android:id="@+id/otp_3"
+            style="@style/sfbold"
+            android:layout_width="@dimen/_39sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/otp_background"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/otp_4"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/otp_2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+
+            android:focusable="false"
+            android:cursorVisible="false"
+            android:clickable="false"
+            android:maxLength="1"
+            android:gravity="center"
+            android:text="@={vm.otp4}"
+            android:id="@+id/otp_4"
+            style="@style/sfbold"
+            android:layout_width="@dimen/_39sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@drawable/otp_background"
+            android:textSize="@dimen/_12ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/otp_3"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

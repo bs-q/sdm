@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="a"
+            type="q.sdm.ui.recovery.complete.RecoveryCompleteActivity" />
+
+        <variable
+            name="vm"
+            type="q.sdm.ui.recovery.complete.RecoveryCompleteViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/register_success_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/register_complete_img"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_bias=".2"
+            app:layout_constraintWidth_percent=".5"
+            app:layout_constraintDimensionRatio="W,269:240"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/register_success"/>
+        <TextView
+            android:layout_marginTop="@dimen/_24sdp"
+            android:id="@+id/register_complete_msg"
+            android:textAlignment="center"
+            style="@style/sfbold"
+            android:textSize="@dimen/_24ssp"
+            app:layout_constraintTop_toBottomOf="@id/register_complete_img"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chúc mừng bạn đã\n
+lấy lại mật khẩu thành công"/>
+
+        <RelativeLayout
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".9"
+            android:onClick="@{(v)->a.onClick(v)}"
+            android:id="@+id/login_btn"
+            android:background="@drawable/login_btn_active"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_34sdp"
+
+            android:layout_marginHorizontal="@dimen/_20sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginVertical="@dimen/_3sdp"
+                android:text="Trang chủ"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

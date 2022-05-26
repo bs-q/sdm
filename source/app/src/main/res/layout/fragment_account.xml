@@ -2,10 +2,17 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+        <variable
+            name="a"
+            type="q.sdm.ui.main.account.AccountFragment" />
 
+        <variable
+            name="vm"
+            type="q.sdm.ui.main.account.AccountViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:onClick="@{(v)->a.onClick(v)}"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

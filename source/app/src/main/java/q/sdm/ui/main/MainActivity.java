@@ -3,6 +3,7 @@ package q.sdm.ui.main;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -38,6 +39,15 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         homeFragment = new HomeFragment();
         active = homeFragment;
         fm.beginTransaction().add(R.id.nav_host_fragment,homeFragment,HOME).commitNow();
+        myApplication().getTotalItemInCart().addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                viewBinding.bottomNav.getOrCreateBadge(R.id.cart).setNumber(myApplication().getTotalItemInCart().get());
+                viewBinding.bottomNav.getOrCreateBadge(R.id.cart).setBackgroundColor(getResources().getColor(R.color.primary,getTheme()));
+                viewBinding.bottomNav.getOrCreateBadge(R.id.cart).setBadgeTextColor(getResources().getColor(R.color.white,getTheme()));
+
+            }
+        });
         viewBinding.bottomNav.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.home:

@@ -29,7 +29,8 @@
             android:drawableStart="@drawable/search"
             android:layout_marginEnd="@dimen/_12sdp"
             android:textColor="#7E8389"
-            android:hint="Tim kiếm theo nhà hàng hoặc cửa ..."
+            android:ellipsize="end"
+            android:hint="Tim kiếm theo tên sản phẩm hoặc loại ..."
             android:layout_width="0dp"
             android:layout_height="0dp"/>
         <FrameLayout

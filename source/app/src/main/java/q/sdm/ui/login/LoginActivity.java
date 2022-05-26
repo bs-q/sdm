@@ -8,7 +8,10 @@ import q.sdm.databinding.ActivityLoginBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.activity.BaseCallback;
+import q.sdm.ui.recovery.RecoveryActivity;
+import q.sdm.ui.register.RegisterActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -107,8 +110,15 @@ implements View.OnClickListener {
             }
         });
     }
-    private void navigateToRegister(){}
-    private void navigateToForgetPassword(){}
+    private void navigateToRegister(){
+        Intent it = new Intent(this, RegisterActivity.class);
+        startActivity(it);
+        finish();
+    }
+    private void navigateToForgetPassword(){
+        Intent it = new Intent(this, RecoveryActivity.class);
+        startActivity(it);
+    }
 
     @BindingAdapter("layout_height")
     public static void setLayoutHeight(View view, int height) {

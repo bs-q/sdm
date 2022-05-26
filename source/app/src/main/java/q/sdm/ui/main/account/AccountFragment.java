@@ -1,14 +1,17 @@
 package q.sdm.ui.main.account;
 
+import android.content.Intent;
 import android.view.View;
 
 import q.sdm.BR;
 import q.sdm.R;
+import q.sdm.databinding.FragmentAccountBinding;
 import q.sdm.databinding.FragmentHomeBinding;
 import q.sdm.di.component.FragmentComponent;
 import q.sdm.ui.base.fragment.BaseFragment;
+import q.sdm.ui.login.LoginActivity;
 
-public class AccountFragment extends BaseFragment<FragmentHomeBinding, AccountViewModel> {
+public class AccountFragment extends BaseFragment<FragmentAccountBinding, AccountViewModel> {
     @Override
     public int getBindingVariable() {
         return BR.vm;
@@ -21,7 +24,8 @@ public class AccountFragment extends BaseFragment<FragmentHomeBinding, AccountVi
 
     @Override
     protected void performDataBinding() {
-
+        binding.setA(this);
+        binding.setVm(viewModel);
     }
 
     @Override
@@ -31,6 +35,10 @@ public class AccountFragment extends BaseFragment<FragmentHomeBinding, AccountVi
 
     @Override
     public void onClick(View v) {
-
+        navigateToLogin();
+    }
+    private void navigateToLogin(){
+        Intent it = new Intent(requireContext(), LoginActivity.class);
+        startActivity(it);
     }
 }

@@ -18,9 +18,17 @@
         android:padding="@dimen/_10sdp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+<!--        <variable-->
+<!--            name="total"-->
+<!--            type="androidx.databinding.ObservableInt" />-->
+<!--        <variable-->
+<!--            name="location"-->
+<!--            type="androidx.databinding.ObservableField&lt;String>" />-->
         <include android:layout_width="match_parent"
             android:id="@+id/location_cart"
             app:layout_constraintTop_toTopOf="parent"
+            app:total="@{a.myApplication().totalItemInCart}"
+            app:location="@{a.myApplication().customerLocation}"
             android:layout_height="wrap_content"
             layout="@layout/layout_location_cart"/>
         <include android:layout_width="match_parent"

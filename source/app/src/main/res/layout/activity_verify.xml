@@ -21,15 +21,83 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
+                android:id="@+id/verify_image"
+                android:src="@drawable/verify_img"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="@dimen/_30sdp"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"/>
+                android:layout_width="@dimen/_195sdp"
+                android:layout_height="@dimen/_195sdp"/>
             <TextView
+                android:id="@+id/verify_title"
+                app:layout_constraintTop_toBottomOf="@id/verify_image"
+                android:layout_marginStart="@dimen/_20sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/sfbold"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_38sdp"
+                android:text="Nhập mã xác thực"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/verify_message"
+                app:layout_constraintTop_toBottomOf="@id/verify_title"
+                android:layout_marginStart="@dimen/_20sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/sfregular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:text="Quý khách vui lòng nhập mã OTP đã được gửi về mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <include
+                app:vm="@{vm}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:id="@+id/otp_bar"
+                app:layout_constraintTop_toBottomOf="@id/verify_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                layout="@layout/layout_otp"/>
+            <TextView
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/verify_send_message"
+                app:layout_constraintTop_toBottomOf="@id/otp_bar"
+                app:layout_constraintStart_toStartOf="parent"
+                style="@style/sfregular"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:text="@string/not_receive_otp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <RelativeLayout
+                android:clickable="@{vm.validOtp}"
+                app:layout_constraintTop_toBottomOf="@id/verify_send_message"
+                android:onClick="@{(v)->a.onClick(v)}"
+                android:id="@+id/verify_btn"
+                android:background="@{!vm.validOtp ? @drawable/login_btn_inactive : @drawable/login_btn_active}"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_34sdp"
+                android:layout_marginHorizontal="@dimen/_20sdp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginVertical="@dimen/_3sdp"
+                    android:text="Tiếp tục"
+                    android:textColor='@{!vm.validOtp ? @color/login_text_inactive : @color/login_text_active}'
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

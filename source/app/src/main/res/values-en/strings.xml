@@ -11,4 +11,5 @@
     <string name="account">Account</string>
     <string name="term">Bằng cách tiếp tục, bạn đồng ý với Điều khoản dịch vụ của chúng tôi và Chính sách quyền riêng tư.</string>
     <string name="me">Tôi</string>
+    <string name="not_receive_otp">"    Không nhận được mã? <font fgcolor="#E92F48">Gửi lại OTP</font> "</string>
 </resources>

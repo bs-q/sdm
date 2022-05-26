@@ -8,6 +8,7 @@ import java.util.concurrent.Callable;
 import javax.inject.Inject;
 
 import io.reactivex.rxjava3.core.Observable;
+import q.sdm.data.model.db.ProductEntity;
 import q.sdm.data.model.db.UserEntity;
 
 public class AppDbService implements DbService {
@@ -64,5 +65,53 @@ public class AppDbService implements DbService {
                return mAppDatabase.getDbUserDao().findById(id);
             }
         });
+    }
+
+    @Override
+    public Observable<List<ProductEntity>> getAllDbProduct() {
+        return Observable.fromCallable(new Callable<List<ProductEntity>>() {
+            @Override
+            public List<ProductEntity> call() throws Exception {
+                return mAppDatabase.getDbProductDao().loadAll();
+            }
+        });
+    }
+
+    @Override
+    public LiveData<List<ProductEntity>> loadAllProductToLiveData() {
+        return mAppDatabase.getDbProductDao().loadAllToLiveData();
+    }
+
+    @Override
+    public Observable<Long> insertProduct(ProductEntity user) {
+        return Observable.fromCallable(new Callable<Long>() {
+            @Override
+            public Long call() throws Exception {
+                return mAppDatabase.getDbProductDao().insert(user);
+            }
+        });    }
+
+    @Override
+    public Observable<Boolean> deleteProduct(ProductEntity user) {
+        return Observable.fromCallable(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                mAppDatabase.getDbProductDao().delete(user);
+                return true;
+            }
+        });    }
+
+    @Override
+    public Observable<ProductEntity> findProductById(Long id) {
+        return Observable.fromCallable(new Callable<ProductEntity>() {
+            @Override
+            public ProductEntity call() throws Exception {
+                return mAppDatabase.getDbProductDao().findById(id);
+            }
+        });    }
+
+    @Override
+    public void nukeProducts() {
+        mAppDatabase.getDbProductDao().deleteAll();
     }
 }

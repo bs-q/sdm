@@ -46,7 +46,9 @@ public class RegisterViewModel extends BaseViewModel {
                 .subscribe(response->{
                     hideLoading();
                     callback.doSuccess();
-                },throwable -> callback.doError(throwable,this)));
+                },throwable -> {
+                    callback.doError(throwable, this);
+                }));
 
     }
 }

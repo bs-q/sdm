@@ -1,13 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="a"
+            type="q.sdm.ui.main.cart.CartFragment" />
 
+        <variable
+            name="vm"
+            type="q.sdm.ui.main.cart.CartViewModel" />
+        <variable
+            name="profile"
+            type="q.sdm.data.model.api.response.account.ProfileResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageView
+            online_image="@{profile.customerAvatarPath}"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_14sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/fc_account_img"
+            android:layout_width="@dimen/_48sdp"
+            android:layout_height="@dimen/_48sdp"
+            android:src="@drawable/account"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/fc_customer_address"
+            android:textColor="#7E8389"
+            style="@style/sfregular"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintStart_toEndOf="@id/fc_account_img"
+            android:layout_marginStart="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="@id/fc_account_img"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/fc_customer_name"
+            android:textColor="#424242"
+            style="@style/sfbold"
+            android:text="@{profile.customerFullName}"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:textSize="@dimen/_18ssp"
+            app:layout_constraintStart_toEndOf="@id/fc_account_img"
+            android:layout_marginStart="@dimen/_16sdp"
+            app:layout_constraintBottom_toTopOf="@id/fc_customer_address"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            app:layout_constraintTop_toBottomOf="@id/fc_account_img"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:background="#BFC1C4"
+            android:id="@+id/fc_line_first"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/fc_order_title"
+            android:textColor="#7E8389"
+            style="@style/sfregular"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:text="Đơn hàng của bạn"
+
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/_14sdp"
+            app:layout_constraintTop_toBottomOf="@id/fc_line_first"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/fc_line_second"
+            app:layout_constraintTop_toBottomOf="@id/fc_order_title"
+            android:layout_marginTop="@dimen/_14sdp"
+            android:layout_marginHorizontal="@dimen/_18sdp"/>
+        <View
+            android:id="@+id/fc_line_second"
+            android:layout_marginBottom="@dimen/_14sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#BFC1C4"
+            app:layout_constraintBottom_toTopOf="@id/fc_pre_total"/>
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/layout_pre_calculate"
+            android:id="@+id/fc_pre_total"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            android:layout_marginBottom="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/fc_line_third"/>
+        <View
+            android:id="@+id/fc_line_third"
+            android:layout_marginBottom="@dimen/_14sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#BFC1C4"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/fc_total"/>
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/layout_total"
+            android:id="@+id/fc_total"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            android:layout_marginBottom="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/fc_line_fourth"/>
+
+        <View
+            android:id="@+id/fc_line_fourth"
+            android:layout_marginBottom="@dimen/_16sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#BFC1C4"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/fc_payment_title"/>
+        <TextView
+            app:layout_constraintBottom_toTopOf="@id/fc_payment"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            android:layout_marginBottom="@dimen/_14sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Phương thức thanh toán"
+            style="@style/sfmedium"
+            android:textColor="#666666"
+            android:textSize="@dimen/_10ssp"
+            android:id="@+id/fc_payment_title"/>
+
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/layout_cart_payment"
+            android:id="@+id/fc_payment"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            android:layout_marginBottom="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/fc_checkout"/>
+
+        <include
+            app:a="@{a}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/layout_checkout"
+            android:id="@+id/fc_checkout"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

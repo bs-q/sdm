@@ -4,6 +4,8 @@ import android.app.Application;
 import android.app.Dialog;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableInt;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.OnLifecycleEvent;
@@ -16,6 +18,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 import lombok.Getter;
 import lombok.Setter;
+import q.sdm.data.model.api.response.product.ProductResponse;
 import q.sdm.di.component.AppComponent;
 import q.sdm.di.component.DaggerAppComponent;
 import q.sdm.others.MyTimberDebugTree;
@@ -30,7 +33,17 @@ public class MVVMApplication extends Application{
     @Getter
     private AppComponent appComponent;
 
+    @Getter
+    @Setter
+    private ProductResponse productDetailItem;
 
+    @Getter
+    @Setter
+    private ObservableInt totalItemInCart = new ObservableInt(0);
+
+    @Getter
+    @Setter
+    private ObservableField<String> customerLocation = new ObservableField<>("...");
     @Override
     public void onCreate() {
         super.onCreate();

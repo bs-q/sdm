@@ -20,8 +20,7 @@ public interface ApiService {
     @GET("v1/account/profile")
     Observable<ResponseWrapper<LoginResponse>> profile();
 
-    @POST("v1/account/login")
-
+    @POST("v1/customer/register")
     Observable<ResponseWrapper<RegisterResponse>> register(@Body RegisterRequest request);
 
 }

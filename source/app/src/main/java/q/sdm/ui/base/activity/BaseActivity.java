@@ -321,6 +321,9 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
         mvvmApplication.setCurrentActivity(this);
     }
 
+    protected MVVMApplication myApplication(){
+        return (MVVMApplication) application;
+    }
 
 
 }

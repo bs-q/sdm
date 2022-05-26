@@ -113,4 +113,7 @@ implements View.OnClickListener {
         }
     }
 
+    public MVVMApplication myApplication(){
+        return (MVVMApplication) requireActivity().getApplication();
+    }
 }

@@ -14,9 +14,15 @@ import q.sdm.ViewModelProviderFactory;
 import q.sdm.data.Repository;
 import q.sdm.di.scope.ActivityScope;
 import q.sdm.ui.base.activity.BaseActivity;
+import q.sdm.ui.category.CategoryViewModel;
+import q.sdm.ui.location.LocationViewModel;
 import q.sdm.ui.login.LoginViewModel;
 import q.sdm.ui.main.MainViewModel;
+import q.sdm.ui.product.ProductDetailViewModel;
+import q.sdm.ui.recovery.RecoveryViewModel;
+import q.sdm.ui.recovery.complete.RecoveryCompleteViewModel;
 import q.sdm.ui.register.RegisterViewModel;
+import q.sdm.ui.register.complete.RegisterCompleteViewModel;
 import q.sdm.ui.register.verify.VerifyViewModel;
 import q.sdm.utils.GetInfo;
 
@@ -76,4 +82,51 @@ public class ActivityModule {
         return new ViewModelProvider(activity, factory).get(VerifyViewModel.class);
     }
 
+    @Provides
+    @ActivityScope
+    RegisterCompleteViewModel provideRegisterCompleteViewModel(Repository repository, Context application) {
+        Supplier<RegisterCompleteViewModel> supplier = () -> new RegisterCompleteViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<RegisterCompleteViewModel> factory = new ViewModelProviderFactory<>(RegisterCompleteViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(RegisterCompleteViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    RecoveryViewModel provideRecoveryViewModel(Repository repository, Context application) {
+        Supplier<RecoveryViewModel> supplier = () -> new RecoveryViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<RecoveryViewModel> factory = new ViewModelProviderFactory<>(RecoveryViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(RecoveryViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    RecoveryCompleteViewModel provideRecoveryCompleteViewModel(Repository repository, Context application) {
+        Supplier<RecoveryCompleteViewModel> supplier = () -> new RecoveryCompleteViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<RecoveryCompleteViewModel> factory = new ViewModelProviderFactory<>(RecoveryCompleteViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(RecoveryCompleteViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    LocationViewModel provideLocationViewModel(Repository repository, Context application) {
+        Supplier<LocationViewModel> supplier = () -> new LocationViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<LocationViewModel> factory = new ViewModelProviderFactory<>(LocationViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(LocationViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    CategoryViewModel provideCategoryViewModel(Repository repository, Context application) {
+        Supplier<CategoryViewModel> supplier = () -> new CategoryViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<CategoryViewModel> factory = new ViewModelProviderFactory<>(CategoryViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(CategoryViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    ProductDetailViewModel provideProductDetailViewModel(Repository repository, Context application) {
+        Supplier<ProductDetailViewModel> supplier = () -> new ProductDetailViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<ProductDetailViewModel> factory = new ViewModelProviderFactory<>(ProductDetailViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(ProductDetailViewModel.class);
+    }
 }
