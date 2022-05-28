@@ -65,9 +65,7 @@ implements View.OnClickListener {
         viewModel.email.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-                viewModel.valid.set(VALID_EMAIL_ADDRESS_REGEX.matcher(
-                        viewModel.email.get()
-                ).find());
+                viewModel.valid.set(viewModel.email.get().length() == 11);
             }
         });
         viewBinding.password.input.setOnFocusChangeListener((v, hasFocus) -> {
@@ -102,7 +100,8 @@ implements View.OnClickListener {
             viewModel.register(new BaseCallback() {
                 @Override
                 public void doSuccess() {
-                    navigateToVerify();
+                    navigateToLogin();
+//                    navigateToVerify();
                 }
             });
         } else if (v.getId() == R.id.login_btn){

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="username"
+            type="String" />
+        <variable
+            name="email"
+            type="String" />
+        <variable
+            name="a"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:id="@+id/lai_avatar"
+            android:src="@drawable/account"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <LinearLayout
+            app:layout_constraintTop_toTopOf="@id/lai_avatar"
+            app:layout_constraintStart_toEndOf="@id/lai_avatar"
+            app:layout_constraintBottom_toBottomOf="@id/lai_avatar"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:text="@{username}"
+                    android:textColor="#181725"
+                    android:textSize="@dimen/_16ssp"
+                    style="@style/sfmedium"
+                    android:id="@+id/lai_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+                <ImageView
+                    android:onClick="@{(v)->a.onClick(v)}"
+                    android:src="@drawable/edit"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"/>
+            </LinearLayout>
+            <TextView
+                android:text="@{email}"
+                android:textColor="#7C7C7C"
+                android:textSize="@dimen/_12ssp"
+                style="@style/sfmedium"
+                android:id="@+id/lai_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

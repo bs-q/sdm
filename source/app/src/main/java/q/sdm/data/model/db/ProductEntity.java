@@ -20,4 +20,7 @@ public class ProductEntity  extends BaseEntity{
 
     @ColumnInfo(name = "amount")
     public Integer amount;
+
+    @ColumnInfo(name = "price")
+    public Double price;
 }

@@ -37,15 +37,20 @@ public class RegisterViewModel extends BaseViewModel {
     public void register(BaseCallback callback){
         showLoading();
         RegisterRequest request = new RegisterRequest();
-        request.setName(name.get());
-        request.setEmail(email.get());
-        request.setPassword(password.get());
+        request.setCustomerFullName(name.get());
+        request.setCustomerPhone(email.get());
+        request.setCustomerPassword(password.get());
 
         compositeDisposable.add(repository.getApiService().register(request).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response->{
-                    hideLoading();
-                    callback.doSuccess();
+                    if (response.isResult()){
+                        hideLoading();
+                        callback.doSuccess();
+                    } else {
+                        callback.doFail();
+                    }
+
                 },throwable -> {
                     callback.doError(throwable, this);
                 }));

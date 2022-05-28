@@ -24,19 +24,42 @@ public class LoginViewModel extends BaseViewModel {
      * state of valid email icon, true : check; false : cross
      * ***/
     public ObservableBoolean valid = new ObservableBoolean(false);
+
+
+    public ObservableBoolean showSplashScreen = new ObservableBoolean(true);
     public LoginViewModel(Repository repository, MVVMApplication application) {
         super(repository, application);
     }
     public void login(BaseCallback callback){
         showLoading();
         LoginRequest request = new LoginRequest();
-        request.setUsername(email.get());
+        request.setPhoneOrEmail(email.get());
         request.setPassword(password.get());
         repository.getApiService().login(request).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(response->{
-
-                    callback.doSuccess();
+                    if (response.isResult()){
+                        repository.getSharedPreferences().setToken(response.getData().getToken());
+                        callback.doSuccess();
+                    } else {
+                        callback.doFail();
+                    }
                 },throwable -> callback.doError(throwable,this));
+    }
+    public void profile(BaseCallback callback){
+        compositeDisposable.add(repository.getApiService().profile()
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(
+                response -> {
+                    if (response.isResult()){
+                        application.setProfileResponse(response.getData());
+                        callback.doSuccess();
+                    }
+                },throwable -> {
+                    showSplashScreen.set(false);
+                    callback.doError(throwable,this);
+                }
+        ));
     }
 }

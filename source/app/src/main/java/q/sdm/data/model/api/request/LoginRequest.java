@@ -7,6 +7,6 @@ import lombok.EqualsAndHashCode;
 @Data
 public class LoginRequest extends BaseRequest{
     private String app = "CLIENT_WEB";
-    private String username;
+    private String phoneOrEmail;
     private String password;
 }

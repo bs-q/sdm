@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <variable
+            name="profile"
+            type="q.sdm.data.model.api.response.account.ProfileResponse" />
         <variable
             name="a"
             type="q.sdm.ui.main.account.AccountFragment" />
@@ -12,9 +17,131 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:onClick="@{(v)->a.onClick(v)}"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <include
+            android:id="@+id/lci"
+            app:a="@{a}"
+            app:username="@{profile.customerFullName}"
+            app:email="@{profile.customerEmail}"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_18sdp"
+            layout="@layout/layout_account_info"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_40sdp"
+            app:layout_constraintTop_toBottomOf="@id/lci"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+           <RelativeLayout
+               android:layout_marginHorizontal="@dimen/_20sdp"
+               android:id="@+id/fc_cart_btn"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/cart_icon"
+                    android:src="@drawable/cart_menu"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"/>
+               <TextView
+                   android:layout_marginStart="@dimen/_16sdp"
+                   android:layout_toEndOf="@id/cart_icon"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Đơn hàng"
+                   android:textSize="@dimen/_14ssp"
+                   style="@style/sfbold"
+                   android:textColor="#181725"/>
+               <ImageView
+                   android:id="@+id/cart_foward"
+                   android:src="@drawable/arrow"
+                   android:rotation="90"
+                   android:layout_alignParentEnd="true"
+                   android:layout_width="@dimen/_8sdp"
+                   android:layout_height="@dimen/_14sdp"
+                   />
+           </RelativeLayout>
+            <View
+                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_marginBottom="@dimen/_18sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="#E2E2E2"/>
+            <RelativeLayout
+                android:layout_marginHorizontal="@dimen/_20sdp"
+                android:id="@+id/fc_location_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/location_icon"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/location_menu" />
+                <TextView
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_toEndOf="@id/location_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Địa chỉ giao hàng"
+                    android:textSize="@dimen/_14ssp"
+                    style="@style/sfbold"
+                    android:textColor="#181725"/>
+                <ImageView
+                    android:id="@+id/location_foward"
+                    android:src="@drawable/arrow"
+                    android:rotation="90"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="@dimen/_8sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="#E2E2E2"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <RelativeLayout
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="@{(v)->a.onClick(v)}"
+            android:id="@+id/fc_logout"
+            android:background="@drawable/logout_background"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_44sdp"
+
+            android:layout_marginHorizontal="@dimen/_20sdp">
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/logout_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginVertical="@dimen/_3sdp"
+                android:text="Đăng xuất"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+        </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -58,6 +58,7 @@
             android:paddingEnd="@dimen/_40sdp"
             android:text="@={input}"
             android:textColor="@color/black"
+            android:inputType="number"
             android:textCursorDrawable="@drawable/cursor"
             android:textSize="@dimen/_14sdp"
             android:textStyle="bold"

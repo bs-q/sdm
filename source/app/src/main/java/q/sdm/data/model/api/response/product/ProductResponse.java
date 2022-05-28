@@ -1,12 +1,22 @@
 package q.sdm.data.model.api.response.product;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
 public class ProductResponse {
-    private Long id;
-    private String productName;
-    private String productImage;
-    private Long productPrice;
-    private String description;
+    Long categoryId;
+    String createdBy;
+    Date createdDate;
+    String description;
+    boolean hasChild;
+    Long id;
+    String labelColor;
+    String productImage;
+    String productName;
+    Double productPrice;
+    Integer saleoff;
+    String shortDescription;
+    Integer status;
 }

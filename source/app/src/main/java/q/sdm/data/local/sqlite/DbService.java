@@ -24,9 +24,9 @@ public interface DbService {
 
     LiveData<List<ProductEntity>> loadAllProductToLiveData();
 
-    Observable<Long> insertProduct(ProductEntity user);
+    Observable<Long> insertProduct(ProductEntity product);
 
-    Observable<Boolean> deleteProduct(ProductEntity user);
+    Observable<Boolean> deleteProduct(ProductEntity product);
 
     Observable<ProductEntity> findProductById(Long id);
 

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="total"
-            type="androidx.databinding.ObservableLong" />
+            type="androidx.databinding.ObservableDouble" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

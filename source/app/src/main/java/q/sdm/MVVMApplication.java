@@ -18,6 +18,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 import lombok.Getter;
 import lombok.Setter;
+import q.sdm.data.model.api.response.account.ProfileResponse;
 import q.sdm.data.model.api.response.product.ProductResponse;
 import q.sdm.di.component.AppComponent;
 import q.sdm.di.component.DaggerAppComponent;
@@ -44,6 +45,10 @@ public class MVVMApplication extends Application{
     @Getter
     @Setter
     private ObservableField<String> customerLocation = new ObservableField<>("...");
+
+    @Getter
+    @Setter
+    private ProfileResponse profileResponse;
     @Override
     public void onCreate() {
         super.onCreate();

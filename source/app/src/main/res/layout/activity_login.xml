@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <import type="android.view.View"/>
         <variable
             name="a"
             type="q.sdm.ui.login.LoginActivity" />
@@ -12,187 +12,196 @@
             name="vm"
             type="q.sdm.ui.login.LoginViewModel" />
     </data>
-    <ScrollView
-        android:orientation="vertical"
-        android:fillViewport="true"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <ScrollView
+            android:orientation="vertical"
+            android:fillViewport="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl"
-                android:background="@color/white"
+            android:layout_height="match_parent">
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_600sdp">
-                <View
-                    android:id="@+id/top_bg"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    app:layout_constraintHeight_percent=".3"
-                    android:background="@drawable/top_background"/>
-                <View
-                    android:id="@+id/bottom_bg"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    app:layout_constraintHeight_percent=".3"
-                    android:background="@drawable/bottom_background"/>
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_600sdp">
+                    <View
+                        android:id="@+id/top_bg"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        app:layout_constraintHeight_percent=".3"
+                        android:background="@drawable/top_background"/>
+                    <View
+                        android:id="@+id/bottom_bg"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        app:layout_constraintHeight_percent=".3"
+                        android:background="@drawable/bottom_background"/>
 
-                <ImageView
-                    android:layout_width="@dimen/_60sdp"
-                    android:layout_height="@dimen/_60sdp"
-                    android:src="@drawable/app_icon"
-                    app:layout_constraintStart_toStartOf="@id/top_bg"
-                    app:layout_constraintEnd_toEndOf="@id/top_bg"
-                    app:layout_constraintTop_toTopOf="@id/top_bg"
-                    app:layout_constraintBottom_toBottomOf="@id/top_bg"
-                    app:layout_constraintVertical_bias=".3"
-                    />
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_marginStart="@dimen/_20sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@id/top_bg"
-                    app:layout_constraintBottom_toBottomOf="@id/top_bg">
-                    <TextView
+                    <ImageView
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_60sdp"
+                        android:src="@drawable/app_icon"
+                        app:layout_constraintStart_toStartOf="@id/top_bg"
+                        app:layout_constraintEnd_toEndOf="@id/top_bg"
+                        app:layout_constraintTop_toTopOf="@id/top_bg"
+                        app:layout_constraintBottom_toBottomOf="@id/top_bg"
+                        app:layout_constraintVertical_bias=".3"
+                        />
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/_20sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_22ssp"
-                        android:text="Đăng Nhập"
+                        app:layout_constraintStart_toStartOf="@id/top_bg"
+                        app:layout_constraintBottom_toBottomOf="@id/top_bg">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_22ssp"
+                            android:text="Đăng Nhập"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"/>
+                        <TextView
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/_12ssp"
+                            android:text="Nhập mail và mật khẩu của bạn"
+                            android:textStyle="bold"
+                            android:textColor="@color/gray"/>
+                    </LinearLayout>
+                    <!--        <variable-->
+                    <!--            name="toggle"-->
+                    <!--            type="Boolean" />-->
+                    <!--        <variable-->
+                    <!--            name="title"-->
+                    <!--            type="String" />-->
+                    <!--        <variable-->
+                    <!--            name="input"-->
+                    <!--            type="androidx.databinding.ObservableField&lt;String>" />-->
+                    <!--        <variable-->
+                    <!--            name="state"-->
+                    <!--            type="androidx.databinding.ObservableBoolean" />-->
+                    <!--        <variable-->
+                    <!--            name="togglePassword"-->
+                    <!--            type="androidx.databinding.ObservableBoolean" />-->
+                    <!--        <import type="android.view.View"/>-->
+                    <!--        <variable-->
+                    <!--            name="click"-->
+                    <!--            type="android.view.View.OnClickListener" />-->
+                    <!--        <import type="android.text.InputType"/>-->
+                    <include
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:id="@+id/email"
+                        app:title="@{`Số điện thoại`}"
+                        app:input="@{vm.email}"
+                        app:state="@{vm.emailState}"
+                        app:click="@{a}"
+                        app:valid="@{vm.valid}"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        layout="@layout/email_form"
+                        app:layout_constraintTop_toBottomOf="@id/top_bg"/>
+                    <include
+                        android:layout_marginHorizontal="@dimen/_20sdp"
+                        android:id="@+id/password"
+                        app:toggle="@{true}"
+                        app:title="@{`Mật khẩu`}"
+                        app:click="@{a}"
+                        app:input="@{vm.password}"
+                        app:state="@{vm.passwordState}"
+                        app:togglePassword="@{vm.toggle}"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        layout="@layout/password_form"
+                        app:layout_constraintTop_toBottomOf="@id/email"/>
+                    <TextView
+                        android:id="@+id/forgot_pwd"
+                        app:layout_constraintTop_toBottomOf="@id/password"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_width="wrap_content"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/_8ssp"
+                        android:text="Quên mật khẩu?"
                         android:textStyle="bold"
-                        android:textColor="@color/black"/>
-                    <TextView
-                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textColor="#333333"/>
+                    <RelativeLayout
+                        android:clickable="@{(vm.email.equals(``) || vm.password.equals(``) || !vm.valid) ? false : true}"
+                        app:layout_constraintTop_toBottomOf="@id/forgot_pwd"
+                        android:onClick="@{(v)->a.onClick(v)}"
+                        android:id="@+id/login_btn"
+                        android:background="@{(vm.email.equals(``) || vm.password.equals(``) || !vm.valid) ? @drawable/login_btn_inactive : @drawable/login_btn_active}"
+                        android:layout_marginTop="@dimen/_25sdp"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_34sdp"
+                        android:layout_marginHorizontal="@dimen/_20sdp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginVertical="@dimen/_3sdp"
+                            android:text="Đăng nhập"
+                            android:textColor='@{(vm.email.equals(``) || vm.password.equals(``) || !vm.valid) ? @color/login_text_inactive : @color/login_text_active}'
+                            android:textSize="@dimen/_12ssp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+                    <LinearLayout
+                        app:layout_constraintTop_toBottomOf="@id/login_btn"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:id="@+id/register"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginTop="@dimen/_27sdp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/_12ssp"
-                        android:text="Nhập mail và mật khẩu của bạn"
-                        android:textStyle="bold"
-                        android:textColor="@color/gray"/>
-                </LinearLayout>
-                <!--        <variable-->
-                <!--            name="toggle"-->
-                <!--            type="Boolean" />-->
-                <!--        <variable-->
-                <!--            name="title"-->
-                <!--            type="String" />-->
-                <!--        <variable-->
-                <!--            name="input"-->
-                <!--            type="androidx.databinding.ObservableField&lt;String>" />-->
-                <!--        <variable-->
-                <!--            name="state"-->
-                <!--            type="androidx.databinding.ObservableBoolean" />-->
-                <!--        <variable-->
-                <!--            name="togglePassword"-->
-                <!--            type="androidx.databinding.ObservableBoolean" />-->
-                <!--        <import type="android.view.View"/>-->
-                <!--        <variable-->
-                <!--            name="click"-->
-                <!--            type="android.view.View.OnClickListener" />-->
-                <!--        <import type="android.text.InputType"/>-->
-                <include
-                    android:layout_marginHorizontal="@dimen/_20sdp"
-                    android:id="@+id/email"
-                    app:title="@{`Email`}"
-                    app:input="@{vm.email}"
-                    app:state="@{vm.emailState}"
-                    app:click="@{a}"
-                    app:valid="@{vm.valid}"
-                    android:layout_marginTop="@dimen/_25sdp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    layout="@layout/email_form"
-                    app:layout_constraintTop_toBottomOf="@id/top_bg"/>
-                <include
-                    android:layout_marginHorizontal="@dimen/_20sdp"
-                    android:id="@+id/password"
-                    app:toggle="@{true}"
-                    app:title="@{`Password`}"
-                    app:click="@{a}"
-                    app:input="@{vm.password}"
-                    app:state="@{vm.passwordState}"
-                    app:togglePassword="@{vm.toggle}"
-                    android:layout_marginTop="@dimen/_25sdp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    layout="@layout/password_form"
-                    app:layout_constraintTop_toBottomOf="@id/email"/>
-                <TextView
-                    android:id="@+id/forgot_pwd"
-                    app:layout_constraintTop_toBottomOf="@id/password"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_15sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_marginEnd="@dimen/_20sdp"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/_8ssp"
-                    android:text="Quên mật khẩu?"
-                    android:textStyle="bold"
-                    android:textColor="#333333"/>
-                <RelativeLayout
-                    android:clickable="@{(vm.email.equals(``) || vm.password.equals(``) || !vm.valid) ? false : true}"
-                    app:layout_constraintTop_toBottomOf="@id/forgot_pwd"
-                    android:onClick="@{(v)->a.onClick(v)}"
-                    android:id="@+id/login_btn"
-                    android:background="@{(vm.email.equals(``) || vm.password.equals(``) || !vm.valid) ? @drawable/login_btn_inactive : @drawable/login_btn_active}"
-                    android:layout_marginTop="@dimen/_25sdp"
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_34sdp"
-                    android:layout_marginHorizontal="@dimen/_20sdp">
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:layout_marginVertical="@dimen/_3sdp"
-                        android:text="Đăng nhập"
-                        android:textColor='@{(vm.email.equals(``) || vm.password.equals(``) || !vm.valid) ? @color/login_text_inactive : @color/login_text_active}'
-                        android:textSize="@dimen/_12ssp"
-                        android:textStyle="bold" />
-                </RelativeLayout>
-                <LinearLayout
-                    app:layout_constraintTop_toBottomOf="@id/login_btn"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:id="@+id/register"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginTop="@dimen/_27sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center_horizontal">
+                        <TextView
+                            android:layout_marginStart="@dimen/_3sdp"
+                            android:textColor="@color/tab_text"
+                            android:textSize="@dimen/_13ssp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chưa có tài khoản? "/>
+                        <TextView
+                            android:textColor="@color/primary"
+                            android:textSize="@dimen/_13ssp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:onClick="@{(v)-> a.onClick(v)}"
+                            android:id="@+id/register_btn"
+                            android:text="Đăng ký"/>
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_marginStart="@dimen/_3sdp"
-                        android:textColor="@color/tab_text"
-                        android:textSize="@dimen/_13ssp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Chưa có tài khoản? "/>
-                    <TextView
-                        android:textColor="@color/primary"
-                        android:textSize="@dimen/_13ssp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:onClick="@{(v)-> a.onClick(v)}"
-                        android:id="@+id/register_btn"
-                        android:text="Đăng ký"/>
-                </LinearLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-    </ScrollView>
+        </ScrollView>
+        <include
+            layout="@layout/layout_splash_screen"
+            android:visibility="@{vm.showSplashScreen ? View.VISIBLE : View.INVISIBLE}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </FrameLayout>
 
 </layout>

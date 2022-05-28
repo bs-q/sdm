@@ -8,10 +8,13 @@ import q.sdm.databinding.ActivityLoginBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.activity.BaseCallback;
+import q.sdm.ui.base.activity.BaseViewModel;
+import q.sdm.ui.main.MainActivity;
 import q.sdm.ui.recovery.RecoveryActivity;
 import q.sdm.ui.register.RegisterActivity;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -52,7 +55,22 @@ implements View.OnClickListener {
         int height = displayMetrics.heightPixels;
         viewBinding.cl.setLayoutParams(new LinearLayoutCompat.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, height));
         listenFormFocus();
-        setupForm();
+        profile();
+    }
+    private void profile(){
+        viewModel.profile(new BaseCallback() {
+            @Override
+            public void doSuccess() {
+                navigateToMainScreen();
+            }
+
+            @Override
+            public void doError(Throwable throwable, BaseViewModel viewModel) {
+                BaseCallback.super.doError(throwable, viewModel);
+                setupForm();
+            }
+        });
+
     }
 
     private void setupForm(){
@@ -69,9 +87,7 @@ implements View.OnClickListener {
         viewModel.email.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-                viewModel.valid.set(VALID_EMAIL_ADDRESS_REGEX.matcher(
-                        viewModel.email.get()
-                ).find());
+                viewModel.valid.set(viewModel.email.get().length() == 11);
             }
         });
         viewBinding.password.input.setOnFocusChangeListener((v, hasFocus) -> {
@@ -85,6 +101,7 @@ implements View.OnClickListener {
             public void onPropertyChanged(Observable sender, int propertyId) {
                 viewBinding.password.input.postDelayed(()->{
                     viewBinding.password.input.setSelection(viewModel.password.get().length());
+                    viewBinding.password.input.setTypeface(null, Typeface.BOLD);
                 },100);
             }
         });
@@ -106,18 +123,30 @@ implements View.OnClickListener {
         viewModel.login(new BaseCallback() {
             @Override
             public void doSuccess() {
-                finish();
+                viewModel.hideLoading();
+                navigateToMainScreen();
+            }
+
+            @Override
+            public void doFail() {
+                BaseCallback.super.doFail();
+                viewModel.hideLoading();
+                viewModel.showErrorMessage("Sai số điện thoại hoặc mật khẩu");
             }
         });
     }
     private void navigateToRegister(){
         Intent it = new Intent(this, RegisterActivity.class);
         startActivity(it);
-        finish();
     }
     private void navigateToForgetPassword(){
         Intent it = new Intent(this, RecoveryActivity.class);
         startActivity(it);
+    }
+    private void navigateToMainScreen(){
+        Intent it = new Intent(this, MainActivity.class);
+        startActivity(it);
+        finish();
     }
 
     @BindingAdapter("layout_height")

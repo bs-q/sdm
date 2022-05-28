@@ -77,6 +77,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="0dp"
+            android:id="@+id/fc_rv"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,6 +94,8 @@
             app:layout_constraintBottom_toTopOf="@id/fc_pre_total"/>
 
         <include
+            app:total="@{vm.total}"
+            app:vat="@{vm.vat}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/layout_pre_calculate"
@@ -110,6 +113,7 @@
             app:layout_constraintBottom_toTopOf="@id/fc_total"/>
 
         <include
+            app:total="@{vm.totalAndVat}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/layout_total"

@@ -5,10 +5,10 @@
     <data>
         <variable
             name="total"
-            type="androidx.databinding.ObservableLong" />
+            type="androidx.databinding.ObservableDouble" />
         <variable
             name="vat"
-            type="androidx.databinding.ObservableLong" />
+            type="androidx.databinding.ObservableDouble" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat

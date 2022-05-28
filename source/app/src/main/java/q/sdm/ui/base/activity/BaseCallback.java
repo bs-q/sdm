@@ -16,6 +16,9 @@ import timber.log.Timber;
 
 public interface BaseCallback {
     void doSuccess();
+    default void doFail() {
+
+    }
     default void doError(Throwable throwable,BaseViewModel viewModel){
         String message = null;
         try {

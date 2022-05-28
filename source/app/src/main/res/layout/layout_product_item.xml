@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="product"
+            type="q.sdm.data.model.db.ProductEntity" />
+        <variable
+            name="click"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginBottom="@dimen/_14sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="#424242"
+            style="@style/sfmedium"
+            android:text="@{String.valueOf(product.amount) + `x`}"
+            android:layout_width="wrap_content"
+            android:id="@+id/lpi_quantity"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="@{product.name}"
+            android:layout_marginStart="@dimen/_18sdp"
+            app:layout_constraintStart_toEndOf="@id/lpi_quantity"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="#424242"
+            style="@style/sfmedium"
+            app:layout_constraintEnd_toStartOf="@id/lpi_price"
+            android:ellipsize="end"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_width="0dp"
+            android:id="@+id/lpi_name"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="@{@string/money_format(product.price)}"
+            android:layout_marginStart="@dimen/_18sdp"
+            app:layout_constraintEnd_toStartOf="@id/lpi_delete"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textSize="@dimen/_12ssp"
+            android:textColor="#424242"
+            android:layout_marginEnd="@dimen/_6sdp"
+            style="@style/sfmedium"
+            android:layout_width="wrap_content"
+            android:id="@+id/lpi_price"
+            android:layout_height="wrap_content"/>
+
+
+        <ImageView
+            android:onClick="@{(v)->click.onClick(v)}"
+            android:id="@+id/lpi_delete"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:src="@drawable/delete_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

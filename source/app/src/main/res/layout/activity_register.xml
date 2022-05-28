@@ -93,7 +93,7 @@
                 <include
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:id="@+id/email"
-                    app:title="@{`Email`}"
+                    app:title="@{`Số điện thoại`}"
                     app:input="@{vm.email}"
                     app:state="@{vm.emailState}"
                     app:click="@{a}"
