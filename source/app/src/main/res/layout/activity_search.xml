@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="a"
+            type="q.sdm.ui.search.SearchActivity" />
+
+        <variable
+            name="vm"
+            type="q.sdm.ui.search.SearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:text="@={vm.searchQuery}"
+            style="@style/sfregular"
+            android:paddingHorizontal="@dimen/_11sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:background="@drawable/search_scan"
+            android:id="@+id/search"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textSize="@dimen/_12ssp"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:drawablePadding="@dimen/_15sdp"
+            android:drawableStart="@drawable/search"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:textColor="#7E8389"
+            android:layout_marginTop="@dimen/_12ssp"
+            android:ellipsize="end"
+            android:inputType="text"
+            android:imeOptions="actionSearch"
+            android:hint="Tìm kiếm theo tên sản phẩm hoặc loại ..."
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+        <androidx.recyclerview.widget.RecyclerView
+            app:layout_constraintTop_toBottomOf="@id/search"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:id="@+id/as_rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

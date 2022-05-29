@@ -47,6 +47,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
                 <ImageView
+                    android:id="@+id/avatar_edit"
                     android:onClick="@{(v)->a.onClick(v)}"
                     android:src="@drawable/edit"
                     android:layout_width="@dimen/_12sdp"

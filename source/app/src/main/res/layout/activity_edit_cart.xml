@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="a"
+            type="q.sdm.ui.main.cart.edit.CartEditActivity" />
+
+        <variable
+            name="vm"
+            type="q.sdm.ui.main.cart.edit.CartEditViewModel" />
+        <variable
+            name="product"
+            type="q.sdm.data.model.api.response.product.ProductResponse" />
+    </data>
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        app:cardPreventCornerOverlap="false"
+        android:clipToPadding="false"
+        android:layout_marginTop="@dimen/_20sdp"
+        app:shapeAppearanceOverlay="@style/cardTopOnly"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/root"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/aec_sv"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                app:layout_constraintBottom_toTopOf="@id/aec_bottom"
+                android:layout_marginBottom="@dimen/_14sdp"
+                android:layout_height="0dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:background="@android:color/transparent"
+                    android:layout_width="match_parent"
+                    android:clipToOutline="true"
+
+                    android:layout_height="match_parent">
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:background="@drawable/cart_edit_background"
+                        app:shapeAppearanceOverlay="@style/ImageView.Corner"
+                        android:scaleType="centerCrop"
+                        android:id="@+id/pd_img"
+                        online_image="@{product.productImage}"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/_160sdp"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"/>
+                    <TextView
+                        android:layout_marginTop="@dimen/_4sdp"
+                        android:layout_marginHorizontal="@dimen/_6sdp"
+                        app:layout_constraintTop_toBottomOf="@id/pd_img"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:maxLines="2"
+                        android:id="@+id/pd_name"
+                        android:textSize="@dimen/_14ssp"
+                        android:textColor="#666666"
+                        style="@style/sfbold"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@{product.productName}"/>
+                    <TextView
+                        style="@style/sfmedium"
+                        android:layout_marginHorizontal="@dimen/_6sdp"
+                        app:layout_constraintTop_toBottomOf="@id/pd_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:maxLines="2"
+                        android:id="@+id/pd_money"
+                        android:textSize="@dimen/_16ssp"
+                        android:textColor="@color/primary"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/money_format(product.productPrice)}"/>
+
+
+                    <WebView
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginHorizontal="@dimen/_6sdp"
+                        app:layout_constraintTop_toBottomOf="@id/pd_money"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:id="@+id/pd_description"
+                        android:textSize="@dimen/_14ssp"
+                        android:textColor="@color/black"
+                        style="@style/sfmedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:html_text="@{product.description}"/>
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:layout_width="0dp"
+                        android:id="@+id/shimmer"
+                        app:shimmer_auto_start="true"
+                        android:layout_height="@dimen/_200sdp"
+                        android:layout_marginTop="@dimen/_16sdp"
+                        android:layout_marginHorizontal="@dimen/_6sdp"
+                        app:layout_constraintTop_toBottomOf="@id/pd_money"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+                        <include layout="@layout/layout_preview_description"/>
+                    </com.facebook.shimmer.ShimmerFrameLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+            <ImageView
+                android:id="@+id/close"
+                android:onClick="@{(v)->a.onClick(v)}"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:src="@drawable/delete_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@color/white"
+                android:elevation="@dimen/_10sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:orientation="vertical"
+                android:id="@+id/aec_bottom"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:paddingVertical="@dimen/_12sdp"
+                android:paddingHorizontal="@dimen/_8sdp"
+                android:layout_height="wrap_content">
+                <RelativeLayout
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:onClick="@{(v)->a.onClick(v)}"
+                    android:id="@+id/aec_update"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/login_btn_active"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    app:layout_constraintWidth_percent=".6"
+                    android:layout_height="@dimen/_34sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="Cập nhật"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="0dp"
+                    android:background="@drawable/edit_quantity_background"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    app:layout_constraintEnd_toStartOf="@id/aec_update"
+                    android:layout_height="@dimen/_34sdp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+
+                    <FrameLayout
+                        android:onClick="@{(v)->a.onClick(v)}"
+                        android:id="@+id/minus"
+                        android:paddingHorizontal="@dimen/_8sdp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/minus"/>
+                    </FrameLayout>
+                    <EditText
+                        android:background="@android:color/transparent"
+                        android:text="@={vm.quantityString}"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:textAlignment="center"
+                        style="@style/sfbold"
+                        android:imeOptions="actionDone"
+                        android:textSize="@dimen/_16ssp"
+                        android:maxLines="1"
+                        android:id="@+id/aec_quantity"
+                        android:maxLength="2"
+                        android:inputType="number"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/minus"
+                        app:layout_constraintEnd_toStartOf="@id/plus"/>
+                    <FrameLayout
+                        android:onClick="@{(v)->a.onClick(v)}"
+                        android:id="@+id/plus"
+                        android:paddingHorizontal="@dimen/_8sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="wrap_content"
+
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/plus"/>
+                    </FrameLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

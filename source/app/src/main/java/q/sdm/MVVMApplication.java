@@ -13,6 +13,8 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 
+import java.util.List;
+
 import es.dmoral.toasty.Toasty;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.subjects.PublishSubject;
@@ -20,6 +22,7 @@ import lombok.Getter;
 import lombok.Setter;
 import q.sdm.data.model.api.response.account.ProfileResponse;
 import q.sdm.data.model.api.response.product.ProductResponse;
+import q.sdm.data.model.db.ProductEntity;
 import q.sdm.di.component.AppComponent;
 import q.sdm.di.component.DaggerAppComponent;
 import q.sdm.others.MyTimberDebugTree;
@@ -40,6 +43,10 @@ public class MVVMApplication extends Application{
 
     @Getter
     @Setter
+    private List<ProductResponse> searchResults;
+
+    @Getter
+    @Setter
     private ObservableInt totalItemInCart = new ObservableInt(0);
 
     @Getter
@@ -49,6 +56,10 @@ public class MVVMApplication extends Application{
     @Getter
     @Setter
     private ProfileResponse profileResponse;
+
+    @Getter
+    @Setter
+    private ProductEntity editProduct;
     @Override
     public void onCreate() {
         super.onCreate();

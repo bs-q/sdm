@@ -18,6 +18,7 @@ import q.sdm.databinding.LayoutProductItemBinding;
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterViewHolder> {
     public interface CartAdapterCallback {
         void productCallback(ProductEntity productEntity);
+        void deleteProduct(ProductEntity productEntity);
     }
     public List<ProductEntity> productEntities = new ArrayList<>();
     public CartAdapterCallback callback;
@@ -35,6 +36,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartAdapterVie
     public void onBindViewHolder(@NonNull CartAdapterViewHolder holder, int position) {
         holder.layoutProductItemBinding.setProduct(productEntities.get(position));
         holder.layoutProductItemBinding.setClick(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback.deleteProduct(holder.layoutProductItemBinding.getProduct());
+            }
+        });
+        holder.layoutProductItemBinding.getRoot().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 callback.productCallback(holder.layoutProductItemBinding.getProduct());

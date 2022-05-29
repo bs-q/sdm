@@ -33,6 +33,7 @@
             layout="@layout/layout_location_cart"/>
         <include android:layout_width="match_parent"
             android:layout_marginTop="@dimen/_2sdp"
+            app:click="@{a}"
             app:layout_constraintTop_toBottomOf="@id/location_cart"
             android:id="@+id/search_scan"
             android:layout_height="wrap_content"

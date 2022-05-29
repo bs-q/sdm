@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="a"
+            type="q.sdm.ui.address.AddAddressActivity" />
+
+        <variable
+            name="vm"
+            type="q.sdm.ui.address.AddAddressViewModel" />
+    </data>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:src="@drawable/update_location"
+                android:id="@+id/aul_image"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintWidth_percent=".6"
+                android:layout_marginTop="@dimen/_30sdp"
+                app:layout_constraintVertical_bias=".1"
+                app:layout_constraintDimensionRatio="H,224:170"/>
+            <TextView
+                android:textSize="@dimen/_20ssp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/aul_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/sfmedium"
+                android:text="Chọn vị trí của bạn"
+                android:textColor="#181725"/>
+            <LinearLayout
+                app:layout_constraintTop_toBottomOf="@id/aul_image"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/_60sdp"
+
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/city_menu"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_width="match_parent"
+                    app:boxStrokeColor="@color/dropdown"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    app:hintTextColor="#53B175"
+                    style="@style/dropdown"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxBackgroundMode="outline"
+                    app:boxStrokeWidth="@dimen/_1sdp"
+                    android:hint="Tỉnh/Thành"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <AutoCompleteTextView
+                        android:labelFor="@id/city_menu"
+                        android:inputType="none|textNoSuggestions"
+                        showSoftInputOnFocus = "false"
+                        android:id="@+id/province_auto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/province_menu"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_width="match_parent"
+                    android:hint="Quận/Huyện"
+                    app:boxStrokeColor="@color/dropdown"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    app:hintTextColor="#53B175"
+                    style="@style/dropdown"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxBackgroundMode="outline"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/district_auto"
+                        android:labelFor="@id/province_menu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="none|textNoSuggestions"
+                        android:cursorVisible="false"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/commune_menu"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_width="match_parent"
+                    android:hint="Xã/Phường"
+                    app:boxStrokeColor="@color/dropdown"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    app:hintTextColor="#53B175"
+                    style="@style/dropdown"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxBackgroundMode="outline"
+                    android:layout_height="wrap_content"
+                    >
+
+                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                        android:id="@+id/commune_auto"
+                        android:labelFor="@id/commune_menu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:inputType="none|textNoSuggestions"
+                        android:cursorVisible="false"                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</layout>

@@ -2,16 +2,25 @@ package q.sdm.ui.product;
 
 import q.sdm.R;
 import q.sdm.BR;
+import q.sdm.data.model.api.response.product.ProductResponse;
 import q.sdm.data.model.db.ProductEntity;
 import q.sdm.databinding.ActivityProductDetailBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.activity.BaseDbCallback;
+import q.sdm.ui.base.activity.BaseRequestCallback;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
+import android.view.ViewGroup;
+import android.webkit.WebView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.BindingAdapter;
+
+import org.w3c.dom.Text;
 
 public class ProductDetailActivity extends BaseActivity<ActivityProductDetailBinding,ProductDetailViewModel>
 implements View.OnClickListener {
@@ -79,5 +88,24 @@ implements View.OnClickListener {
         viewBinding.setA(this);
         viewBinding.setVm(viewModel);
         viewBinding.setProduct(myApplication().getProductDetailItem());
+        getProductDetail();
+    }
+
+    private void getProductDetail(){
+        viewModel.getProductDetail(myApplication().getProductDetailItem().getId(), new BaseRequestCallback<ProductResponse>() {
+            @Override
+            public void doSuccess(ProductResponse response) {
+                viewBinding.setProduct(response);
+                viewBinding.shimmer.setVisibility(View.INVISIBLE);
+                viewBinding.shimmer.stopShimmer();
+                viewBinding.executePendingBindings();
+            }
+        });
+    }
+
+    @BindingAdapter("html_text")
+    public static void setHtmlText(WebView view, String source) {
+        if (source == null) return;;
+        view.loadDataWithBaseURL(null,source, "text/html; charset=utf-8", "UTF-8", null);
     }
 }

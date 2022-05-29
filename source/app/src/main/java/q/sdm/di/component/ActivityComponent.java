@@ -3,16 +3,20 @@ package q.sdm.di.component;
 import dagger.Component;
 import q.sdm.di.module.ActivityModule;
 import q.sdm.di.scope.ActivityScope;
+import q.sdm.ui.address.AddAddressActivity;
 import q.sdm.ui.category.CategoryActivity;
 import q.sdm.ui.location.LocationActivity;
 import q.sdm.ui.login.LoginActivity;
 import q.sdm.ui.main.MainActivity;
+import q.sdm.ui.main.cart.edit.CartEditActivity;
 import q.sdm.ui.product.ProductDetailActivity;
 import q.sdm.ui.recovery.RecoveryActivity;
 import q.sdm.ui.recovery.complete.RecoveryCompleteActivity;
 import q.sdm.ui.register.RegisterActivity;
 import q.sdm.ui.register.complete.RegisterCompleteActivity;
 import q.sdm.ui.register.verify.VerifyActivity;
+import q.sdm.ui.search.SearchActivity;
+import q.sdm.ui.search.result.SearchResultActivity;
 
 @ActivityScope
 @Component(modules = {ActivityModule.class}, dependencies = AppComponent.class)
@@ -36,5 +40,13 @@ public interface ActivityComponent {
     void inject(CategoryActivity activity);
 
     void inject(ProductDetailActivity activity);
+
+    void inject(SearchActivity activity);
+
+    void inject(SearchResultActivity activity);
+
+    void inject(CartEditActivity activity);
+
+    void inject(AddAddressActivity activity);
 }
 

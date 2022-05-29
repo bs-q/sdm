@@ -13,12 +13,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:clickable="true"
+            android:cursorVisible="false"
+            android:focusable="false"
             style="@style/sfregular"
             android:paddingHorizontal="@dimen/_11sdp"
             android:paddingVertical="@dimen/_10sdp"
             android:background="@drawable/search_scan"
             android:onClick="@{(v)->click.onClick(v)}"
-            android:id="@+id/location"
+            android:id="@+id/search"
             app:layout_constraintTop_toTopOf="@id/scan"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/scan"
@@ -30,7 +33,7 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:textColor="#7E8389"
             android:ellipsize="end"
-            android:hint="Tim kiếm theo tên sản phẩm hoặc loại ..."
+            android:hint="Tìm kiếm theo tên sản phẩm hoặc loại ..."
             android:layout_width="0dp"
             android:layout_height="0dp"/>
         <FrameLayout

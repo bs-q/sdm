@@ -70,6 +70,12 @@
         <activity android:name=".ui.location.LocationActivity" />
         <activity android:name=".ui.category.CategoryActivity" />
         <activity android:name=".ui.product.ProductDetailActivity" />
+        <activity android:name=".ui.search.SearchActivity" />
+        <activity android:name=".ui.search.result.SearchResultActivity" />
+        <activity android:name=".ui.main.cart.edit.CartEditActivity"
+            android:theme="@style/MyTransparentTheme"/>
+        <activity android:name=".ui.address.AddAddressActivity"
+            android:exported="true"/>
 
         <meta-data
             android:name="com.google.android.gms.version"

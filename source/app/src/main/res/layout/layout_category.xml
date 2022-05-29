@@ -6,22 +6,27 @@
         <variable
             name="thumbnail"
             type="String" />
+        <variable
+            name="name"
+            type="String" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
+        android:background="@color/white"
         app:cardPreventCornerOverlap="true"
         android:layout_marginTop="@dimen/_3sdp"
         android:layout_marginBottom="@dimen/_12sdp"
         android:layout_marginStart="@dimen/_3sdp"
         android:layout_marginEnd="@dimen/_3sdp"
         app:cardCornerRadius="@dimen/_6sdp"
-        app:cardBackgroundColor="@android:color/transparent"
+        app:cardBackgroundColor="@android:color/white"
         android:layout_width="@dimen/_100sdp"
         android:layout_height="@dimen/_64sdp">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
+                android:src="@color/white"
                 android:scaleType="centerCrop"
                 app:online_image="@{thumbnail}"
                 android:layout_width="match_parent"
@@ -34,7 +39,7 @@
                 style="@style/sfbold"
                 android:textSize="@dimen/_12sdp"
                 android:textColor="@color/white"
-                android:text="Category"
+                android:text="@{name}"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

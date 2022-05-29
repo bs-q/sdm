@@ -1,5 +1,6 @@
 package q.sdm.ui.main.cart;
 
+import android.content.Intent;
 import android.view.View;
 
 import androidx.lifecycle.Observer;
@@ -16,6 +17,7 @@ import q.sdm.databinding.FragmentHomeBinding;
 import q.sdm.di.component.FragmentComponent;
 import q.sdm.ui.base.fragment.BaseFragment;
 import q.sdm.ui.main.cart.adapter.CartAdapter;
+import q.sdm.ui.main.cart.edit.CartEditActivity;
 
 public class CartFragment extends BaseFragment<FragmentCartBinding, CartViewModel> implements CartAdapter.CartAdapterCallback {
 
@@ -50,7 +52,7 @@ public class CartFragment extends BaseFragment<FragmentCartBinding, CartViewMode
             @Override
             public void onChanged(List<ProductEntity> productEntities) {
                 cartAdapter.productEntities = productEntities;
-                double total = productEntities.stream().mapToDouble(o -> o.price).reduce(0, Double::sum);
+                double total = productEntities.stream().mapToDouble(o -> o.price*o.amount).reduce(0, Double::sum);
                 viewModel.total.set(total);
                 viewModel.totalAndVat.set(total);
                 cartAdapter.notifyDataSetChanged();
@@ -82,8 +84,27 @@ public class CartFragment extends BaseFragment<FragmentCartBinding, CartViewMode
 
     }
 
+    boolean lock = false;
     @Override
     public void productCallback(ProductEntity productEntity) {
+        if (lock) return;
+        lock = true;
+        myApplication().setEditProduct(productEntity);
+        navigateToProductEdit();
+        binding.getRoot().postDelayed(()->{
+            lock = false;
+        },650);
+    }
+
+    private void navigateToProductEdit(){
+        Intent it = new Intent(requireContext(), CartEditActivity.class);
+        startActivity(it);
+        requireActivity().overridePendingTransition(R.anim.bottom_up, R.anim.nothing);
+
+    }
+
+    @Override
+    public void deleteProduct(ProductEntity productEntity) {
         viewModel.deleteProduct(productEntity);
     }
 }

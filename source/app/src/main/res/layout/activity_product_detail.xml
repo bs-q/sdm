@@ -30,7 +30,7 @@
             android:layout_height="0dp">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent">
                 <ImageView
                     android:scaleType="centerCrop"
                     android:id="@+id/pd_img"
@@ -70,7 +70,7 @@
                     android:text="@{@string/money_format(product.productPrice)}"/>
 
 
-                <TextView
+                <WebView
                     android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginHorizontal="@dimen/_6sdp"
                     app:layout_constraintTop_toBottomOf="@id/pd_money"
@@ -80,9 +80,21 @@
                     android:textSize="@dimen/_14ssp"
                     android:textColor="@color/black"
                     style="@style/sfmedium"
+                    app:html_text="@{product.description}"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="@{product.description}"/>
+                    android:layout_height="wrap_content"/>
+                <com.facebook.shimmer.ShimmerFrameLayout
+                    android:layout_width="0dp"
+                    android:id="@+id/shimmer"
+                    app:shimmer_auto_start="true"
+                    android:layout_height="@dimen/_200sdp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginHorizontal="@dimen/_6sdp"
+                    app:layout_constraintTop_toBottomOf="@id/pd_money"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+                    <include layout="@layout/layout_preview_description"/>
+                </com.facebook.shimmer.ShimmerFrameLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
         <RelativeLayout

@@ -1,12 +1,12 @@
 package q.sdm.ui.main.home.adapter;
 
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import q.sdm.data.model.api.response.category.CategoryResponse;
@@ -16,7 +16,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public interface CategoryAdapterClick{
         void categoryItemClick(CategoryResponse categoryResponse);
     }
-    List<CategoryResponse> categoryResponseList;
+    List<CategoryResponse> categoryResponseList = new ArrayList<>();
     private CategoryAdapterClick callback;
     public CategoryAdapter(CategoryAdapterClick categoryAdapterClick) {
         this.callback = categoryAdapterClick;
@@ -32,7 +32,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapterViewHolder holder, int position) {
-        holder.layoutCategoryBinding.setThumbnail(categoryResponseList.get(position).getThumbnail());
+        holder.layoutCategoryBinding.setThumbnail(categoryResponseList.get(position).getCategoryImage());
+        holder.layoutCategoryBinding.setName(categoryResponseList.get(position).getCategoryName());
         holder.layoutCategoryBinding.getRoot().setOnClickListener((v)->{
             callback.categoryItemClick(categoryResponseList.get(position));
         });

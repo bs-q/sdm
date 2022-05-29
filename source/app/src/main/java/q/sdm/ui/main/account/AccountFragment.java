@@ -35,8 +35,19 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
 
     @Override
     public void onClick(View v) {
-        navigateToLogin();
+        if (v.getId() == binding.fcLogout.getId()){
+            viewModel.logout();
+            navigateToLogin();
+        } else if (v.getId() == binding.lai.avatarEdit.getId()){
+
+        }
+
     }
+
+    private void changeAvatar(){
+
+    }
+
     private void navigateToLogin(){
         Intent it = new Intent(requireContext(), LoginActivity.class);
         startActivity(it);

@@ -21,7 +21,7 @@
         android:layout_height="match_parent">
 
         <include
-            android:id="@+id/lci"
+            android:id="@+id/lai"
             app:a="@{a}"
             app:username="@{profile.customerFullName}"
             app:email="@{profile.customerEmail}"
@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginTop="@dimen/_40sdp"
-            app:layout_constraintTop_toBottomOf="@id/lci"
+            app:layout_constraintTop_toBottomOf="@id/lai"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 

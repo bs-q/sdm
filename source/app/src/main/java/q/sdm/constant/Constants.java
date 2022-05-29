@@ -15,7 +15,9 @@ public class Constants {
     public static final int CARD=2;
     public static final int DONE=1;
     public static final int CANCEL=2;
-
+    public static final String PROVINCE_KIND_PROVINCE = "PROVINCE_KIND_PROVINCE";
+    public static final String PROVINCE_KIND_DISTRICT = "PROVINCE_KIND_DISTRICT";
+    public static final String PROVINCE_KIND_COMMUNE = "PROVINCE_KIND_COMMUNE";
 
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
             Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);

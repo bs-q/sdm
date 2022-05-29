@@ -13,17 +13,21 @@ import q.sdm.MVVMApplication;
 import q.sdm.ViewModelProviderFactory;
 import q.sdm.data.Repository;
 import q.sdm.di.scope.ActivityScope;
+import q.sdm.ui.address.AddAddressViewModel;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.category.CategoryViewModel;
 import q.sdm.ui.location.LocationViewModel;
 import q.sdm.ui.login.LoginViewModel;
 import q.sdm.ui.main.MainViewModel;
+import q.sdm.ui.main.cart.edit.CartEditViewModel;
 import q.sdm.ui.product.ProductDetailViewModel;
 import q.sdm.ui.recovery.RecoveryViewModel;
 import q.sdm.ui.recovery.complete.RecoveryCompleteViewModel;
 import q.sdm.ui.register.RegisterViewModel;
 import q.sdm.ui.register.complete.RegisterCompleteViewModel;
 import q.sdm.ui.register.verify.VerifyViewModel;
+import q.sdm.ui.search.SearchViewModel;
+import q.sdm.ui.search.result.SearchResultViewModel;
 import q.sdm.utils.GetInfo;
 
 @Module
@@ -128,5 +132,37 @@ public class ActivityModule {
         Supplier<ProductDetailViewModel> supplier = () -> new ProductDetailViewModel(repository, (MVVMApplication) application);
         ViewModelProviderFactory<ProductDetailViewModel> factory = new ViewModelProviderFactory<>(ProductDetailViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(ProductDetailViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    SearchViewModel provideSearchViewModel(Repository repository, Context application) {
+        Supplier<SearchViewModel> supplier = () -> new SearchViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<SearchViewModel> factory = new ViewModelProviderFactory<>(SearchViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(SearchViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    SearchResultViewModel provideSearchResultViewModel(Repository repository, Context application) {
+        Supplier<SearchResultViewModel> supplier = () -> new SearchResultViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<SearchResultViewModel> factory = new ViewModelProviderFactory<>(SearchResultViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(SearchResultViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    CartEditViewModel provideCartEditViewModel(Repository repository, Context application) {
+        Supplier<CartEditViewModel> supplier = () -> new CartEditViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<CartEditViewModel> factory = new ViewModelProviderFactory<>(CartEditViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(CartEditViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    AddAddressViewModel provideAddAddressViewModel(Repository repository, Context application) {
+        Supplier<AddAddressViewModel> supplier = () -> new AddAddressViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<AddAddressViewModel> factory = new ViewModelProviderFactory<>(AddAddressViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(AddAddressViewModel.class);
     }
 }

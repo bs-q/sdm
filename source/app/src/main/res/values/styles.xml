@@ -8,7 +8,7 @@
         <item name="windowActionBar">false</item>
         <item name="colorPrimaryDark">#333333</item>
         <!-- navigation icon color -->
-        <item name="colorControlNormal">@color/white</item>
+<!--        <item name="colorControlNormal">@color/white</item>-->
         <item name="windowNoTitle">true</item>
     </style>
     <style name="MaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
@@ -42,5 +42,36 @@
     <style name="circleImageView" parent="">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="MyTransparentTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+    <style name="ImageView.Corner" parent="">
+        <item name="cornerSizeTopRight">@dimen/_8sdp</item>
+        <item name="cornerSizeTopLeft">@dimen/_8sdp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+
+    <style name="cardTopOnly" >
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">@dimen/_8sdp</item>
+        <item name="cornerSizeTopLeft">@dimen/_8sdp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="dropdown" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+        <item name="boxStrokeColor">@color/dropdown</item>
+        <item name="endIconTint">@color/gray</item>
     </style>
 </resources>
