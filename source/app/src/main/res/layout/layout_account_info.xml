@@ -46,12 +46,6 @@
                     android:id="@+id/lai_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
-                <ImageView
-                    android:id="@+id/avatar_edit"
-                    android:onClick="@{(v)->a.onClick(v)}"
-                    android:src="@drawable/edit"
-                    android:layout_width="@dimen/_12sdp"
-                    android:layout_height="@dimen/_12sdp"/>
             </LinearLayout>
             <TextView
                 android:text="@{email}"

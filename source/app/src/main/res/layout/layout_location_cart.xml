@@ -40,14 +40,14 @@
         <ImageView
             android:layout_marginVertical="@dimen/_6sdp"
             android:onClick="@{(v)->click.onClick(v)}"
-            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
             android:id="@+id/cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/cart_notification"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toStartOf="@id/menu"/>
         <ImageView
             android:translationY="@dimen/_minus1sdp"
             android:translationX="@dimen/_2sdp"
@@ -71,5 +71,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_8ssp"/>
+
+        <ImageView
+            android:layout_marginVertical="@dimen/_6sdp"
+            android:onClick="@{(v)->click.onClick(v)}"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:id="@+id/menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/menu"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

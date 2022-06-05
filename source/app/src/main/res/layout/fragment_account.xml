@@ -17,6 +17,8 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:clickable="true"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -80,6 +82,43 @@
                 android:background="#E2E2E2"/>
             <RelativeLayout
                 android:layout_marginHorizontal="@dimen/_20sdp"
+                android:id="@+id/fc_account_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/account_icon"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/account_detail" />
+
+                <TextView
+                    style="@style/sfbold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_toEndOf="@id/account_icon"
+                    android:text="Thôn tin tài khoản"
+                    android:textColor="#181725"
+                    android:textSize="@dimen/_14ssp" />
+                <ImageView
+                    android:id="@+id/account_foward"
+                    android:src="@drawable/arrow"
+                    android:rotation="90"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="@dimen/_8sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    />
+            </RelativeLayout>
+            <View
+                android:layout_marginTop="@dimen/_18sdp"
+                android:layout_marginBottom="@dimen/_18sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:background="#E2E2E2"/>
+            <RelativeLayout
+                android:layout_marginHorizontal="@dimen/_20sdp"
                 android:id="@+id/fc_location_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -90,15 +129,16 @@
                     android:layout_height="@dimen/_20sdp"
                     android:layout_alignParentStart="true"
                     android:src="@drawable/location_menu" />
+
                 <TextView
-                    android:layout_marginStart="@dimen/_16sdp"
-                    android:layout_toEndOf="@id/location_icon"
+                    style="@style/sfbold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_16sdp"
+                    android:layout_toEndOf="@id/location_icon"
                     android:text="Địa chỉ giao hàng"
-                    android:textSize="@dimen/_14ssp"
-                    style="@style/sfbold"
-                    android:textColor="#181725"/>
+                    android:textColor="#181725"
+                    android:textSize="@dimen/_14ssp" />
                 <ImageView
                     android:id="@+id/location_foward"
                     android:src="@drawable/arrow"

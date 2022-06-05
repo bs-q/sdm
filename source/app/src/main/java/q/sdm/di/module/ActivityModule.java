@@ -19,7 +19,6 @@ import q.sdm.ui.category.CategoryViewModel;
 import q.sdm.ui.location.LocationViewModel;
 import q.sdm.ui.login.LoginViewModel;
 import q.sdm.ui.main.MainViewModel;
-import q.sdm.ui.main.cart.edit.CartEditViewModel;
 import q.sdm.ui.product.ProductDetailViewModel;
 import q.sdm.ui.recovery.RecoveryViewModel;
 import q.sdm.ui.recovery.complete.RecoveryCompleteViewModel;
@@ -148,14 +147,6 @@ public class ActivityModule {
         Supplier<SearchResultViewModel> supplier = () -> new SearchResultViewModel(repository, (MVVMApplication) application);
         ViewModelProviderFactory<SearchResultViewModel> factory = new ViewModelProviderFactory<>(SearchResultViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(SearchResultViewModel.class);
-    }
-
-    @Provides
-    @ActivityScope
-    CartEditViewModel provideCartEditViewModel(Repository repository, Context application) {
-        Supplier<CartEditViewModel> supplier = () -> new CartEditViewModel(repository, (MVVMApplication) application);
-        ViewModelProviderFactory<CartEditViewModel> factory = new ViewModelProviderFactory<>(CartEditViewModel.class, supplier);
-        return new ViewModelProvider(activity, factory).get(CartEditViewModel.class);
     }
 
     @Provides

@@ -71,7 +71,7 @@
     </style>
 
     <style name="dropdown" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
-        <item name="boxStrokeColor">@color/dropdown</item>
+        <item name="boxStrokeColor">@color/gray</item>
         <item name="endIconTint">@color/gray</item>
     </style>
 </resources>

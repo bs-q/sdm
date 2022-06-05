@@ -15,7 +15,6 @@ import q.sdm.di.scope.FragmentScope;
 import q.sdm.ui.base.fragment.BaseFragment;
 import q.sdm.ui.main.account.AccountViewModel;
 import q.sdm.ui.main.cart.CartViewModel;
-import q.sdm.ui.main.cart.edit.CartEditViewModel;
 import q.sdm.ui.main.home.HomeViewModel;
 import q.sdm.utils.GetInfo;
 
@@ -65,11 +64,4 @@ public class FragmentModule {
         return new ViewModelProvider(fragment, factory).get(AccountViewModel.class);
     }
 
-    @Provides
-    @FragmentScope
-    CartEditViewModel provideCartEditViewModel(Repository repository, Context application) {
-        Supplier<CartEditViewModel> supplier = () -> new CartEditViewModel(repository, (MVVMApplication)application);
-        ViewModelProviderFactory<CartEditViewModel> factory = new ViewModelProviderFactory<>(CartEditViewModel.class, supplier);
-        return new ViewModelProvider(fragment, factory).get(CartEditViewModel.class);
-    }
 }

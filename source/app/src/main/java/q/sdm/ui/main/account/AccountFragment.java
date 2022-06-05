@@ -38,13 +38,13 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
         if (v.getId() == binding.fcLogout.getId()){
             viewModel.logout();
             navigateToLogin();
-        } else if (v.getId() == binding.lai.avatarEdit.getId()){
-
+        } else if (v.getId() == binding.fcAccountBtn.getId()){
+            navigateToAccountDetail();
         }
 
     }
 
-    private void changeAvatar(){
+    private void navigateToAccountDetail(){
 
     }
 

@@ -52,13 +52,13 @@
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/city_menu"
+                    android:id="@+id/province_menu"
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_6sdp"
                     android:layout_width="match_parent"
                     app:boxStrokeColor="@color/dropdown"
+                    app:hintTextColor="@color/gray"
                     app:boxStrokeWidthFocused="@dimen/_1sdp"
-                    app:hintTextColor="#53B175"
                     style="@style/dropdown"
                     app:boxBackgroundColor="@android:color/transparent"
                     app:boxBackgroundMode="outline"
@@ -68,9 +68,11 @@
                     >
 
                     <AutoCompleteTextView
-                        android:labelFor="@id/city_menu"
-                        android:inputType="none|textNoSuggestions"
+                        android:labelFor="@id/province_auto"
+                        android:inputType="none"
                         showSoftInputOnFocus = "false"
+                        android:cursorVisible="false"
+
                         android:id="@+id/province_auto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -78,29 +80,28 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/province_menu"
+                    android:id="@+id/district_menu"
                     android:layout_marginHorizontal="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_6sdp"
                     android:layout_width="match_parent"
                     android:hint="Quận/Huyện"
-                    app:boxStrokeColor="@color/dropdown"
                     app:boxStrokeWidthFocused="@dimen/_1sdp"
-                    app:hintTextColor="#53B175"
                     style="@style/dropdown"
                     app:boxBackgroundColor="@android:color/transparent"
                     app:boxBackgroundMode="outline"
                     android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/dropdown"
+                    app:hintTextColor="@color/gray"
                     >
 
-                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    <AutoCompleteTextView
                         android:id="@+id/district_auto"
-                        android:labelFor="@id/province_menu"
+                        android:inputType="none"
+                        showSoftInputOnFocus = "false"
+                        android:cursorVisible="false"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:inputType="none|textNoSuggestions"
-                        android:cursorVisible="false"
                         />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -110,27 +111,69 @@
                     android:layout_marginTop="@dimen/_6sdp"
                     android:layout_width="match_parent"
                     android:hint="Xã/Phường"
-                    app:boxStrokeColor="@color/dropdown"
                     app:boxStrokeWidthFocused="@dimen/_1sdp"
-                    app:hintTextColor="#53B175"
                     style="@style/dropdown"
                     app:boxBackgroundColor="@android:color/transparent"
                     app:boxBackgroundMode="outline"
                     android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/dropdown"
+                    app:hintTextColor="@color/gray"
                     >
 
-                    <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    <AutoCompleteTextView
+                        android:cursorVisible="false"
                         android:id="@+id/commune_auto"
-                        android:labelFor="@id/commune_menu"
+                        android:inputType="none"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:inputType="none|textNoSuggestions"
-                        android:cursorVisible="false"                        />
+                        android:layout_height="wrap_content"/>                    />
+
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/address_menu"
+                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_6sdp"
+                    android:layout_width="match_parent"
+                    android:hint="Địa chỉ"
+                    app:boxStrokeWidthFocused="@dimen/_1sdp"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:boxBackgroundColor="@android:color/transparent"
+                    app:boxBackgroundMode="outline"
+                    android:layout_height="wrap_content"
+                    app:boxStrokeColor="@color/dropdown"
+                    app:hintTextColor="@color/gray"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/address_form"
+                        android:text="@={vm.address}"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>                    />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <RelativeLayout
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias=".9"
+                    android:onClick="@{(v)->a.onClick(v)}"
+                    android:id="@+id/update_address_btn"
+                    android:background="@drawable/login_btn_active"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_34sdp"
+                    android:layout_marginHorizontal="@dimen/_20sdp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginVertical="@dimen/_3sdp"
+                        android:text="Cập nhật địa chỉ"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
             </LinearLayout>
 
 

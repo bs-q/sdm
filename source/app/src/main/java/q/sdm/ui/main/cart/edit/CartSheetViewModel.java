@@ -11,15 +11,14 @@ import q.sdm.data.model.api.response.product.ProductResponse;
 import q.sdm.data.model.db.ProductEntity;
 import q.sdm.ui.base.activity.BaseDbCallback;
 import q.sdm.ui.base.activity.BaseRequestCallback;
-import q.sdm.ui.base.activity.BaseViewModel;
+import q.sdm.ui.base.fragment.BaseSheetViewModel;
 
-public class CartEditViewModel extends BaseViewModel {
-    public ObservableInt quantity = new ObservableInt(0);
-    public ObservableField<String> quantityString = new ObservableField<String>("0");
-
-    public CartEditViewModel(Repository repository, MVVMApplication application) {
+public class CartSheetViewModel extends BaseSheetViewModel {
+    public CartSheetViewModel(Repository repository, MVVMApplication application) {
         super(repository, application);
     }
+    public ObservableInt quantity = new ObservableInt(0);
+    public ObservableField<String> quantityString = new ObservableField<>("0");
 
     public void deleteProduct(ProductEntity productEntity){
         compositeDisposable.add(repository.getSqliteService().deleteProduct(productEntity)

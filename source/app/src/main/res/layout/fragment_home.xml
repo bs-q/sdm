@@ -26,6 +26,7 @@
 <!--            type="androidx.databinding.ObservableField&lt;String>" />-->
         <include android:layout_width="match_parent"
             android:id="@+id/location_cart"
+            app:click="@{a}"
             app:layout_constraintTop_toTopOf="parent"
             app:total="@{a.myApplication().totalItemInCart}"
             app:location="@{a.myApplication().customerLocation}"

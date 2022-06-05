@@ -13,11 +13,10 @@ import q.sdm.R;
 import q.sdm.data.model.api.response.account.ProfileResponse;
 import q.sdm.data.model.db.ProductEntity;
 import q.sdm.databinding.FragmentCartBinding;
-import q.sdm.databinding.FragmentHomeBinding;
 import q.sdm.di.component.FragmentComponent;
 import q.sdm.ui.base.fragment.BaseFragment;
 import q.sdm.ui.main.cart.adapter.CartAdapter;
-import q.sdm.ui.main.cart.edit.CartEditActivity;
+import q.sdm.ui.main.cart.edit.CartSheet;
 
 public class CartFragment extends BaseFragment<FragmentCartBinding, CartViewModel> implements CartAdapter.CartAdapterCallback {
 
@@ -87,20 +86,19 @@ public class CartFragment extends BaseFragment<FragmentCartBinding, CartViewMode
     boolean lock = false;
     @Override
     public void productCallback(ProductEntity productEntity) {
-        if (lock) return;
-        lock = true;
         myApplication().setEditProduct(productEntity);
-        navigateToProductEdit();
-        binding.getRoot().postDelayed(()->{
-            lock = false;
-        },650);
+        openSheet();
+        return;
+//        if (lock) return;
+//        lock = true;
+//        navigateToProductEdit();
+//        binding.getRoot().postDelayed(()->{
+//            lock = false;
+//        },650);
     }
-
-    private void navigateToProductEdit(){
-        Intent it = new Intent(requireContext(), CartEditActivity.class);
-        startActivity(it);
-        requireActivity().overridePendingTransition(R.anim.bottom_up, R.anim.nothing);
-
+    private void openSheet(){
+        CartSheet cartSheet = new CartSheet();
+        cartSheet.show(getChildFragmentManager(),"CART_SHEET");
     }
 
     @Override
