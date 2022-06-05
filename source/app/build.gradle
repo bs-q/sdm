@@ -169,5 +169,7 @@ dependencies {
 
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
+    // image capture
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
 
 }

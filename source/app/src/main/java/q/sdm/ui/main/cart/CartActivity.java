@@ -1,8 +1,10 @@
 package q.sdm.ui.main.cart;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -13,12 +15,14 @@ import q.sdm.R;
 import q.sdm.data.model.api.response.account.ProfileResponse;
 import q.sdm.data.model.db.ProductEntity;
 import q.sdm.databinding.FragmentCartBinding;
+import q.sdm.di.component.ActivityComponent;
 import q.sdm.di.component.FragmentComponent;
+import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.fragment.BaseFragment;
 import q.sdm.ui.main.cart.adapter.CartAdapter;
 import q.sdm.ui.main.cart.edit.CartSheet;
 
-public class CartFragment extends BaseFragment<FragmentCartBinding, CartViewModel> implements CartAdapter.CartAdapterCallback {
+public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewModel> implements CartAdapter.CartAdapterCallback, View.OnClickListener {
 
     CartAdapter cartAdapter;
 
@@ -27,21 +31,28 @@ public class CartFragment extends BaseFragment<FragmentCartBinding, CartViewMode
         return BR.vm;
     }
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_cart;
-    }
 
     @Override
-    protected void performDataBinding() {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         ProfileResponse profileResponse = new ProfileResponse();
         profileResponse.setCustomerFullName("QUAN");
         profileResponse.setCustomerAddress("ABC duong D xa E");
-        binding.setA(this);
-        binding.setVm(viewModel);
-        binding.setProfile(profileResponse);
-        binding.executePendingBindings();
+        viewBinding.setA(this);
+        viewBinding.setVm(viewModel);
+        viewBinding.setProfile(profileResponse);
+        viewBinding.executePendingBindings();
         setupCartAdapter();
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void performDependencyInjection(ActivityComponent buildComponent) {
+        buildComponent.inject(this);
     }
 
     private void setupCartAdapter(){
@@ -58,14 +69,10 @@ public class CartFragment extends BaseFragment<FragmentCartBinding, CartViewMode
             }
         });
         cartAdapter.callback = this;
-        binding.fcRv.setLayoutManager(new LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false));
-        binding.fcRv.setAdapter(cartAdapter);
+        viewBinding.fcRv.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        viewBinding.fcRv.setAdapter(cartAdapter);
     }
 
-    @Override
-    protected void performDependencyInjection(FragmentComponent buildComponent) {
-        buildComponent.inject(this);
-    }
 
     @Override
     public void onClick(View v) {
@@ -92,13 +99,13 @@ public class CartFragment extends BaseFragment<FragmentCartBinding, CartViewMode
 //        if (lock) return;
 //        lock = true;
 //        navigateToProductEdit();
-//        binding.getRoot().postDelayed(()->{
+//        viewBinding.getRoot().postDelayed(()->{
 //            lock = false;
 //        },650);
     }
     private void openSheet(){
         CartSheet cartSheet = new CartSheet();
-        cartSheet.show(getChildFragmentManager(),"CART_SHEET");
+        cartSheet.show(getSupportFragmentManager(),"CART_SHEET");
     }
 
     @Override

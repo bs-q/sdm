@@ -25,6 +25,7 @@
         <include
             android:id="@+id/lai"
             app:a="@{a}"
+            app:avatar="@{profile.getAvatar()}"
             app:username="@{profile.customerFullName}"
             app:email="@{profile.customerEmail}"
             android:layout_width="match_parent"
@@ -56,23 +57,24 @@
                     android:layout_width="@dimen/_20sdp"
                     android:layout_height="@dimen/_20sdp"
                     android:layout_alignParentStart="true"/>
+
                <TextView
-                   android:layout_marginStart="@dimen/_16sdp"
-                   android:layout_toEndOf="@id/cart_icon"
+                   style="@style/sfbold"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
+                   android:layout_marginStart="@dimen/_16sdp"
+                   android:layout_toEndOf="@id/cart_icon"
                    android:text="Đơn hàng"
-                   android:textSize="@dimen/_14ssp"
-                   style="@style/sfbold"
-                   android:textColor="#181725"/>
+                   android:textColor="#181725"
+                   android:textSize="@dimen/_14ssp" />
+
                <ImageView
                    android:id="@+id/cart_foward"
-                   android:src="@drawable/arrow"
-                   android:rotation="90"
-                   android:layout_alignParentEnd="true"
                    android:layout_width="@dimen/_8sdp"
                    android:layout_height="@dimen/_14sdp"
-                   />
+                   android:layout_alignParentEnd="true"
+                   android:rotation="90"
+                   android:src="@drawable/arrow" />
            </RelativeLayout>
             <View
                 android:layout_marginTop="@dimen/_18sdp"
@@ -81,6 +83,7 @@
                 android:layout_height="@dimen/_1sdp"
                 android:background="#E2E2E2"/>
             <RelativeLayout
+                android:onClick="@{(v)->a.onClick(v)}"
                 android:layout_marginHorizontal="@dimen/_20sdp"
                 android:id="@+id/fc_account_btn"
                 android:layout_width="match_parent"
@@ -99,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_16sdp"
                     android:layout_toEndOf="@id/account_icon"
-                    android:text="Thôn tin tài khoản"
+                    android:text="Thông tin tài khoản"
                     android:textColor="#181725"
                     android:textSize="@dimen/_14ssp" />
                 <ImageView

@@ -76,6 +76,9 @@
             android:theme="@style/MyTransparentTheme"/>
         <activity android:name=".ui.address.AddAddressActivity"
             android:exported="true"/>
+        <activity android:name=".ui.main.account.detail.AccountDetailActivity" />
+        <activity android:name=".ui.main.cart.added.ProductAddedActivity" />
+        <activity android:name=".ui.main.cart.CartActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"

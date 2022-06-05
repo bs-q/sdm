@@ -8,6 +8,9 @@ import q.sdm.ui.category.CategoryActivity;
 import q.sdm.ui.location.LocationActivity;
 import q.sdm.ui.login.LoginActivity;
 import q.sdm.ui.main.MainActivity;
+import q.sdm.ui.main.account.detail.AccountDetailActivity;
+import q.sdm.ui.main.cart.CartActivity;
+import q.sdm.ui.main.cart.added.ProductAddedActivity;
 import q.sdm.ui.product.ProductDetailActivity;
 import q.sdm.ui.recovery.RecoveryActivity;
 import q.sdm.ui.recovery.complete.RecoveryCompleteActivity;
@@ -45,5 +48,11 @@ public interface ActivityComponent {
     void inject(SearchResultActivity activity);
 
     void inject(AddAddressActivity activity);
+
+    void inject(AccountDetailActivity activity);
+
+    void inject(ProductAddedActivity activity);
+
+    void inject(CartActivity activity);
 }
 

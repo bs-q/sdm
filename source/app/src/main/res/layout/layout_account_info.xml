@@ -10,6 +10,9 @@
             name="email"
             type="String" />
         <variable
+            name="avatar"
+            type="String" />
+        <variable
             name="a"
             type="android.view.View.OnClickListener" />
     </data>
@@ -22,12 +25,14 @@
             android:layout_width="@dimen/_50sdp"
             android:layout_height="@dimen/_50sdp"
             android:id="@+id/lai_avatar"
+            avatar_image="@{avatar}"
             android:src="@drawable/account"
             app:shapeAppearanceOverlay="@style/circleImageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
         <LinearLayout
+            android:layout_marginStart="@dimen/_4sdp"
             app:layout_constraintTop_toTopOf="@id/lai_avatar"
             app:layout_constraintStart_toEndOf="@id/lai_avatar"
             app:layout_constraintBottom_toBottomOf="@id/lai_avatar"

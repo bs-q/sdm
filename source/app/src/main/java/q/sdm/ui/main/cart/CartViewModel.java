@@ -11,9 +11,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import q.sdm.MVVMApplication;
 import q.sdm.data.Repository;
 import q.sdm.data.model.db.ProductEntity;
+import q.sdm.ui.base.activity.BaseViewModel;
 import q.sdm.ui.base.fragment.BaseFragmentViewModel;
 
-public class CartViewModel extends BaseFragmentViewModel {
+public class CartViewModel extends BaseViewModel {
     public ObservableDouble total = new ObservableDouble(0);
     public ObservableDouble vat = new ObservableDouble(0);
     public ObservableDouble totalAndVat = new ObservableDouble(0);

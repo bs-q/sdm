@@ -5,7 +5,7 @@
     <data>
         <variable
             name="a"
-            type="q.sdm.ui.main.cart.CartFragment" />
+            type="q.sdm.ui.main.cart.CartActivity" />
 
         <variable
             name="vm"
@@ -17,6 +17,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:background="@color/white"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

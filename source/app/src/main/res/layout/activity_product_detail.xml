@@ -87,7 +87,7 @@
                     android:layout_width="0dp"
                     android:id="@+id/shimmer"
                     app:shimmer_auto_start="true"
-                    android:layout_height="@dimen/_200sdp"
+                    android:layout_height="@dimen/_300sdp"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginHorizontal="@dimen/_6sdp"
                     app:layout_constraintTop_toBottomOf="@id/pd_money"

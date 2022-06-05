@@ -5,7 +5,6 @@ import dagger.Component;
 import q.sdm.di.module.FragmentModule;
 import q.sdm.di.scope.FragmentScope;
 import q.sdm.ui.main.account.AccountFragment;
-import q.sdm.ui.main.cart.CartFragment;
 import q.sdm.ui.main.home.HomeFragment;
 
 @FragmentScope
@@ -13,8 +12,6 @@ import q.sdm.ui.main.home.HomeFragment;
 public interface FragmentComponent {
 
     void inject(HomeFragment fragment);
-
-    void inject(CartFragment fragment);
 
     void inject(AccountFragment fragment);
 }

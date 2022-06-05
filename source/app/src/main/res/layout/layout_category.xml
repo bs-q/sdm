@@ -36,6 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"    />
             <TextView
+                android:textAlignment="center"
+                android:layout_marginHorizontal="@dimen/_4sdp"
                 style="@style/sfbold"
                 android:textSize="@dimen/_12sdp"
                 android:textColor="@color/white"

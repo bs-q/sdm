@@ -19,6 +19,9 @@ import q.sdm.ui.category.CategoryViewModel;
 import q.sdm.ui.location.LocationViewModel;
 import q.sdm.ui.login.LoginViewModel;
 import q.sdm.ui.main.MainViewModel;
+import q.sdm.ui.main.account.detail.AccountDetailViewModel;
+import q.sdm.ui.main.cart.CartViewModel;
+import q.sdm.ui.main.cart.added.ProductAddedViewModel;
 import q.sdm.ui.product.ProductDetailViewModel;
 import q.sdm.ui.recovery.RecoveryViewModel;
 import q.sdm.ui.recovery.complete.RecoveryCompleteViewModel;
@@ -155,5 +158,29 @@ public class ActivityModule {
         Supplier<AddAddressViewModel> supplier = () -> new AddAddressViewModel(repository, (MVVMApplication) application);
         ViewModelProviderFactory<AddAddressViewModel> factory = new ViewModelProviderFactory<>(AddAddressViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(AddAddressViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    AccountDetailViewModel provideAccountDetailViewModel(Repository repository, Context application) {
+        Supplier<AccountDetailViewModel> supplier = () -> new AccountDetailViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<AccountDetailViewModel> factory = new ViewModelProviderFactory<>(AccountDetailViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(AccountDetailViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    ProductAddedViewModel provideProductAddedViewModel(Repository repository, Context application) {
+        Supplier<ProductAddedViewModel> supplier = () -> new ProductAddedViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<ProductAddedViewModel> factory = new ViewModelProviderFactory<>(ProductAddedViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(ProductAddedViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    CartViewModel provideCartViewModel(Repository repository, Context application) {
+        Supplier<CartViewModel> supplier = () -> new CartViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<CartViewModel> factory = new ViewModelProviderFactory<>(CartViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(CartViewModel.class);
     }
 }

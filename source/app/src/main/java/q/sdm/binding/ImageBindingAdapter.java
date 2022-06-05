@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.imageview.ShapeableImageView;
 
+import q.sdm.R;
+
 public class ImageBindingAdapter {
 
     private ImageBindingAdapter(){}
@@ -28,6 +30,14 @@ public class ImageBindingAdapter {
     public static void setOnlineImage(ShapeableImageView view, String url) {
         Glide.with(view.getContext()).load(url)
                 .centerInside()
+                .into(view);
+    }
+
+    @androidx.databinding.BindingAdapter("avatar_image")
+    public static void setAvatarImage(ShapeableImageView view, String url) {
+        Glide.with(view.getContext()).load(url)
+                .centerInside()
+                .placeholder(R.drawable.account)
                 .into(view);
     }
 }

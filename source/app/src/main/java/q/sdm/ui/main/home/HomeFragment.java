@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.view.View;
 
 import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.List;
@@ -21,7 +20,7 @@ import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.base.fragment.BaseFragment;
 import q.sdm.ui.main.MainActivity;
 import q.sdm.ui.main.account.AccountFragment;
-import q.sdm.ui.main.cart.CartFragment;
+import q.sdm.ui.main.cart.added.ProductAddedActivity;
 import q.sdm.ui.main.home.adapter.CategoryAdapter;
 import q.sdm.ui.main.home.adapter.HomeAdapter;
 import q.sdm.ui.product.ProductDetailActivity;
@@ -103,12 +102,15 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         } else if (v.getId() == binding.locationCart.location.getId()){
             navigateToCreateAddress();
         } else if (v.getId() == binding.locationCart.cart.getId()){
-            CartFragment cartFragment = new CartFragment();
-            ((MainActivity) requireActivity()).showFragment(cartFragment );
+            navigateToAdded();
         } else if (v.getId() == binding.locationCart.menu.getId()) {
             AccountFragment accountFragment = new AccountFragment();
             ((MainActivity)requireActivity()).showFragment(accountFragment);
         }
+    }
+    private void navigateToAdded(){
+        Intent it = new Intent(requireContext(), ProductAddedActivity.class);
+        startActivity(it);
     }
 
     private void navigateToCreateAddress(){

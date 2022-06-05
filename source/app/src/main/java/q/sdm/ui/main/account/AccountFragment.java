@@ -10,6 +10,7 @@ import q.sdm.databinding.FragmentHomeBinding;
 import q.sdm.di.component.FragmentComponent;
 import q.sdm.ui.base.fragment.BaseFragment;
 import q.sdm.ui.login.LoginActivity;
+import q.sdm.ui.main.account.detail.AccountDetailActivity;
 
 public class AccountFragment extends BaseFragment<FragmentAccountBinding, AccountViewModel> {
     @Override
@@ -45,11 +46,23 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
     }
 
     private void navigateToAccountDetail(){
-
+        Intent it = new Intent(requireContext(), AccountDetailActivity.class);
+        startActivity(it);
     }
 
     private void navigateToLogin(){
         Intent it = new Intent(requireContext(), LoginActivity.class);
         startActivity(it);
+        requireActivity().finish();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        binding.lai.setEmail(myApplication().getProfileResponse().getCustomerEmail());
+        binding.lai.setUsername(myApplication().getProfileResponse().getCustomerFullName());
+        binding.lai.setAvatar(myApplication().getProfileResponse().getAvatar());
+        binding.lai.executePendingBindings();
+
     }
 }

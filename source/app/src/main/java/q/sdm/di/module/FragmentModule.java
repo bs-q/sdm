@@ -4,6 +4,7 @@ import android.content.Context;
 
 import androidx.core.util.Supplier;
 import androidx.lifecycle.ViewModelProvider;
+
 import javax.inject.Named;
 
 import dagger.Module;
@@ -14,7 +15,6 @@ import q.sdm.data.Repository;
 import q.sdm.di.scope.FragmentScope;
 import q.sdm.ui.base.fragment.BaseFragment;
 import q.sdm.ui.main.account.AccountViewModel;
-import q.sdm.ui.main.cart.CartViewModel;
 import q.sdm.ui.main.home.HomeViewModel;
 import q.sdm.utils.GetInfo;
 
@@ -46,14 +46,6 @@ public class FragmentModule {
         Supplier<HomeViewModel> supplier = () -> new HomeViewModel(repository, (MVVMApplication)application);
         ViewModelProviderFactory<HomeViewModel> factory = new ViewModelProviderFactory<>(HomeViewModel.class, supplier);
         return new ViewModelProvider(fragment, factory).get(HomeViewModel.class);
-    }
-
-    @Provides
-    @FragmentScope
-    CartViewModel provideCartViewModel(Repository repository, Context application) {
-        Supplier<CartViewModel> supplier = () -> new CartViewModel(repository, (MVVMApplication)application);
-        ViewModelProviderFactory<CartViewModel> factory = new ViewModelProviderFactory<>(CartViewModel.class, supplier);
-        return new ViewModelProvider(fragment, factory).get(CartViewModel.class);
     }
 
     @Provides

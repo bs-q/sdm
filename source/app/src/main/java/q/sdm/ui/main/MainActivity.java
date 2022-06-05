@@ -3,7 +3,6 @@ package q.sdm.ui.main;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
-import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,8 +12,6 @@ import q.sdm.R;
 import q.sdm.databinding.ActivityMainBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
-import q.sdm.ui.main.account.AccountFragment;
-import q.sdm.ui.main.cart.CartFragment;
 import q.sdm.ui.main.home.HomeFragment;
 
 

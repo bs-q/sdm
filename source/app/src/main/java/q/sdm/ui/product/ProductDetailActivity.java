@@ -67,6 +67,7 @@ implements View.OnClickListener {
                 productEntity.setName(myApplication().getProductDetailItem().getProductName());
                 productEntity.setAmount(1);
                 productEntity.setPrice(myApplication().getProductDetailItem().getProductPrice());
+                productEntity.setThumbnail(myApplication().getProductDetailItem().getProductImage());
                 viewModel.updateProduct(productEntity, new BaseDbCallback<Long>() {
                     @Override
                     public void doSuccess(Long response) {

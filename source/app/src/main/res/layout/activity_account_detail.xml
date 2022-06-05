@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="a"
+            type="q.sdm.ui.main.account.detail.AccountDetailActivity" />
+
+        <variable
+            name="vm"
+            type="q.sdm.ui.main.account.detail.AccountDetailViewModel" />
+        <variable
+            name="profile"
+            type="q.sdm.data.model.api.response.account.ProfileResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="match_parent">
+        <TextView
+            android:background="@color/white"
+            android:paddingVertical="@dimen/_12sdp"
+            android:layout_width="match_parent"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            style="@style/sfregular"
+            android:textSize="@dimen/_16ssp"
+            android:textColor="#292D32"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Thông tin tài khoản"
+            android:id="@+id/acd_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:id="@+id/acd_avatar"
+            android:src="@drawable/account"
+            app:shapeAppearanceOverlay="@style/circleImageView"
+            app:layout_constraintTop_toBottomOf="@id/acd_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/_30sdp"
+            />
+        <TextView
+            android:paddingVertical="@dimen/_4sdp"
+            android:onClick="@{(v)->a.onClick(v)}"
+            android:id="@+id/acd_change_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Thay đổi ảnh đại diện"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/_10ssp"
+            style="@style/sfregular"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/acd_avatar"/>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            app:layout_constraintTop_toBottomOf="@id/acd_change_avatar"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toTopOf="@id/update_btn">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp">
+
+            <TextView
+                android:id="@+id/name_title"
+                android:text="Tên hiển thị"
+                android:textColor="#424242"
+                android:textSize="@dimen/_14ssp"
+                style="@style/sfmedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintWidth_percent=".3"/>
+            <RelativeLayout
+                android:onClick="@{(v)->a.onClick(v)}"
+                android:id="@+id/name_title_layer"
+                app:layout_constraintStart_toEndOf="@id/name_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:background="@android:color/transparent"
+                    android:id="@+id/name"
+                    style="@style/sfmedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:text="@={vm.username}"
+                    android:textColor="#424242"
+                    android:textSize="@dimen/_14ssp" />
+                <View
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="#E2E2E2"/>
+
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="@dimen/_2sdp"
+            android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp">
+
+                <TextView
+                    android:id="@+id/password_title"
+                    android:text="Mật khẩu cũ"
+                    android:textColor="#424242"
+                    android:textSize="@dimen/_14ssp"
+                    style="@style/sfmedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintWidth_percent=".3"/>
+                <RelativeLayout
+                    android:onClick="@{(v)->a.onClick(v)}"
+                    android:id="@+id/password_title_layer"
+                    app:layout_constraintStart_toEndOf="@id/password_title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/password"
+                        style="@style/sfmedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginVertical="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:background="@android:color/transparent"
+                        android:inputType="textPassword"
+                        android:text="@={vm.oldPassword}"
+                        android:textColor="#424242"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#E2E2E2" />
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp">
+
+                <TextView
+                    android:id="@+id/password_old_title"
+                    android:text="Mật khẩu mới"
+                    android:textColor="#424242"
+                    android:textSize="@dimen/_14ssp"
+                    style="@style/sfmedium"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintWidth_percent=".3"/>
+                <RelativeLayout
+                    android:onClick="@{(v)->a.onClick(v)}"
+                    android:id="@+id/password_old_title_layer"
+                    app:layout_constraintStart_toEndOf="@id/password_old_title"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/password_old"
+                        style="@style/sfmedium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginVertical="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_6sdp"
+                        android:background="@android:color/transparent"
+                        android:inputType="textPassword"
+                        android:text="@={vm.newPassword}"
+                        android:textColor="#424242"
+                        android:textSize="@dimen/_14ssp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#E2E2E2" />
+
+                </RelativeLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <RelativeLayout
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="@{(v)->a.onClick(v)}"
+            android:id="@+id/update_btn"
+            android:background="@drawable/login_btn_active"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_34sdp"
+
+            android:layout_marginHorizontal="@dimen/_10sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginVertical="@dimen/_3sdp"
+                android:text="Cập nhật tài khoản"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
