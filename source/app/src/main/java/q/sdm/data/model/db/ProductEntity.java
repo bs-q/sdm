@@ -1,7 +1,10 @@
 package q.sdm.data.model.db;
 
+import androidx.databinding.Observable;
+import androidx.databinding.ObservableInt;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import lombok.Data;
@@ -29,6 +32,24 @@ public class ProductEntity  extends BaseEntity{
     public Double price;
 
     public String getProductThumbnail(){
-        return BuildConfig.BASE_URL + "v1/file/download" + thumbnail;
+        return thumbnail;
+    }
+
+    /**
+     * Use this method to observe amount of product.
+     */
+    @Ignore
+    private ObservableInt amountObservable;
+    public ObservableInt getObservableAmount(){
+        if (amountObservable == null) {
+            amountObservable = new ObservableInt(amount);
+            amountObservable.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+                @Override
+                public void onPropertyChanged(Observable sender, int propertyId) {
+                    ProductEntity.this.amount = amountObservable.get();
+                }
+            });
+        }
+        return amountObservable;
     }
 }

@@ -92,6 +92,17 @@ public class AppDbService implements DbService {
         });    }
 
     @Override
+    public Observable<Boolean> insertAllProduct(List<ProductEntity> products) {
+        return Observable.fromCallable(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                mAppDatabase.getDbProductDao().insertAll(products);
+                return true;
+            }
+        });
+    }
+
+    @Override
     public Observable<Boolean> deleteProduct(ProductEntity user) {
         return Observable.fromCallable(new Callable<Boolean>() {
             @Override

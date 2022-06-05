@@ -8,7 +8,7 @@
             type="q.sdm.data.model.db.ProductEntity" />
         <variable
             name="quantity"
-            type="androidx.databinding.ObservableField&lt;String>" />
+            type="androidx.databinding.ObservableInt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,8 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_marginVertical="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:layout_width="0dp"
             android:layout_marginStart="@dimen/_10sdp"
             android:id="@+id/product_layer"
@@ -25,70 +26,59 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintWidth_percent=".6">
+            app:layout_constraintWidth_percent=".7">
             <TextView
                 android:text="@{product.name}"
                 android:layout_marginStart="@dimen/_8sdp"
-                app:layout_constraintTop_toTopOf="parent"
                 android:textSize="@dimen/_12ssp"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="@dimen/_6sdp"
                 android:textColor="#424242"
                 style="@style/sfmedium"
                 android:ellipsize="end"
                 android:layout_marginEnd="@dimen/_8sdp"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:id="@+id/name"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_marginTop="@dimen/_4sdp"
-                android:paddingVertical="@dimen/_4sdp"
-                android:paddingHorizontal="@dimen/_8sdp"
-                android:background="@drawable/product_added_price_background"
-                android:text="@{@string/money_format(product.price)}"
+               android:text="@{@string/money_format(product.price)}"
                 android:layout_marginStart="@dimen/_8sdp"
-                app:layout_constraintTop_toBottomOf="@id/name"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:textSize="@dimen/_11ssp"
                 android:textColor="#424242"
-                app:layout_constraintHorizontal_bias="0"
-                android:layout_marginEnd="@dimen/_8sdp"
-                style="@style/sfbold"
+                style="@style/sfmedium"
                 android:layout_width="wrap_content"
                 android:id="@+id/price"
                 android:layout_height="wrap_content"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
         <ImageView
             android:id="@+id/minus"
-            android:layout_width="@dimen/_28sdp"
-            android:layout_height="@dimen/_28sdp"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
             app:layout_constraintStart_toEndOf="@id/product_layer"
             app:layout_constraintTop_toTopOf="@id/product_layer"
             app:layout_constraintBottom_toBottomOf="@id/product_layer"
             android:src="@drawable/added_minus"/>
-        <EditText
+        <TextView
             android:background="@android:color/transparent"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:textAlignment="center"
+            android:textColor="#424242"
             style="@style/sfbold"
-            android:imeOptions="actionDone"
-            android:textSize="@dimen/_16ssp"
+            android:textSize="@dimen/_15ssp"
             android:maxLines="1"
             android:id="@+id/aec_quantity"
-            android:text="@={quantity}"
+            android:text="@{String.valueOf(product.getObservableAmount())}"
             android:maxLength="2"
-            android:inputType="number"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/minus"
+            app:layout_constraintBottom_toBottomOf="@id/minus"
             app:layout_constraintStart_toEndOf="@id/minus"
             app:layout_constraintEnd_toStartOf="@id/plus"/>
 
         <ImageView
             android:layout_marginEnd="@dimen/_10sdp"
             android:id="@+id/plus"
-            android:layout_width="@dimen/_28sdp"
-            android:layout_height="@dimen/_28sdp"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/product_layer"
             app:layout_constraintBottom_toBottomOf="@id/product_layer"
@@ -96,7 +86,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"
-            android:background="#7E838933"
+            android:background="#337E8389"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

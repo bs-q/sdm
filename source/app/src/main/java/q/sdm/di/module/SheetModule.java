@@ -16,6 +16,7 @@ import q.sdm.di.scope.SheetScope;
 import q.sdm.ui.base.fragment.BaseSheet;
 import q.sdm.ui.main.account.AccountViewModel;
 import q.sdm.ui.main.cart.CartViewModel;
+import q.sdm.ui.main.cart.added.edit.ProductAddedEditViewModel;
 import q.sdm.ui.main.cart.edit.CartSheetViewModel;
 import q.sdm.ui.main.home.HomeViewModel;
 import q.sdm.utils.GetInfo;
@@ -48,6 +49,14 @@ public class SheetModule {
         Supplier<CartSheetViewModel> supplier = () -> new CartSheetViewModel(repository, (MVVMApplication)application);
         ViewModelProviderFactory<CartSheetViewModel> factory = new ViewModelProviderFactory<>(CartSheetViewModel.class, supplier);
         return new ViewModelProvider(fragment, factory).get(CartSheetViewModel.class);
+    }
+
+    @Provides
+    @SheetScope
+    ProductAddedEditViewModel provideProductAddedEditViewModel(Repository repository, Context application) {
+        Supplier<ProductAddedEditViewModel> supplier = () -> new ProductAddedEditViewModel(repository, (MVVMApplication)application);
+        ViewModelProviderFactory<ProductAddedEditViewModel> factory = new ViewModelProviderFactory<>(ProductAddedEditViewModel.class, supplier);
+        return new ViewModelProvider(fragment, factory).get(ProductAddedEditViewModel.class);
     }
     
 }

@@ -47,7 +47,7 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
 
     @Override
     public int getLayoutId() {
-        return 0;
+        return R.layout.fragment_cart;
     }
 
     @Override

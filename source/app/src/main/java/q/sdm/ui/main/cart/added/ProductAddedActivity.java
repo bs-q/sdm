@@ -6,9 +6,12 @@ import q.sdm.data.model.db.ProductEntity;
 import q.sdm.databinding.ActivityProductAddedBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
+import q.sdm.ui.main.cart.CartActivity;
 import q.sdm.ui.main.cart.adapter.CartAdapter;
 import q.sdm.ui.main.cart.added.adapter.ProductAddedAdapter;
+import q.sdm.ui.main.cart.added.edit.ProductAddedEditSheet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -66,16 +69,23 @@ implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        if (viewModel.productEntityLiveData.getValue().isEmpty()){
+            viewModel.showErrorMessage("Bạn không có sản phẩm nào trong giỏ hàng");
+            return;
+        }
         if (v.getId() == viewBinding.cartLayer.getId()) {
             navigateToEditAdded();
         } else if (v.getId() == viewBinding.checkout.getId()){
-
+            navigateToCheckout();
         }
     }
     private void navigateToEditAdded(){
-
+        ProductAddedEditSheet productAddedEditSheet = new ProductAddedEditSheet();
+        productAddedEditSheet.show(getSupportFragmentManager(),"EDIT_ADDED_PRODUCT");
     }
-    private void navigateToCheckout(){
-
+    public void navigateToCheckout(){
+        Intent it = new Intent(this, CartActivity.class);
+        startActivity(it);
+        finish();
     }
 }

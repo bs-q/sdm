@@ -57,12 +57,16 @@ implements View.OnClickListener {
         viewModel.districtId = null;
         viewModel.communeId = null;
         viewBinding.districtAuto.setEnabled(true);
+        viewBinding.districtMenu.setEnabled(true);
         viewBinding.communeAuto.setEnabled(false);
+        viewBinding.communeMenu.setEnabled(false);
+
     }
     private void resetFromDistrict(){
         viewBinding.communeAuto.getText().clear();
         viewModel.communeId = null;
         viewBinding.communeAuto.setEnabled(true);
+        viewBinding.communeMenu.setEnabled(true);
     }
     private void setupProvinceAutoComplete(){
         viewModel.showLoading();

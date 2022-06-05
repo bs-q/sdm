@@ -26,6 +26,8 @@ public interface DbService {
 
     Observable<Long> insertProduct(ProductEntity product);
 
+    Observable<Boolean> insertAllProduct(List<ProductEntity> products);
+
     Observable<Boolean> deleteProduct(ProductEntity product);
 
     Observable<ProductEntity> findProductById(Long id);
