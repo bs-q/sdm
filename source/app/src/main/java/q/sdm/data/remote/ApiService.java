@@ -16,6 +16,7 @@ import q.sdm.data.model.api.response.DataWrapper;
 import q.sdm.data.model.api.response.EmptyResponse;
 import q.sdm.data.model.api.response.LoginResponse;
 import q.sdm.data.model.api.response.account.ProfileResponse;
+import q.sdm.data.model.api.response.address.AddressResponse;
 import q.sdm.data.model.api.response.category.CategoryResponse;
 import q.sdm.data.model.api.response.product.ProductResponse;
 import q.sdm.data.model.api.response.province.ProvinceResponse;
@@ -69,5 +70,8 @@ public interface ApiService {
 
     @PUT("/v1/customer/update_profile")
     Observable<ResponseWrapper<EmptyResponse>> updateProfile(@Body UpdateProfileRequest request);
+
+    @GET("/v1/addresses/auto-complete")
+    Observable<ResponseWrapper<DataWrapper<List<AddressResponse>>>> getAddresses();
 
 }

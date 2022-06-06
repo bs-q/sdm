@@ -24,6 +24,16 @@ public class AppPreferencesService implements PreferencesService {
     }
 
     @Override
+    public Long getCurrentLocation() {
+        return mPrefs.getLong(LOCATION, -1);
+    }
+
+    @Override
+    public void setCurrentLocation(Long id) {
+        mPrefs.edit().putLong(LOCATION, id).apply();
+    }
+
+    @Override
     public String getCurrentLanguage() {
         return mPrefs.getString(LANG, "vi");
     }

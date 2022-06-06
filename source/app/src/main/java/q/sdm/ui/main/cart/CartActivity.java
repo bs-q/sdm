@@ -19,6 +19,7 @@ import q.sdm.di.component.ActivityComponent;
 import q.sdm.di.component.FragmentComponent;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.fragment.BaseFragment;
+import q.sdm.ui.location.LocationActivity;
 import q.sdm.ui.main.cart.adapter.CartAdapter;
 import q.sdm.ui.main.cart.edit.CartSheet;
 
@@ -35,12 +36,9 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ProfileResponse profileResponse = new ProfileResponse();
-        profileResponse.setCustomerFullName("QUAN");
-        profileResponse.setCustomerAddress("ABC duong D xa E");
         viewBinding.setA(this);
         viewBinding.setVm(viewModel);
-        viewBinding.setProfile(profileResponse);
+        viewBinding.setProfile(myApplication().getProfileResponse());
         viewBinding.executePendingBindings();
         setupCartAdapter();
     }
@@ -80,7 +78,13 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
             navigateToSelectPayment();
         } else if (v.getId() == R.id.fc_checkout) {
             checkout();
+        } else if (v.getId() == viewBinding.fcChangeAddress.getId()){
+            navigateToAddressList();
         }
+    }
+    private void navigateToAddressList(){
+        Intent it = new Intent(this, LocationActivity.class);
+        startActivity(it);
     }
 
     private void navigateToSelectPayment(){

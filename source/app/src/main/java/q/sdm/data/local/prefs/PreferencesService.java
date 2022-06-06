@@ -6,6 +6,10 @@ public interface PreferencesService {
     public static final String KEY_BEARER_TOKEN="KEY_BEARER_TOKEN";
 
     public static final String LANG="LANGUAGE";
+    public static final String LOCATION="LOCATION";
+
+    Long getCurrentLocation();
+    void setCurrentLocation(Long id);
 
     String getCurrentLanguage();
     void setCurrentLanguage(String locale);

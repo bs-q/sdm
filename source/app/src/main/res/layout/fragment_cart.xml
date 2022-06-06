@@ -20,10 +20,23 @@
         android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:onClick="@{(v)->a.onClick(v)}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/fc_change_address"
+            android:textColor="@color/primary"
+            style="@style/sfregular"
+            android:text="Thay đổi"
+            android:paddingVertical="@dimen/_2sdp"
+            app:layout_constraintTop_toTopOf="@id/fc_account_img"
+            android:textSize="@dimen/_10ssp"
+            android:layout_marginEnd="@dimen/_16sdp"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <ImageView
             holder_image="@{@drawable/account}"
-            online_image="@{profile.customerAvatarPath}"
+            online_image="@{profile.getAvatar}"
             android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginStart="@dimen/_14sdp"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,6 +52,7 @@
             android:id="@+id/fc_customer_address"
             android:textColor="#7E8389"
             style="@style/sfregular"
+            android:text="@{a.myApplication().customerLocation}"
             android:textSize="@dimen/_10ssp"
             app:layout_constraintStart_toEndOf="@id/fc_account_img"
             android:layout_marginStart="@dimen/_16sdp"
@@ -50,11 +64,24 @@
             android:textColor="#424242"
             style="@style/sfbold"
             android:text="@{profile.customerFullName}"
-            android:layout_marginBottom="@dimen/_8sdp"
-            android:textSize="@dimen/_14ssp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:textSize="@dimen/_16ssp"
             app:layout_constraintStart_toEndOf="@id/fc_account_img"
             android:layout_marginStart="@dimen/_16sdp"
             app:layout_constraintBottom_toTopOf="@id/fc_customer_address"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/fc_customer_phone"
+            android:textColor="#7E8389"
+            style="@style/sfregular"
+            android:text="@{profile.customerPhone}"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintStart_toEndOf="@id/fc_customer_name"
+            android:layout_marginStart="@dimen/_8sdp"
+            app:layout_constraintBaseline_toBaselineOf="@id/fc_customer_name"
+            />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/_1sdp"

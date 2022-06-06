@@ -1,6 +1,7 @@
 package q.sdm.ui.main.home;
 
 import android.content.Intent;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 
 import androidx.lifecycle.Observer;
@@ -15,9 +16,9 @@ import q.sdm.data.model.api.response.product.ProductResponse;
 import q.sdm.data.model.db.ProductEntity;
 import q.sdm.databinding.FragmentHomeBinding;
 import q.sdm.di.component.FragmentComponent;
-import q.sdm.ui.address.AddAddressActivity;
 import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.base.fragment.BaseFragment;
+import q.sdm.ui.location.LocationActivity;
 import q.sdm.ui.main.MainActivity;
 import q.sdm.ui.main.account.AccountFragment;
 import q.sdm.ui.main.cart.added.ProductAddedActivity;
@@ -63,6 +64,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         observeCart();
         getCategory();
         getProductsFirstTime();
+        setScrollableLocation();
+    }
+    private void setScrollableLocation(){
+        binding.locationCart.location.setMovementMethod(new ScrollingMovementMethod());
+        binding.locationCart.location.setHorizontallyScrolling(true);
+
     }
     private void getCategory(){
         viewModel.getCategories(new BaseRequestCallback<List<CategoryResponse>>() {
@@ -100,7 +107,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         if (v.getId() == binding.searchScan.search.getId()){
             navigateToSearchActivity();
         } else if (v.getId() == binding.locationCart.location.getId()){
-            navigateToCreateAddress();
+            navigateToAddressList();
         } else if (v.getId() == binding.locationCart.cart.getId()){
             navigateToAdded();
         } else if (v.getId() == binding.locationCart.menu.getId()) {
@@ -113,8 +120,9 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         startActivity(it);
     }
 
-    private void navigateToCreateAddress(){
-        Intent it = new Intent(requireContext(), AddAddressActivity.class);
+
+    private void navigateToAddressList(){
+        Intent it = new Intent(requireContext(), LocationActivity.class);
         startActivity(it);
     }
 

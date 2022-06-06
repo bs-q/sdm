@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="location"
+            type="q.sdm.data.model.api.response.address.AddressResponse" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/location_icon"
+            android:layout_width="@dimen/_14sdp"
+            android:layout_height="@dimen/_14sdp"/>
+
+        <TextView
+            android:text="@{location.getParseAddress()}"
+            android:textSize="@dimen/_10ssp"
+            android:textColor="#7E8389"
+            style="@style/sfregular"
+            android:id="@+id/address"
+            android:layout_marginHorizontal="@dimen/_8sdp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="#337E8389"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@id/address"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
