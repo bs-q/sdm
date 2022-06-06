@@ -22,6 +22,7 @@ import q.sdm.ui.base.fragment.BaseFragment;
 import q.sdm.ui.location.LocationActivity;
 import q.sdm.ui.main.cart.adapter.CartAdapter;
 import q.sdm.ui.main.cart.edit.CartSheet;
+import q.sdm.ui.main.cart.receiver.UpdateReceiverSheet;
 
 public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewModel> implements CartAdapter.CartAdapterCallback, View.OnClickListener {
 
@@ -39,6 +40,9 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
         viewBinding.setA(this);
         viewBinding.setVm(viewModel);
         viewBinding.setProfile(myApplication().getProfileResponse());
+        viewModel.receiverAddress.set(myApplication().getCustomerLocation().get());
+        viewModel.receiverName.set(myApplication().getProfileResponse().getCustomerFullName());
+        viewModel.receiverPhone.set(myApplication().getProfileResponse().getCustomerPhone());
         viewBinding.executePendingBindings();
         setupCartAdapter();
     }
@@ -79,12 +83,13 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
         } else if (v.getId() == R.id.fc_checkout) {
             checkout();
         } else if (v.getId() == viewBinding.fcChangeAddress.getId()){
-            navigateToAddressList();
+            navigateToUpdateReceiver();
         }
     }
-    private void navigateToAddressList(){
-        Intent it = new Intent(this, LocationActivity.class);
-        startActivity(it);
+
+    private void navigateToUpdateReceiver(){
+        UpdateReceiverSheet updateReceiverSheet = new UpdateReceiverSheet(viewModel.receiverName, viewModel.receiverPhone,viewModel.receiverAddress);
+        updateReceiverSheet.show(getSupportFragmentManager(),"RECEIVER");
     }
 
     private void navigateToSelectPayment(){

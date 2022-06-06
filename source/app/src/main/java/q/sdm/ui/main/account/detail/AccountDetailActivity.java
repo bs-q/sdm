@@ -12,6 +12,7 @@ import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.main.account.detail.dialog.CaptureImageDialog;
 import q.sdm.ui.main.account.email.UpdateEmailActivity;
 import q.sdm.ui.main.account.name.UpdateNameActivity;
+import q.sdm.ui.main.account.password.UpdatePasswordActivity;
 import q.sdm.ui.main.account.request.RequestPasswordSheet;
 import timber.log.Timber;
 
@@ -67,7 +68,13 @@ implements View.OnClickListener {
             changeImage();
         } else if (v.getId() == viewBinding.emailTitleLayer.getId()){
             navigateToEditEmail();
+        } else if (v.getId() == viewBinding.passwordLayer.getId()) {
+            navigateToEditPassword();
         }
+    }
+    private void navigateToEditPassword(){
+        Intent it = new Intent(this, UpdatePasswordActivity.class);
+        startActivity(it);
     }
     private void navigateToEditName(){
         Intent it = new Intent(this, UpdateNameActivity.class);

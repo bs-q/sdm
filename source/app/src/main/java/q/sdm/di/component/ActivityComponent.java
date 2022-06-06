@@ -5,12 +5,14 @@ import q.sdm.di.module.ActivityModule;
 import q.sdm.di.scope.ActivityScope;
 import q.sdm.ui.address.AddAddressActivity;
 import q.sdm.ui.category.CategoryActivity;
+import q.sdm.ui.category.product.CategoryProductActivity;
 import q.sdm.ui.location.LocationActivity;
 import q.sdm.ui.login.LoginActivity;
 import q.sdm.ui.main.MainActivity;
 import q.sdm.ui.main.account.detail.AccountDetailActivity;
 import q.sdm.ui.main.account.email.UpdateEmailActivity;
 import q.sdm.ui.main.account.name.UpdateNameActivity;
+import q.sdm.ui.main.account.password.UpdatePasswordActivity;
 import q.sdm.ui.main.cart.CartActivity;
 import q.sdm.ui.main.cart.added.ProductAddedActivity;
 import q.sdm.ui.product.ProductDetailActivity;
@@ -60,5 +62,9 @@ public interface ActivityComponent {
     void inject(UpdateNameActivity activity);
 
     void inject(UpdateEmailActivity activity);
+
+    void inject(UpdatePasswordActivity activity);
+
+    void inject(CategoryProductActivity activity);
 }
 

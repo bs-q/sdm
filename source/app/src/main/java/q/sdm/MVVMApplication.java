@@ -21,6 +21,7 @@ import io.reactivex.rxjava3.subjects.PublishSubject;
 import lombok.Getter;
 import lombok.Setter;
 import q.sdm.data.model.api.response.account.ProfileResponse;
+import q.sdm.data.model.api.response.category.CategoryResponse;
 import q.sdm.data.model.api.response.product.ProductResponse;
 import q.sdm.data.model.db.ProductEntity;
 import q.sdm.di.component.AppComponent;
@@ -60,6 +61,10 @@ public class MVVMApplication extends Application{
     @Getter
     @Setter
     private ProductEntity editProduct;
+
+    @Getter
+    @Setter
+    private CategoryResponse selectedCategory;
     @Override
     public void onCreate() {
         super.onCreate();

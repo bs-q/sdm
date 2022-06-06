@@ -16,12 +16,14 @@ import q.sdm.di.scope.ActivityScope;
 import q.sdm.ui.address.AddAddressViewModel;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.category.CategoryViewModel;
+import q.sdm.ui.category.product.CategoryProductViewModel;
 import q.sdm.ui.location.LocationViewModel;
 import q.sdm.ui.login.LoginViewModel;
 import q.sdm.ui.main.MainViewModel;
 import q.sdm.ui.main.account.detail.AccountDetailViewModel;
 import q.sdm.ui.main.account.email.UpdateEmailViewModel;
 import q.sdm.ui.main.account.name.UpdateNameViewModel;
+import q.sdm.ui.main.account.password.UpdatePasswordViewModel;
 import q.sdm.ui.main.cart.CartViewModel;
 import q.sdm.ui.main.cart.added.ProductAddedViewModel;
 import q.sdm.ui.product.ProductDetailViewModel;
@@ -200,5 +202,21 @@ public class ActivityModule {
         Supplier<UpdateEmailViewModel> supplier = () -> new UpdateEmailViewModel(repository, (MVVMApplication) application);
         ViewModelProviderFactory<UpdateEmailViewModel> factory = new ViewModelProviderFactory<>(UpdateEmailViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(UpdateEmailViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    UpdatePasswordViewModel provideUpdatePasswordViewModel(Repository repository, Context application) {
+        Supplier<UpdatePasswordViewModel> supplier = () -> new UpdatePasswordViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<UpdatePasswordViewModel> factory = new ViewModelProviderFactory<>(UpdatePasswordViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(UpdatePasswordViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    CategoryProductViewModel provideCategoryProductViewModel(Repository repository, Context application) {
+        Supplier<CategoryProductViewModel> supplier = () -> new CategoryProductViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<CategoryProductViewModel> factory = new ViewModelProviderFactory<>(CategoryProductViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(CategoryProductViewModel.class);
     }
 }

@@ -109,12 +109,13 @@
                     android:text="@{profile.customerFullName}"
                     android:textColor="#424242"
                     android:textSize="@dimen/_14ssp" />
+
                 <ImageView
                     android:id="@+id/name_arrow"
-                    android:layout_centerVertical="true"
                     android:layout_width="@dimen/_8sdp"
                     android:layout_height="@dimen/_14sdp"
                     android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
                     android:rotation="90"
                     android:src="@drawable/arrow" />
                 <View
@@ -145,7 +146,9 @@
                 app:layout_constraintWidth_percent=".3"/>
             <RelativeLayout
                 android:onClick="@{(v)->a.onClick(v)}"
-                android:id="@+id/password_old_title_layer"
+                android:id="@+id/password_layer"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
                 app:layout_constraintStart_toEndOf="@id/password_old_title"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -163,11 +166,15 @@
                     android:layout_marginVertical="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_6sdp"
                     android:background="@android:color/transparent"
-                    android:inputType="textPassword"
-                    android:text="        "
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:text="\u2022\u2022\u2022\u2022\u2022\u2022"
                     android:textColor="#424242"
                     android:textSize="@dimen/_14ssp" />
                 <ImageView
+                    android:clickable="false"
                     android:id="@+id/password_arrow"
                     android:layout_centerVertical="true"
                     android:layout_width="@dimen/_8sdp"

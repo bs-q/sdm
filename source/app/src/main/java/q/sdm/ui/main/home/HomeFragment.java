@@ -18,6 +18,7 @@ import q.sdm.databinding.FragmentHomeBinding;
 import q.sdm.di.component.FragmentComponent;
 import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.base.fragment.BaseFragment;
+import q.sdm.ui.category.product.CategoryProductActivity;
 import q.sdm.ui.location.LocationActivity;
 import q.sdm.ui.main.MainActivity;
 import q.sdm.ui.main.account.AccountFragment;
@@ -133,7 +134,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
 
     @Override
     public void categoryItemClick(CategoryResponse categoryResponse) {
-
+        myApplication().setSelectedCategory(categoryResponse);
+        navigateToProductCategory();
+    }
+    private void navigateToProductCategory(){
+        Intent it = new Intent(requireContext(), CategoryProductActivity.class);
+        startActivity(it);
     }
 
     @Override

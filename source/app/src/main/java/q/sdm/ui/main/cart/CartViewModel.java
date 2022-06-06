@@ -1,6 +1,7 @@
 package q.sdm.ui.main.cart;
 
 import androidx.databinding.ObservableDouble;
+import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableLong;
 import androidx.lifecycle.LiveData;
 
@@ -18,6 +19,9 @@ public class CartViewModel extends BaseViewModel {
     public ObservableDouble total = new ObservableDouble(0);
     public ObservableDouble vat = new ObservableDouble(0);
     public ObservableDouble totalAndVat = new ObservableDouble(0);
+    public ObservableField<String> receiverName = new ObservableField<>("");
+    public ObservableField<String> receiverPhone = new ObservableField<>("");
+    public ObservableField<String> receiverAddress = new ObservableField<>("");
     LiveData<List<ProductEntity>> productEntityLiveData;
     public CartViewModel(Repository repository, MVVMApplication application) {
         super(repository, application);

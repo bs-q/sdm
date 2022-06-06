@@ -19,6 +19,7 @@ import q.sdm.ui.main.account.request.RequestPasswordViewModel;
 import q.sdm.ui.main.cart.CartViewModel;
 import q.sdm.ui.main.cart.added.edit.ProductAddedEditViewModel;
 import q.sdm.ui.main.cart.edit.CartSheetViewModel;
+import q.sdm.ui.main.cart.receiver.UpdateReceiverViewModel;
 import q.sdm.ui.main.home.HomeViewModel;
 import q.sdm.utils.GetInfo;
 
@@ -67,5 +68,11 @@ public class SheetModule {
         ViewModelProviderFactory<RequestPasswordViewModel> factory = new ViewModelProviderFactory<>(RequestPasswordViewModel.class, supplier);
         return new ViewModelProvider(fragment, factory).get(RequestPasswordViewModel.class);
     }
-    
+    @Provides
+    @SheetScope
+    UpdateReceiverViewModel provideUpdateReceiverViewModel(Repository repository, Context application) {
+        Supplier<UpdateReceiverViewModel> supplier = () -> new UpdateReceiverViewModel(repository, (MVVMApplication)application);
+        ViewModelProviderFactory<UpdateReceiverViewModel> factory = new ViewModelProviderFactory<>(UpdateReceiverViewModel.class, supplier);
+        return new ViewModelProvider(fragment, factory).get(UpdateReceiverViewModel.class);
+    }
 }

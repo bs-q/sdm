@@ -6,6 +6,7 @@ import q.sdm.di.scope.SheetScope;
 import q.sdm.ui.main.account.request.RequestPasswordSheet;
 import q.sdm.ui.main.cart.added.edit.ProductAddedEditSheet;
 import q.sdm.ui.main.cart.edit.CartSheet;
+import q.sdm.ui.main.cart.receiver.UpdateReceiverSheet;
 
 @SheetScope
 @Component(modules = {SheetModule.class},dependencies = AppComponent.class)
@@ -15,4 +16,6 @@ public interface SheetComponent {
     void inject(ProductAddedEditSheet sheet);
 
     void inject(RequestPasswordSheet sheet);
+
+    void inject(UpdateReceiverSheet sheet);
 }

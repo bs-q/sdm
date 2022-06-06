@@ -56,6 +56,8 @@ public interface ApiService {
     @GET("v1/product/client-list")
     Observable<ResponseWrapper<ResponseListObj<ProductResponse>>> products(@Query("size")Integer size, @Query("page") Integer page);
 
+    @GET("v1/product/auto-complete")
+    Observable<ResponseWrapper<DataWrapper<List<ProductResponse>>>> productsCategory(@Query("categoryId")Long categoryId);
 
     @GET("v1/product/auto-complete")
     Observable<ResponseWrapper<DataWrapper<List<ProductResponse>>>> searchProducts(@Query("name") String query);

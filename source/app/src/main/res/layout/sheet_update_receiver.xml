@@ -6,11 +6,11 @@
 
         <variable
             name="a"
-            type="q.sdm.ui.main.account.password.UpdatePasswordActivity" />
+            type="q.sdm.ui.main.cart.receiver.UpdateReceiverSheet" />
 
         <variable
             name="vm"
-            type="q.sdm.ui.main.account.password.UpdatePasswordViewModel" />
+            type="q.sdm.ui.main.cart.receiver.UpdateReceiverViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,39 +28,38 @@
             android:textSize="@dimen/_16ssp"
             android:textColor="#292D32"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="Đổi mật khẩu"
+            android:text="Cập nhật thông tin"
             android:id="@+id/header"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
-        <TextView
-            android:onClick="@{(v)->a.onClick(v)}"
-            android:layout_width="0dp"
-            android:elevation="@dimen/_4sdp"
-            android:layout_height="wrap_content"
-            android:id="@+id/done"
-            android:textColor="@color/primary"
-            style="@style/sfmedium"
-            android:text="Hoàn tất"
-            android:paddingVertical="@dimen/_2sdp"
+        <ImageView
+            android:elevation="@dimen/_5sdp"
+
+            android:id="@+id/close"
+            android:onClick="@{(v)->a.dismiss()}"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:src="@drawable/delete_icon"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/header"
-            android:textSize="@dimen/_12ssp"
-            android:layout_marginEnd="@dimen/_16sdp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"/>
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintTop_toBottomOf="@id/header"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@id/update_btn">
+
             <TextView
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="@dimen/_14sdp"
                 android:layout_marginStart="@dimen/_14sdp"
                 app:layout_constraintTop_toBottomOf="@id/header"
                 android:id="@+id/password_title"
-                android:text="Mật khẩu hiện tại"
+                android:text="Tên người nhận hàng"
                 android:textColor="#666666"
                 android:textSize="@dimen/_12ssp"
                 style="@style/sfmedium"
@@ -68,7 +67,8 @@
                 android:layout_height="wrap_content"
                 />
             <RelativeLayout
-                android:id="@+id/current_password_layer"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:id="@+id/password_layer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/password_title"
@@ -76,39 +76,37 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/current_password"
+                    android:id="@+id/name"
                     style="@style/sfmedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
                     android:layout_marginVertical="@dimen/_4sdp"
-                    android:layout_marginStart="@dimen/_14sdp"
-                    android:layout_marginEnd="@dimen/_14sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
                     android:background="@android:color/transparent"
-                    android:inputType="textPassword"
-                    android:text="@={vm.oldPassword,default = `....`}"
+                    android:inputType="textPersonName"
+                    android:text="@={vm.receiverName}"
                     android:textColor="#424242"
+                    android:maxLength="16"
                     android:textSize="@dimen/_14ssp" />
 
 
                 <View
                     android:layout_marginTop="@dimen/_4sdp"
-                    android:layout_below="@id/current_password"
+                    android:layout_below="@id/name"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:background="#E2E2E2"/>
 
             </RelativeLayout>
-
-<!--                    new password-->
             <TextView
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="@dimen/_14sdp"
                 android:layout_marginStart="@dimen/_14sdp"
                 app:layout_constraintTop_toBottomOf="@id/header"
-                android:id="@+id/new_password_title"
-                android:text="Mật khẩu mới"
+                android:id="@+id/phone_title"
+                android:text="Số điện thoại người nhận"
                 android:textColor="#666666"
                 android:textSize="@dimen/_12ssp"
                 style="@style/sfmedium"
@@ -116,7 +114,8 @@
                 android:layout_height="wrap_content"
                 />
             <RelativeLayout
-                android:id="@+id/new_password_layer"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:id="@+id/phone_layer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/password_title"
@@ -124,38 +123,36 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:id="@+id/new_password"
+                    android:id="@+id/phone"
                     style="@style/sfmedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginHorizontal="@dimen/_14sdp"
                     android:layout_marginVertical="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
                     android:background="@android:color/transparent"
-                    android:inputType="textPassword"
-                    android:text="@={vm.newPassword,default = `....`}"
+                    android:inputType="phone"
+                    android:text="@={vm.receiverPhone}"
                     android:textColor="#424242"
                     android:textSize="@dimen/_14ssp" />
 
 
                 <View
                     android:layout_marginTop="@dimen/_4sdp"
-                    android:layout_below="@id/new_password"
+                    android:layout_below="@id/phone"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:background="#E2E2E2"/>
 
             </RelativeLayout>
-
-<!--            new password confirm-->
             <TextView
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="@dimen/_14sdp"
                 android:layout_marginStart="@dimen/_14sdp"
                 app:layout_constraintTop_toBottomOf="@id/header"
-                android:id="@+id/new_password_confirm_title"
-                android:text="Xác nhận mật khẩu mới"
+                android:id="@+id/address_title"
+                android:text="Địa chỉ giao hàng"
                 android:textColor="#666666"
                 android:textSize="@dimen/_12ssp"
                 style="@style/sfmedium"
@@ -163,32 +160,47 @@
                 android:layout_height="wrap_content"
                 />
             <RelativeLayout
-                android:id="@+id/new_password_confirm_layer"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:onClick="@{(v)->a.onClick(v)}"
+                android:layout_marginHorizontal="@dimen/_14sdp"
+                android:id="@+id/address_layer"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/password_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:layout_marginHorizontal="@dimen/_14sdp"
-                    android:id="@+id/new_password_confirm"
+                <TextView
+                    android:id="@+id/address"
                     style="@style/sfmedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_marginVertical="@dimen/_4sdp"
                     android:layout_alignParentEnd="true"
+                    android:layout_marginVertical="@dimen/_4sdp"
+                    android:layout_marginEnd="@dimen/_16sdp"
                     android:background="@android:color/transparent"
-                    android:inputType="textPassword"
-                    android:text="@={vm.confirmPassword,default = `....`}"
+                    android:clickable="false"
+                    android:enabled="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="textPersonName"
+                    android:text="@{vm.receiverAddress}"
                     android:textColor="#424242"
                     android:textSize="@dimen/_14ssp" />
-
+                <ImageView
+                    android:id="@+id/name_arrow"
+                    android:layout_width="@dimen/_8sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:rotation="90"
+                    android:src="@drawable/arrow" />
 
                 <View
                     android:layout_marginTop="@dimen/_4sdp"
-                    android:layout_below="@id/new_password_confirm"
+                    android:layout_below="@id/address"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_1sdp"
                     android:background="#E2E2E2"/>
@@ -196,7 +208,29 @@
             </RelativeLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
+        <RelativeLayout
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:onClick="@{(v)->a.onClick(v)}"
+            android:id="@+id/update_btn"
+            android:background="@drawable/login_btn_active"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_34sdp"
 
+            android:layout_marginHorizontal="@dimen/_10sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginVertical="@dimen/_3sdp"
+                android:text="Cập nhật thông tin giao hàng"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
