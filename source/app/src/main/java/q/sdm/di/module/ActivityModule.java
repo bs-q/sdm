@@ -20,6 +20,8 @@ import q.sdm.ui.location.LocationViewModel;
 import q.sdm.ui.login.LoginViewModel;
 import q.sdm.ui.main.MainViewModel;
 import q.sdm.ui.main.account.detail.AccountDetailViewModel;
+import q.sdm.ui.main.account.email.UpdateEmailViewModel;
+import q.sdm.ui.main.account.name.UpdateNameViewModel;
 import q.sdm.ui.main.cart.CartViewModel;
 import q.sdm.ui.main.cart.added.ProductAddedViewModel;
 import q.sdm.ui.product.ProductDetailViewModel;
@@ -182,5 +184,21 @@ public class ActivityModule {
         Supplier<CartViewModel> supplier = () -> new CartViewModel(repository, (MVVMApplication) application);
         ViewModelProviderFactory<CartViewModel> factory = new ViewModelProviderFactory<>(CartViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(CartViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    UpdateNameViewModel provideUpdateNameViewModel(Repository repository, Context application) {
+        Supplier<UpdateNameViewModel> supplier = () -> new UpdateNameViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<UpdateNameViewModel> factory = new ViewModelProviderFactory<>(UpdateNameViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(UpdateNameViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    UpdateEmailViewModel provideUpdateEmailViewModel(Repository repository, Context application) {
+        Supplier<UpdateEmailViewModel> supplier = () -> new UpdateEmailViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<UpdateEmailViewModel> factory = new ViewModelProviderFactory<>(UpdateEmailViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(UpdateEmailViewModel.class);
     }
 }

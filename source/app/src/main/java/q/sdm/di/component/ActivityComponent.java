@@ -9,6 +9,8 @@ import q.sdm.ui.location.LocationActivity;
 import q.sdm.ui.login.LoginActivity;
 import q.sdm.ui.main.MainActivity;
 import q.sdm.ui.main.account.detail.AccountDetailActivity;
+import q.sdm.ui.main.account.email.UpdateEmailActivity;
+import q.sdm.ui.main.account.name.UpdateNameActivity;
 import q.sdm.ui.main.cart.CartActivity;
 import q.sdm.ui.main.cart.added.ProductAddedActivity;
 import q.sdm.ui.product.ProductDetailActivity;
@@ -54,5 +56,9 @@ public interface ActivityComponent {
     void inject(ProductAddedActivity activity);
 
     void inject(CartActivity activity);
+
+    void inject(UpdateNameActivity activity);
+
+    void inject(UpdateEmailActivity activity);
 }
 

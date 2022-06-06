@@ -44,8 +44,7 @@ public interface ApiService {
     @Headers({"IgnoreAuth: 1"})
     Observable<ResponseWrapper<RegisterResponse>> register(@Body RegisterRequest request);
 
-
-    @GET("v1/category/auto-complete")
+    @GET("v1/category/auto-complete?kind=3")
     Observable<ResponseWrapper<DataWrapper<List<CategoryResponse>>>> category();
 
     @GET("v1/province/auto-complete")

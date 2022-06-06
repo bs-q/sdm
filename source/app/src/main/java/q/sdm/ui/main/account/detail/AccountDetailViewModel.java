@@ -50,54 +50,5 @@ public class AccountDetailViewModel extends BaseViewModel {
     public AccountDetailViewModel(Repository repository, MVVMApplication application) {
         super(repository, application);
     }
-    public void updateImage(Uri img, BaseRequestCallback<ProfileResponse> callback){
-        File f = new File(img.getPath());
 
-        RequestBody reqFile = RequestBody.create(f,MediaType.parse("image/*"));
-        RequestBody type = RequestBody.create("AVATAR",MediaType.parse("text/plain")
-        );
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("file", f.getName(), reqFile);
-        compositeDisposable.add(
-                repository.getApiService().fileUpload(body,type)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(
-                                response-> {
-                                    if (response.isResult()){
-                                        updateProfile(response.getData().getFilePath(),callback);
-                                    } else {
-                                        callback.doFail(response.getMessage(), response.getCode());
-                                    }
-                                }, throwable -> callback.doError(throwable,this)
-                        )
-        );
-    }
-    public void updateProfile(String avatarPath,BaseRequestCallback<ProfileResponse> callback){
-        UpdateProfileRequest request = new UpdateProfileRequest();
-        request.setCustomerFullName(username.get());
-        if (!newPassword.get().isEmpty()){
-            request.setCustomerPassword(newPassword.get());
-        }
-        request.setOldPassword(oldPassword.get());
-        if (avatarPath != null) {
-            request.setCustomerAvatarPath(avatarPath);
-        }
-        compositeDisposable.add(repository.getApiService().updateProfile(request)
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-                .concatMap(response -> repository.getApiService().profile().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()))
-        .subscribe(
-            response -> {
-                if (response.isResult()) {
-                    callback.doSuccess(response.getData());
-                } else {
-                    callback.doFail(response.getMessage(), response.getCode());
-                }
-            },throwable -> {
-                callback.doError(throwable,this);
-            }
-        ));
-
-    }
 }

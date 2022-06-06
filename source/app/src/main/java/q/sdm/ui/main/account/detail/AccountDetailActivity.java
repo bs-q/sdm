@@ -10,6 +10,9 @@ import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.main.account.detail.dialog.CaptureImageDialog;
+import q.sdm.ui.main.account.email.UpdateEmailActivity;
+import q.sdm.ui.main.account.name.UpdateNameActivity;
+import q.sdm.ui.main.account.request.RequestPasswordSheet;
 import timber.log.Timber;
 
 import android.app.Activity;
@@ -59,37 +62,20 @@ implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v.getId() == viewBinding.nameTitleLayer.getId()) {
-
-        } else if (v.getId() == viewBinding.passwordTitleLayer.getId()) {
-
-        } else if (v.getId() == viewBinding.acdChangeAvatar.getId()) {
+            navigateToEditName();
+        }  else if (v.getId() == viewBinding.acdChangeAvatar.getId()) {
             changeImage();
-        } else if (v.getId() == viewBinding.updateBtn.getId()) {
-            if (viewModel.checkForm() && currentUri!=null) {
-                viewModel.showLoading();
-                viewModel.updateImage(currentUri, new BaseRequestCallback<ProfileResponse>() {
-                    @Override
-                    public void doSuccess(ProfileResponse response) {
-                        viewModel.hideLoading();
-                        viewModel.showSuccessMessage("Cập nhật thông tin thành công");
-                        myApplication().setProfileResponse(response);
-                        finish();
-                    }
-                });
-            } else if (viewModel.checkForm() && currentUri == null){
-                viewModel.showLoading();
-                viewModel.updateProfile(null,new BaseRequestCallback<ProfileResponse>() {
-                    @Override
-                    public void doSuccess(ProfileResponse response) {
-                        viewModel.hideLoading();
-                        viewModel.showSuccessMessage("Cập nhật thông tin thành công");
-
-                        myApplication().setProfileResponse(response);
-                        finish();
-                    }
-                });
-            }
+        } else if (v.getId() == viewBinding.emailTitleLayer.getId()){
+            navigateToEditEmail();
         }
+    }
+    private void navigateToEditName(){
+        Intent it = new Intent(this, UpdateNameActivity.class);
+        startActivity(it);
+    }
+    private void navigateToEditEmail(){
+        Intent it = new Intent(this, UpdateEmailActivity.class);
+        startActivity(it);
     }
     private Uri mCameraUri;
     private Uri mGalleryUri;
@@ -121,8 +107,16 @@ implements View.OnClickListener {
     Uri currentUri;
     private void uploadImage(Uri img){
        currentUri = img;
-        Glide.with(viewBinding.acdAvatar).clear(viewBinding.acdAvatar);
-       viewBinding.acdAvatar.setImageURI(img);
+       RequestPasswordSheet requestPasswordSheet = new RequestPasswordSheet(currentUri,myApplication().getProfileResponse().getCustomerFullName());
+       requestPasswordSheet.show(getSupportFragmentManager(),"REQUEST_PWD");
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewBinding.setProfile(myApplication().getProfileResponse());
+        viewBinding.executePendingBindings();
     }
 
     private void changeImage(){

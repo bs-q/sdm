@@ -69,7 +69,7 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:layout_marginHorizontal="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            app:layout_constraintBottom_toTopOf="@id/update_btn">
+            app:layout_constraintBottom_toBottomOf="parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp">
@@ -96,19 +96,27 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:background="@android:color/transparent"
+                <TextView
                     android:id="@+id/name"
                     style="@style/sfmedium"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:layout_alignParentEnd="true"
                     android:layout_marginVertical="@dimen/_10sdp"
                     android:layout_marginEnd="@dimen/_6sdp"
-                    android:text="@={vm.username}"
+                    android:layout_toStartOf="@id/name_arrow"
+                    android:background="@android:color/transparent"
+                    android:text="@{profile.customerFullName}"
                     android:textColor="#424242"
                     android:textSize="@dimen/_14ssp" />
+                <ImageView
+                    android:id="@+id/name_arrow"
+                    android:layout_centerVertical="true"
+                    android:layout_width="@dimen/_8sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_alignParentEnd="true"
+                    android:rotation="90"
+                    android:src="@drawable/arrow" />
                 <View
                     android:layout_alignParentBottom="true"
                     android:layout_width="match_parent"
@@ -121,62 +129,69 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_marginTop="@dimen/_2sdp"
             android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp">
+            android:layout_height="@dimen/_40sdp">
+
+            <TextView
+                android:id="@+id/password_old_title"
+                android:text="Mật khẩu"
+                android:textColor="#424242"
+                android:textSize="@dimen/_14ssp"
+                style="@style/sfmedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintWidth_percent=".3"/>
+            <RelativeLayout
+                android:onClick="@{(v)->a.onClick(v)}"
+                android:id="@+id/password_old_title_layer"
+                app:layout_constraintStart_toEndOf="@id/password_old_title"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/password_title"
-                    android:text="Mật khẩu cũ"
-                    android:textColor="#424242"
-                    android:textSize="@dimen/_14ssp"
+                    android:id="@+id/password_old"
                     style="@style/sfmedium"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintWidth_percent=".3"/>
-                <RelativeLayout
-                    android:onClick="@{(v)->a.onClick(v)}"
-                    android:id="@+id/password_title_layer"
-                    app:layout_constraintStart_toEndOf="@id/password_title"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:background="@android:color/transparent"
+                    android:inputType="textPassword"
+                    android:text="        "
+                    android:textColor="#424242"
+                    android:textSize="@dimen/_14ssp" />
+                <ImageView
+                    android:id="@+id/password_arrow"
+                    android:layout_centerVertical="true"
+                    android:layout_width="@dimen/_8sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_alignParentEnd="true"
+                    android:rotation="90"
+                    android:src="@drawable/arrow" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_alignParentBottom="true"
+                    android:background="#E2E2E2" />
 
-                    <EditText
-                        android:id="@+id/password"
-                        style="@style/sfmedium"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentEnd="true"
-                        android:layout_marginVertical="@dimen/_10sdp"
-                        android:layout_marginEnd="@dimen/_6sdp"
-                        android:background="@android:color/transparent"
-                        android:inputType="textPassword"
-                        android:text="@={vm.oldPassword}"
-                        android:textColor="#424242"
-                        android:textSize="@dimen/_14ssp" />
+            </RelativeLayout>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_alignParentBottom="true"
-                        android:background="#E2E2E2" />
-
-                </RelativeLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_marginTop="@dimen/_2sdp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp">
 
                 <TextView
-                    android:id="@+id/password_old_title"
-                    android:text="Mật khẩu mới"
+                    android:id="@+id/email_title"
+                    android:text="Email"
                     android:textColor="#424242"
                     android:textSize="@dimen/_14ssp"
                     style="@style/sfmedium"
@@ -188,16 +203,16 @@
                     app:layout_constraintWidth_percent=".3"/>
                 <RelativeLayout
                     android:onClick="@{(v)->a.onClick(v)}"
-                    android:id="@+id/password_old_title_layer"
-                    app:layout_constraintStart_toEndOf="@id/password_old_title"
+                    android:id="@+id/email_title_layer"
+                    app:layout_constraintStart_toEndOf="@id/email_title"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content">
 
-                    <EditText
-                        android:id="@+id/password_old"
+                    <TextView
+                        android:id="@+id/email_old"
                         style="@style/sfmedium"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -206,11 +221,17 @@
                         android:layout_marginVertical="@dimen/_10sdp"
                         android:layout_marginEnd="@dimen/_6sdp"
                         android:background="@android:color/transparent"
-                        android:inputType="textPassword"
-                        android:text="@={vm.newPassword}"
+                        android:text="@{profile.customerEmail}"
                         android:textColor="#424242"
                         android:textSize="@dimen/_14ssp" />
-
+                    <ImageView
+                        android:id="@+id/email_arrow"
+                        android:layout_centerVertical="true"
+                        android:layout_width="@dimen/_8sdp"
+                        android:layout_height="@dimen/_14sdp"
+                        android:layout_alignParentEnd="true"
+                        android:rotation="90"
+                        android:src="@drawable/arrow" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"
@@ -220,31 +241,7 @@
                 </RelativeLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-
         </androidx.appcompat.widget.LinearLayoutCompat>
-        <RelativeLayout
-            android:layout_marginBottom="@dimen/_10sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:onClick="@{(v)->a.onClick(v)}"
-            android:id="@+id/update_btn"
-            android:background="@drawable/login_btn_active"
-            android:layout_marginTop="@dimen/_25sdp"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/_34sdp"
-
-            android:layout_marginHorizontal="@dimen/_10sdp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_marginVertical="@dimen/_3sdp"
-                android:text="Cập nhật tài khoản"
-                android:textColor="@color/white"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="bold" />
-        </RelativeLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
