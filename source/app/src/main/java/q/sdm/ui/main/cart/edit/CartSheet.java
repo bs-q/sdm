@@ -67,7 +67,14 @@ public class CartSheet extends BaseSheet<ActivityEditCartBinding,CartSheetViewMo
         viewModel.quantityString.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-                viewModel.quantity.set(Integer.valueOf(viewModel.quantityString.get()));
+                Integer amount = Integer.valueOf(viewModel.quantityString.get());
+                if (amount>myApplication().getEditProduct().quantityInStock) {
+                    viewModel.quantity.set(myApplication().getEditProduct().quantityInStock);
+                    viewModel.quantityString.set(String.valueOf(myApplication().getEditProduct().quantityInStock));
+                    binding.aecQuantity.clearFocus();
+                } else {
+                    viewModel.quantity.set(amount);
+                }
             }
         });
         binding.aecQuantity.setOnKeyListener(new View.OnKeyListener() {

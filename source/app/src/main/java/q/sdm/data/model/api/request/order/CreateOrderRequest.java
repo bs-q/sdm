@@ -9,7 +9,7 @@ import q.sdm.data.model.db.ProductEntity;
 @Data
 public class CreateOrderRequest {
     private String ordersAddress;
-    private Integer paymentMethod;
+    private Integer paymentMethod = 1; // 1 cash; 2 online paypal
     private String receiverName;
     private String receiverPhone;
     private List<OrderDetailResponse> ordersDetailDtos;

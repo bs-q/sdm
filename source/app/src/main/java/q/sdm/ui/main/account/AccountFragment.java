@@ -8,8 +8,10 @@ import q.sdm.R;
 import q.sdm.databinding.FragmentAccountBinding;
 import q.sdm.di.component.FragmentComponent;
 import q.sdm.ui.base.fragment.BaseFragment;
+import q.sdm.ui.location.LocationActivity;
 import q.sdm.ui.login.LoginActivity;
 import q.sdm.ui.main.account.detail.AccountDetailActivity;
+import q.sdm.ui.main.cart.order.history.OrderHistoryActivity;
 
 public class AccountFragment extends BaseFragment<FragmentAccountBinding, AccountViewModel> {
     @Override
@@ -40,8 +42,21 @@ public class AccountFragment extends BaseFragment<FragmentAccountBinding, Accoun
             navigateToLogin();
         } else if (v.getId() == binding.fcAccountBtn.getId()){
             navigateToAccountDetail();
+        } else if (v.getId() == binding.fcLocationBtn.getId()) {
+            navigateToAddressList();
+        } else if (v.getId() == binding.fcOrderBtn.getId()) {
+            navigateToOrderHistory();
         }
 
+    }
+
+    private void navigateToOrderHistory(){
+        Intent it = new Intent(requireContext(), OrderHistoryActivity.class);
+        startActivity(it);
+    }
+    private void navigateToAddressList(){
+        Intent it = new Intent(requireContext(), LocationActivity.class);
+        startActivity(it);
     }
 
 

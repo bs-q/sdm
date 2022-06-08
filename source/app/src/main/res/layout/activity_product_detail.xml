@@ -10,7 +10,7 @@
         <variable
             name="a"
             type="q.sdm.ui.product.ProductDetailActivity" />
-
+        <import type="android.view.View"/>
         <variable
             name="vm"
             type="q.sdm.ui.product.ProductDetailViewModel" />
@@ -62,18 +62,35 @@
                     android:layout_marginBottom="@dimen/_4sdp"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:maxLines="2"
-                    android:id="@+id/pd_money"
+                    android:id="@+id/pd_money_sale"
                     android:textSize="@dimen/_16ssp"
                     android:textColor="@color/primary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@{@string/money_format(product.productPrice)}"/>
+                    android:text="@{@string/money_format(product.productPrice*(((double)1)-(double)(product.saleoff/100)))}"
+                    />
+                <TextView
+                    android:visibility="@{product.saleoff == 0 ? View.GONE : View.VISIBLE}"
+                    style="@style/sfmedium"
+                    android:layout_marginHorizontal="@dimen/_6sdp"
+                    app:layout_constraintTop_toBottomOf="@id/pd_money_sale"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:maxLines="2"
+                    android:id="@+id/pd_money_real"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/primary"
+                    app:strike="@{true}"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{@string/money_format(product.productPrice),default=`100000`}"/>
 
 
                 <WebView
                     android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginHorizontal="@dimen/_6sdp"
-                    app:layout_constraintTop_toBottomOf="@id/pd_money"
+                    app:layout_constraintTop_toBottomOf="@id/pd_money_real"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:id="@+id/pd_description"
@@ -90,7 +107,7 @@
                     android:layout_height="@dimen/_300sdp"
                     android:layout_marginTop="@dimen/_16sdp"
                     android:layout_marginHorizontal="@dimen/_6sdp"
-                    app:layout_constraintTop_toBottomOf="@id/pd_money"
+                    app:layout_constraintTop_toBottomOf="@id/pd_money_real"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent">
                     <include layout="@layout/layout_preview_description"/>
@@ -101,8 +118,9 @@
             android:layout_marginBottom="@dimen/_14sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             android:onClick="@{(v)->a.onClick(v)}"
+            android:clickable="@{(product == null || product.quantityInStock == 0) ? false : true}"
             android:id="@+id/pd_add"
-            android:background="@drawable/login_btn_active"
+            android:background="@{(product == null || product.quantityInStock == 0) ? @drawable/login_btn_inactive: @drawable/login_btn_active}"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_34sdp"
@@ -114,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_marginVertical="@dimen/_3sdp"
-                android:text="Thêm vào giỏ hàng"
+                android:text="@{(product == null || product.quantityInStock == 0) ? `Hết hàng`: `Thêm vào giỏ hàng`}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12ssp"
                 android:textStyle="bold" />

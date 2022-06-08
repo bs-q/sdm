@@ -4,7 +4,13 @@
 
     <data>
         <variable
+            name="sale"
+            type="androidx.databinding.ObservableField&lt;String>" />
+        <variable
             name="total"
+            type="androidx.databinding.ObservableDouble" />
+        <variable
+            name="reduce"
             type="androidx.databinding.ObservableDouble" />
         <variable
             name="vat"
@@ -46,6 +52,39 @@
                 android:id="@+id/lpc_total_money"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                style="@style/sfmedium"
+                android:textColor="#333333"
+                android:text="@{`Giảm giá `+`(`+sale+`%):`,default=`Giảm (5%):`}"
+                android:textSize="@dimen/_12ssp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/lpc_total_member_sale_title"/>
+            <TextView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/lpc_total_member_sale_title"
+                app:layout_constraintBottom_toBottomOf="parent"
+                style="@style/sfmedium"
+                android:textColor="#333333"
+                android:text="@{@string/money_format(reduce)}"
+                android:textSize="@dimen/_12ssp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:textAlignment="viewEnd"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/lpc_total_member_sale_money"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_marginTop="@dimen/_8sdp"
             android:layout_width="match_parent"

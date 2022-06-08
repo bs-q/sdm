@@ -29,4 +29,9 @@
     <color name="login_text_active">#FFF9FF</color>
     <color name="login_text_inactive">#333333</color>
     <color name="wrong">#E92F48</color>
+
+    <color name="order_black">#171717</color>
+    <color name="order_blue">#448EF7</color>
+    <color name="order_green">#569C30</color>
+    <color name="order_yellow">#F2A93B</color>
 </resources>

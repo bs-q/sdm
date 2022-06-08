@@ -16,6 +16,9 @@ public class ResponseListObj<T> {
         return totalPage - 1 > page;
     }
 
+    /**
+     * Return next page
+     */
     public Integer getNext() {
         return page + 1;
     }

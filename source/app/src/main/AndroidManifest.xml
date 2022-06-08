@@ -81,6 +81,9 @@
         <activity android:name=".ui.main.account.email.UpdateEmailActivity" />
         <activity android:name=".ui.main.account.password.UpdatePasswordActivity" />
         <activity android:name=".ui.category.product.CategoryProductActivity" />
+        <activity android:name=".ui.main.cart.order.complete.OrderCompleteActivity" />
+        <activity android:name=".ui.main.cart.order.history.OrderHistoryActivity" />
+        <activity android:name=".ui.main.cart.order.detail.OrderDetailActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"

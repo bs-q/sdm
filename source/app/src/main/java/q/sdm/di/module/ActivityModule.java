@@ -26,6 +26,9 @@ import q.sdm.ui.main.account.name.UpdateNameViewModel;
 import q.sdm.ui.main.account.password.UpdatePasswordViewModel;
 import q.sdm.ui.main.cart.CartViewModel;
 import q.sdm.ui.main.cart.added.ProductAddedViewModel;
+import q.sdm.ui.main.cart.order.complete.OrderCompleteViewModel;
+import q.sdm.ui.main.cart.order.detail.OrderDetailViewModel;
+import q.sdm.ui.main.cart.order.history.OrderHistoryViewModel;
 import q.sdm.ui.product.ProductDetailViewModel;
 import q.sdm.ui.recovery.RecoveryViewModel;
 import q.sdm.ui.recovery.complete.RecoveryCompleteViewModel;
@@ -218,5 +221,29 @@ public class ActivityModule {
         Supplier<CategoryProductViewModel> supplier = () -> new CategoryProductViewModel(repository, (MVVMApplication) application);
         ViewModelProviderFactory<CategoryProductViewModel> factory = new ViewModelProviderFactory<>(CategoryProductViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(CategoryProductViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    OrderCompleteViewModel provideOrderCompleteViewModel(Repository repository, Context application) {
+        Supplier<OrderCompleteViewModel> supplier = () -> new OrderCompleteViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<OrderCompleteViewModel> factory = new ViewModelProviderFactory<>(OrderCompleteViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(OrderCompleteViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    OrderHistoryViewModel provideOrderHistoryViewModel(Repository repository, Context application) {
+        Supplier<OrderHistoryViewModel> supplier = () -> new OrderHistoryViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<OrderHistoryViewModel> factory = new ViewModelProviderFactory<>(OrderHistoryViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(OrderHistoryViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    OrderDetailViewModel provideOrderDetailViewModel(Repository repository, Context application) {
+        Supplier<OrderDetailViewModel> supplier = () -> new OrderDetailViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<OrderDetailViewModel> factory = new ViewModelProviderFactory<>(OrderDetailViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(OrderDetailViewModel.class);
     }
 }

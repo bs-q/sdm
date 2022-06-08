@@ -1,5 +1,7 @@
 package q.sdm.ui.product;
 
+import static android.graphics.Paint.ANTI_ALIAS_FLAG;
+
 import q.sdm.R;
 import q.sdm.BR;
 import q.sdm.data.model.api.response.product.ProductResponse;
@@ -10,6 +12,7 @@ import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.activity.BaseDbCallback;
 import q.sdm.ui.base.activity.BaseRequestCallback;
 
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -47,7 +50,11 @@ implements View.OnClickListener {
         viewModel.findProduct(new BaseDbCallback<ProductEntity>() {
             @Override
             public void doSuccess(ProductEntity response) {
-                response.amount+=1;
+                if (response.amount+1 < viewBinding.getProduct().getQuantityInStock()) {
+                    response.amount+=1;
+                }
+                response.quantityInStock = viewBinding.getProduct().getQuantityInStock();
+                response.sale = viewBinding.getProduct().getSaleoff();
                 viewModel.updateProduct(response, new BaseDbCallback<Long>() {
                     @Override
                     public void doSuccess(Long response) {
@@ -63,11 +70,13 @@ implements View.OnClickListener {
             @Override
             public void doError(Throwable throwable) {
                 ProductEntity productEntity = new ProductEntity();
-                productEntity.setId(myApplication().getProductDetailItem().getId());
-                productEntity.setName(myApplication().getProductDetailItem().getProductName());
+                productEntity.setId(viewBinding.getProduct().getId());
+                productEntity.setName(viewBinding.getProduct().getProductName());
                 productEntity.setAmount(1);
-                productEntity.setPrice(myApplication().getProductDetailItem().getProductPrice());
-                productEntity.setThumbnail(myApplication().getProductDetailItem().getProductImage());
+                productEntity.setPrice(viewBinding.getProduct().getProductPrice());
+                productEntity.setThumbnail(viewBinding.getProduct().getProductImage());
+                productEntity.setQuantityInStock(viewBinding.getProduct().getQuantityInStock());
+                productEntity.setSale(viewBinding.getProduct().getSaleoff());
                 viewModel.updateProduct(productEntity, new BaseDbCallback<Long>() {
                     @Override
                     public void doSuccess(Long response) {
@@ -108,5 +117,11 @@ implements View.OnClickListener {
     public static void setHtmlText(WebView view, String source) {
         if (source == null) return;;
         view.loadDataWithBaseURL(null,source, "text/html; charset=utf-8", "UTF-8", null);
+    }
+    @BindingAdapter("strike")
+    public static void bindStrikeText(TextView view, boolean strike) {
+        if (strike) {
+            view.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+        }
     }
 }

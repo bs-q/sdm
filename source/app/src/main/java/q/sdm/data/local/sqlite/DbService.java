@@ -30,9 +30,11 @@ public interface DbService {
 
     Observable<Boolean> deleteProduct(ProductEntity product);
 
+    Observable<Boolean> deleteListProduct(List<Long> productIds);
+
     Observable<ProductEntity> findProductById(Long id);
 
 
-    void nukeProducts();
+    Observable<Boolean> nukeProducts();
 
 }

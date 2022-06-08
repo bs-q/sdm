@@ -15,6 +15,9 @@ import q.sdm.ui.main.account.name.UpdateNameActivity;
 import q.sdm.ui.main.account.password.UpdatePasswordActivity;
 import q.sdm.ui.main.cart.CartActivity;
 import q.sdm.ui.main.cart.added.ProductAddedActivity;
+import q.sdm.ui.main.cart.order.complete.OrderCompleteActivity;
+import q.sdm.ui.main.cart.order.detail.OrderDetailActivity;
+import q.sdm.ui.main.cart.order.history.OrderHistoryActivity;
 import q.sdm.ui.product.ProductDetailActivity;
 import q.sdm.ui.recovery.RecoveryActivity;
 import q.sdm.ui.recovery.complete.RecoveryCompleteActivity;
@@ -66,5 +69,11 @@ public interface ActivityComponent {
     void inject(UpdatePasswordActivity activity);
 
     void inject(CategoryProductActivity activity);
+
+    void inject(OrderCompleteActivity activity);
+
+    void inject(OrderHistoryActivity activity);
+
+    void inject(OrderDetailActivity activity);
 }
 

@@ -17,10 +17,10 @@ public class ProductResponse {
     String productImage;
     String productName;
     Double productPrice;
-    Integer saleoff;
+    Double saleoff;
     String shortDescription;
     Integer status;
-
+    Integer quantityInStock;
     public String getProductImage(){
         return BuildConfig.BASE_URL+"v1/file/download"+productImage;
     }

@@ -7,6 +7,17 @@ import androidx.room.Room;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+
+import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.inject.Singleton;
 
@@ -29,6 +40,7 @@ import q.sdm.di.qualifier.PreferenceInfo;
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import q.sdm.utils.TimeUtils;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -118,7 +130,20 @@ public class AppModule {
         return new Retrofit.Builder()
                 .client(client)
                 .baseUrl(url)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
+                        .registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
+                            final DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault());
+
+                            @Override
+                            public Date deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+                                try {
+                                    return TimeUtils.UTCToITC(df.parse(json.getAsString()));
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                    return null;
+                                }
+                            }
+                        }).create()))
                 .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .build();
     }

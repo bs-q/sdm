@@ -31,6 +31,12 @@ public class ProductEntity  extends BaseEntity{
     @ColumnInfo(name = "price")
     public Double price;
 
+    @ColumnInfo(name = "quantity_in_stock")
+    public Integer quantityInStock;
+
+    @ColumnInfo(name = "sale")
+    public Double sale;
+
     public String getProductThumbnail(){
         return thumbnail;
     }

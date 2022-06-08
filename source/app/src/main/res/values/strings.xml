@@ -13,4 +13,6 @@
     <string name="me">Tôi</string>
     <string name="money_format" translatable="false">%1$,.0f đ</string>
     <string name="not_receive_otp">Không nhận được mã? <font fgcolor="#E92F48">Gửi lại OTP</font></string>
+    <string name="order_date_format">%1$td/%1$tm/%1$tY - %1$tR</string>
+
 </resources>

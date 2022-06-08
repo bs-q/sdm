@@ -113,6 +113,17 @@ public class AppDbService implements DbService {
         });    }
 
     @Override
+    public Observable<Boolean> deleteListProduct(List<Long> productIds) {
+        return Observable.fromCallable(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                mAppDatabase.getDbProductDao().deleteListProduct(productIds);
+                return true;
+            }
+        });
+    }
+
+    @Override
     public Observable<ProductEntity> findProductById(Long id) {
         return Observable.fromCallable(new Callable<ProductEntity>() {
             @Override
@@ -122,7 +133,13 @@ public class AppDbService implements DbService {
         });    }
 
     @Override
-    public void nukeProducts() {
-        mAppDatabase.getDbProductDao().deleteAll();
+    public Observable<Boolean> nukeProducts() {
+        return Observable.fromCallable(new Callable<Boolean>() {
+            @Override
+            public Boolean call() throws Exception {
+                mAppDatabase.getDbProductDao().deleteAll();
+                return true;
+            }
+        });
     }
 }

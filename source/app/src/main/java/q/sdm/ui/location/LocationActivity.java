@@ -95,7 +95,7 @@ public class LocationActivity extends BaseActivity<ActivityAddressesBinding,Loca
     @Override
     public void setDefaultLocation(AddressResponse addressResponse) {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
-                .setTitle("Đặt làm địa chỉ mặc định")
+                .setTitle("Đặt làm địa chỉ giao hàng")
                 .setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

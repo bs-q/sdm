@@ -48,7 +48,7 @@ public class ProductAddedEditAdapter extends RecyclerView.Adapter<ProductAddedEd
         holder.layoutEditProductAddedBinding.plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (holder.layoutEditProductAddedBinding.getProduct().getObservableAmount().get()==99){
+                if (holder.layoutEditProductAddedBinding.getProduct().getObservableAmount().get()==holder.layoutEditProductAddedBinding.getProduct().quantityInStock){
                     // do nothing
                 } else {
                     holder.layoutEditProductAddedBinding.getProduct().getObservableAmount().set(holder.layoutEditProductAddedBinding.getProduct().getObservableAmount().get()+1);

@@ -42,7 +42,7 @@
             android:id="@+id/lpi_name"
             android:layout_height="wrap_content"/>
         <TextView
-            android:text="@{@string/money_format(product.price)}"
+            android:text="@{@string/money_format(product.price*(((double)1)-(double)(product.sale/100)))}"
             android:layout_marginStart="@dimen/_18sdp"
             app:layout_constraintEnd_toStartOf="@id/lpi_delete"
             app:layout_constraintTop_toTopOf="parent"

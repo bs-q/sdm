@@ -10,6 +10,7 @@ import q.sdm.data.model.api.ResponseWrapper;
 import q.sdm.data.model.api.request.LoginRequest;
 import q.sdm.data.model.api.request.account.UpdateProfileRequest;
 import q.sdm.data.model.api.request.address.CreateAddressRequest;
+import q.sdm.data.model.api.request.order.CreateOrderRequest;
 import q.sdm.data.model.api.request.register.RegisterRequest;
 import q.sdm.data.model.api.response.BaseResponse;
 import q.sdm.data.model.api.response.DataWrapper;
@@ -18,6 +19,8 @@ import q.sdm.data.model.api.response.LoginResponse;
 import q.sdm.data.model.api.response.account.ProfileResponse;
 import q.sdm.data.model.api.response.address.AddressResponse;
 import q.sdm.data.model.api.response.category.CategoryResponse;
+import q.sdm.data.model.api.response.order.OrderHistoryDetailResponse;
+import q.sdm.data.model.api.response.order.OrderHistoryResponse;
 import q.sdm.data.model.api.response.product.ProductResponse;
 import q.sdm.data.model.api.response.province.ProvinceResponse;
 import q.sdm.data.model.api.response.register.RegisterResponse;
@@ -29,6 +32,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -62,6 +66,9 @@ public interface ApiService {
     @GET("v1/product/auto-complete")
     Observable<ResponseWrapper<DataWrapper<List<ProductResponse>>>> searchProducts(@Query("name") String query);
 
+    @GET("v1/product/auto-complete")
+    Observable<ResponseWrapper<DataWrapper<List<ProductResponse>>>> getNukeProducts();
+
     @POST("/v1/addresses/create")
     Observable<ResponseWrapper<EmptyResponse>> createAddress(@Body CreateAddressRequest request);
 
@@ -74,5 +81,14 @@ public interface ApiService {
 
     @GET("/v1/addresses/auto-complete")
     Observable<ResponseWrapper<DataWrapper<List<AddressResponse>>>> getAddresses();
+
+    @POST("/v1/orders/client-create")
+    Observable<ResponseWrapper<EmptyResponse>> createOrder(@Body CreateOrderRequest request);
+
+    @GET("/v1/orders/client-list-orders")
+    Observable<ResponseWrapper<ResponseListObj<OrderHistoryResponse>>> orderHistory(@Query("size")Integer size, @Query("page") Integer page);
+
+    @GET("/v1/orders/client-get-orders/{id}")
+    Observable<ResponseWrapper<OrderHistoryDetailResponse>> orderHistoryDetail(@Path("id") Long id);
 
 }

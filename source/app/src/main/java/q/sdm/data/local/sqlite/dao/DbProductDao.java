@@ -24,7 +24,7 @@ public interface DbProductDao {
     @Query("SELECT * FROM db_products")
     List<ProductEntity> loadAll();
 
-    @Query("SELECT * FROM db_products")
+    @Query("SELECT * FROM db_products ORDER BY id ASC")
     LiveData<List<ProductEntity>> loadAllToLiveData();
 
     @Query("SELECT * FROM db_users WHERE id=:id")
@@ -32,6 +32,9 @@ public interface DbProductDao {
 
     @Delete
     void delete(ProductEntity userEntity);
+
+    @Query("delete from db_products where id in (:productIds)")
+    void deleteListProduct(List<Long> productIds);
 
     @Query("DELETE FROM db_products")
     void deleteAll();

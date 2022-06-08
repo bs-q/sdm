@@ -287,7 +287,11 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
     private void performDataBinding() {
         viewBinding = DataBindingUtil.setContentView(this, getLayoutId());
         viewBinding.setVariable(getBindingVariable(), viewModel);
+        sneakyBinding();
         viewBinding.executePendingBindings();
+    }
+    public void sneakyBinding(){
+
     }
 
     public void showProgressbar(String msg){

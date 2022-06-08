@@ -53,7 +53,7 @@
             android:paddingVertical="@dimen/_3sdp"
             android:paddingHorizontal="@dimen/_8sdp"
             android:background="@drawable/product_added_price_background"
-            android:text="@{@string/money_format(product.price)}"
+            android:text="@{@string/money_format(product.price*(((double)1)-(double)(product.sale/100)))}"
             android:layout_marginStart="@dimen/_8sdp"
             app:layout_constraintStart_toEndOf="@id/thumbnail"
             app:layout_constraintTop_toBottomOf="@id/name"

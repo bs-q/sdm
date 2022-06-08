@@ -50,7 +50,7 @@ public class ProductAddedEditSheet extends BaseSheet<SheetEditProductAddedBindin
             @Override
             public void onChanged(List<ProductEntity> productEntities) {
                 productAddedAdapter.productEntities = productEntities;
-                double total = productEntities.stream().mapToDouble(o -> o.price*o.amount).reduce(0, Double::sum);
+                double total = productEntities.stream().mapToDouble(o -> o.price*(1-(double)(o.sale/100))*o.amount).reduce(0, Double::sum);
                 viewModel.total.set(total);
                 viewModel.amount.set(productEntities.size());
                 productAddedAdapter.notifyDataSetChanged();
@@ -92,7 +92,7 @@ public class ProductAddedEditSheet extends BaseSheet<SheetEditProductAddedBindin
 
     @Override
     public void refreshList() {
-        double total = productAddedAdapter.productEntities.stream().mapToDouble(o -> o.price*o.amount).reduce(0, Double::sum);
+        double total = productAddedAdapter.productEntities.stream().mapToDouble(o -> o.price*(1-(double)(o.sale/100))*o.amount).reduce(0, Double::sum);
         viewModel.total.set(total);
 
     }

@@ -14,15 +14,22 @@ import q.sdm.BR;
 import q.sdm.R;
 import q.sdm.data.model.api.response.account.ProfileResponse;
 import q.sdm.data.model.db.ProductEntity;
+import q.sdm.databinding.DialogOrderFailBinding;
 import q.sdm.databinding.FragmentCartBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.di.component.FragmentComponent;
 import q.sdm.ui.base.activity.BaseActivity;
+import q.sdm.ui.base.activity.BaseDbCallback;
+import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.base.fragment.BaseFragment;
 import q.sdm.ui.location.LocationActivity;
+import q.sdm.ui.main.MainActivity;
 import q.sdm.ui.main.cart.adapter.CartAdapter;
 import q.sdm.ui.main.cart.edit.CartSheet;
+import q.sdm.ui.main.cart.order.complete.OrderCompleteActivity;
+import q.sdm.ui.main.cart.order.fail.OrderFailDialog;
 import q.sdm.ui.main.cart.receiver.UpdateReceiverSheet;
+import timber.log.Timber;
 
 public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewModel> implements CartAdapter.CartAdapterCallback, View.OnClickListener {
 
@@ -64,9 +71,12 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
             @Override
             public void onChanged(List<ProductEntity> productEntities) {
                 cartAdapter.productEntities = productEntities;
-                double total = productEntities.stream().mapToDouble(o -> o.price*o.amount).reduce(0, Double::sum);
+                double total = productEntities.stream().mapToDouble(o -> o.price*((1-o.sale/100))*o.amount).reduce(0, Double::sum);
                 viewModel.total.set(total);
-                viewModel.totalAndVat.set(total);
+                viewModel.reduce.set(total*myApplication().getProfileResponse().getSaleOff()/100);
+                viewModel.sale.set(String.valueOf(myApplication().getProfileResponse().getSaleOff()));
+                viewModel.vat.set((total+viewModel.reduce.get())*0.1);
+                viewModel.totalAndVat.set(total+viewModel.vat.get());
                 cartAdapter.notifyDataSetChanged();
             }
         });
@@ -75,12 +85,27 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
         viewBinding.fcRv.setAdapter(cartAdapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viewModel.updateCart(new BaseDbCallback<Boolean>() {
+            @Override
+            public void doSuccess(Boolean response) {
+                Timber.d("Update cart");
+            }
+
+            @Override
+            public void doError(Throwable throwable) {
+
+            }
+        });
+    }
 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.fc_payment) {
             navigateToSelectPayment();
-        } else if (v.getId() == R.id.fc_checkout) {
+        } else if (v.getId() == R.id.checkout_btn) {
             checkout();
         } else if (v.getId() == viewBinding.fcChangeAddress.getId()){
             navigateToUpdateReceiver();
@@ -96,7 +121,40 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
 
     }
     private void checkout(){
+        if (viewModel.receiverAddress.get().equals("...")) {
+            viewModel.showErrorMessage("Vui lòng cập nhật địa chỉ giao hàng để tiếp tục đặt hàng");
+            return;
+        }
+        viewModel.showLoading();
+        viewModel.createOrder(new BaseRequestCallback<Boolean>() {
+            @Override
+            public void doSuccess(Boolean response) {
+                viewModel.hideLoading();
+                viewModel.nukeProduct();
+                Intent it = new Intent(CartActivity.this, OrderCompleteActivity.class);
+                startActivity(it);
+            }
 
+            @Override
+            public void doFail(String message, String code) {
+                BaseRequestCallback.super.doFail(message, code);
+                viewModel.hideLoading();
+                OrderFailDialog dialogOrderFailBinding = new OrderFailDialog(new OrderFailDialog.OrderFailDialogInterface() {
+                    @Override
+                    public void retry() {
+                        checkout();
+                    }
+
+                    @Override
+                    public void backToHome() {
+                        Intent it = new Intent(CartActivity.this, MainActivity.class);
+                        it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(it);
+                    }
+                });
+                dialogOrderFailBinding.show(getSupportFragmentManager(),"FAIL");
+            }
+        });
     }
 
     boolean lock = false;

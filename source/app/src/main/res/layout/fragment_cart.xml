@@ -97,7 +97,7 @@
             android:textColor="#7E8389"
             style="@style/sfregular"
             android:textSize="@dimen/_10ssp"
-            android:layout_marginStart="@dimen/_16sdp"
+            android:layout_marginStart="@dimen/_12sdp"
             android:text="Đơn hàng của bạn"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -125,6 +125,8 @@
         <include
             app:total="@{vm.total}"
             app:vat="@{vm.vat}"
+            app:sale="@{vm.sale}"
+            app:reduce="@{vm.reduce}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/layout_pre_calculate"
