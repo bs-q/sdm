@@ -176,6 +176,8 @@
 
 
         <include
+            android:onClick="@{(v)->a.onClick(v)}"
+            app:type="@{vm.selectedPayment}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/layout_cart_payment"

@@ -8,6 +8,9 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.paypal.checkout.PayPalCheckout;
+import com.paypal.checkout.config.CheckoutConfig;
+
 import java.util.List;
 
 import q.sdm.BR;
@@ -29,6 +32,7 @@ import q.sdm.ui.main.cart.edit.CartSheet;
 import q.sdm.ui.main.cart.order.complete.OrderCompleteActivity;
 import q.sdm.ui.main.cart.order.fail.OrderFailDialog;
 import q.sdm.ui.main.cart.receiver.UpdateReceiverSheet;
+import q.sdm.ui.payment.SelectPaymentSheet;
 import timber.log.Timber;
 
 public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewModel> implements CartAdapter.CartAdapterCallback, View.OnClickListener {
@@ -52,7 +56,62 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
         viewModel.receiverPhone.set(myApplication().getProfileResponse().getCustomerPhone());
         viewBinding.executePendingBindings();
         setupCartAdapter();
+        viewModel.message.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                if (s.equals("ss")) {
+                    handlePaypalSuccess();
+                } else if (s.equals("cc")){
+                    viewBinding.getRoot().postDelayed(()->{
+                        viewModel.hideLoading();
+                        viewModel.showErrorMessage("Bạn đã huỷ thanh toán");
+                    },300);
+
+                } else if (s.equals("er")) {
+                    viewBinding.getRoot().postDelayed(()->{
+                        viewModel.hideLoading();
+                        viewModel.showErrorMessage("Có lỗi xảy ra vui lòng thử lại");
+                    },300);
+                }
+
+            }
+        });
     }
+
+    private void handlePaypalSuccess(){
+        viewModel.createOrder(new BaseRequestCallback<Boolean>() {
+            @Override
+            public void doSuccess(Boolean response) {
+                viewModel.hideLoading();
+                viewModel.nukeProduct();
+                Intent it = new Intent(CartActivity.this, OrderCompleteActivity.class);
+                startActivity(it);
+                finish();
+            }
+
+            @Override
+            public void doFail(String message, String code) {
+                BaseRequestCallback.super.doFail(message, code);
+                viewModel.hideLoading();
+                OrderFailDialog dialogOrderFailBinding = new OrderFailDialog(new OrderFailDialog.OrderFailDialogInterface() {
+                    @Override
+                    public void retry() {
+                        checkout();
+                    }
+
+                    @Override
+                    public void backToHome() {
+                        Intent it = new Intent(CartActivity.this, MainActivity.class);
+                        it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(it);
+                    }
+                });
+                dialogOrderFailBinding.show(getSupportFragmentManager(),"FAIL");
+            }
+        });
+    }
+
+
 
     @Override
     public int getLayoutId() {
@@ -96,7 +155,7 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
 
             @Override
             public void doError(Throwable throwable) {
-
+                viewModel.hideLoading();
             }
         });
     }
@@ -118,11 +177,20 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
     }
 
     private void navigateToSelectPayment(){
-
+        SelectPaymentSheet selectPaymentSheet = new SelectPaymentSheet(viewModel.selectedPayment);
+        selectPaymentSheet.show(getSupportFragmentManager(),"PAYMENT");
+    }
+    private void doPaypalPayment(){
+        viewModel.createPaypalOrder();
     }
     private void checkout(){
         if (viewModel.receiverAddress.get().equals("...")) {
             viewModel.showErrorMessage("Vui lòng cập nhật địa chỉ giao hàng để tiếp tục đặt hàng");
+            return;
+        }
+        if (viewModel.selectedPayment.get() == 2) {
+            viewModel.showLoading();
+            doPaypalPayment();
             return;
         }
         viewModel.showLoading();
@@ -133,6 +201,7 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
                 viewModel.nukeProduct();
                 Intent it = new Intent(CartActivity.this, OrderCompleteActivity.class);
                 startActivity(it);
+                finish();
             }
 
             @Override

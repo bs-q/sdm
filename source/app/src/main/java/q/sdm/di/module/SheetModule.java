@@ -21,6 +21,7 @@ import q.sdm.ui.main.cart.added.edit.ProductAddedEditViewModel;
 import q.sdm.ui.main.cart.edit.CartSheetViewModel;
 import q.sdm.ui.main.cart.receiver.UpdateReceiverViewModel;
 import q.sdm.ui.main.home.HomeViewModel;
+import q.sdm.ui.payment.SelectPaymentViewModel;
 import q.sdm.utils.GetInfo;
 
 @Module
@@ -74,5 +75,13 @@ public class SheetModule {
         Supplier<UpdateReceiverViewModel> supplier = () -> new UpdateReceiverViewModel(repository, (MVVMApplication)application);
         ViewModelProviderFactory<UpdateReceiverViewModel> factory = new ViewModelProviderFactory<>(UpdateReceiverViewModel.class, supplier);
         return new ViewModelProvider(fragment, factory).get(UpdateReceiverViewModel.class);
+    }
+
+    @Provides
+    @SheetScope
+    SelectPaymentViewModel provideSelectPaymentViewModel(Repository repository, Context application) {
+        Supplier<SelectPaymentViewModel> supplier = () -> new SelectPaymentViewModel(repository, (MVVMApplication)application);
+        ViewModelProviderFactory<SelectPaymentViewModel> factory = new ViewModelProviderFactory<>(SelectPaymentViewModel.class, supplier);
+        return new ViewModelProvider(fragment, factory).get(SelectPaymentViewModel.class);
     }
 }

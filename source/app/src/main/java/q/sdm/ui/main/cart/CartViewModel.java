@@ -1,9 +1,28 @@
 package q.sdm.ui.main.cart;
 
+import androidx.annotation.NonNull;
 import androidx.databinding.ObservableDouble;
 import androidx.databinding.ObservableField;
+import androidx.databinding.ObservableInt;
 import androidx.databinding.ObservableLong;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
+import com.paypal.checkout.PayPalCheckout;
+import com.paypal.checkout.config.CheckoutConfig;
+import com.paypal.checkout.config.Environment;
+import com.paypal.checkout.config.SettingsConfig;
+import com.paypal.checkout.createorder.CreateOrder;
+import com.paypal.checkout.createorder.CreateOrderActions;
+import com.paypal.checkout.createorder.CurrencyCode;
+import com.paypal.checkout.createorder.OrderIntent;
+import com.paypal.checkout.createorder.ShippingPreference;
+import com.paypal.checkout.createorder.UserAction;
+import com.paypal.checkout.order.Amount;
+import com.paypal.checkout.order.AppContext;
+import com.paypal.checkout.order.Order;
+import com.paypal.checkout.order.PurchaseUnit;
+import com.paypal.checkout.order.Shipping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +30,7 @@ import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import q.sdm.BuildConfig;
 import q.sdm.MVVMApplication;
 import q.sdm.data.Repository;
 import q.sdm.data.model.api.request.order.CreateOrderRequest;
@@ -27,15 +47,62 @@ public class CartViewModel extends BaseViewModel {
     public ObservableDouble vat = new ObservableDouble(0);
     public ObservableDouble reduce = new ObservableDouble(0);
     public ObservableField<String> sale = new ObservableField<>("0");
+    public ObservableInt selectedPayment = new ObservableInt(1);
 
     public ObservableDouble totalAndVat = new ObservableDouble(0);
     public ObservableField<String> receiverName = new ObservableField<>("");
     public ObservableField<String> receiverPhone = new ObservableField<>("");
     public ObservableField<String> receiverAddress = new ObservableField<>("");
     LiveData<List<ProductEntity>> productEntityLiveData;
+    public MutableLiveData<String> message = new MutableLiveData<String>();
 
     public CartViewModel(Repository repository, MVVMApplication application) {
         super(repository, application);
+        setupPaypal();
+    }
+
+    private void setupPaypal(){
+        PayPalCheckout.setConfig(new CheckoutConfig(application
+                ,"AWzq9Wc1ueNGbydGK3PXkXYqaWiN_qHLxT6P7yJqQ79FGSc9jfjF0z3uiRvk60k_lg73ZRY0rWELlcq0"
+                , Environment.SANDBOX
+                ,"q.sdm://paypalpay"
+                ,CurrencyCode.USD
+                ,UserAction.PAY_NOW));
+        PayPalCheckout.registerCallbacks(approval -> {
+            message.postValue("ss");
+        },()->{
+            message.postValue("cc");
+        },errorInfo -> {
+            message.postValue("er");
+
+        });
+    }
+    public void createPaypalOrder(){
+        PayPalCheckout.startCheckout(new CreateOrder() {
+            @Override
+            public void create(@NonNull CreateOrderActions createOrderActions) {
+                ArrayList<PurchaseUnit> purchaseUnits = new ArrayList<>();
+                purchaseUnits.add(
+                        new PurchaseUnit.Builder()
+                                .amount(
+                                        new Amount.Builder()
+                                                .currencyCode(CurrencyCode.USD)
+                                                .value("22")
+                                                .build()
+                                )
+                                .build()
+                );
+
+                Order order = new Order.Builder().intent(OrderIntent.CAPTURE)
+                        .appContext(
+                        new AppContext.Builder().userAction(UserAction.PAY_NOW).shippingPreference(ShippingPreference.NO_SHIPPING).build())
+                        .purchaseUnitList(purchaseUnits).build();
+                createOrderActions.create(order,orderId ->{
+
+                });
+            }
+        });
+
     }
 
     public void observeProductsInCart() {
@@ -55,6 +122,7 @@ public class CartViewModel extends BaseViewModel {
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(
                         response -> {
                             syncProduct(response.getData().getData(),callback);
+                            hideLoading();
                         }, throwable -> {
                             Timber.d(throwable);
                         }
@@ -115,6 +183,7 @@ public class CartViewModel extends BaseViewModel {
         request.setReceiverPhone(receiverPhone.get());
         request.setOrdersAddress(receiverAddress.get());
         request.createOrderDetail(productEntityLiveData.getValue());
+        request.setPaymentMethod(selectedPayment.get());
         compositeDisposable.add(repository.getApiService().createOrder(request).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).subscribe(
                         response -> {

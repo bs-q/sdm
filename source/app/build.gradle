@@ -24,7 +24,6 @@ android {
             buildConfigField "String", "BASE_URL", "\"http://156.67.219.34:3000/\""
             buildConfigField "String", "WS_URL", "\"wss://remview-socket.developteam.net/ws\""
             buildConfigField "String", "WEB_URL", "\"https://remview-admin.developteam.net/\""
-
 //            buildConfigField "String", "BASE_URL", "\"https://mobile.remview.de\""
 //            buildConfigField "String", "WS_URL", "\"wss://remview.de/websocket\""
 
@@ -171,5 +170,7 @@ dependencies {
 
     // image capture
     implementation 'com.github.dhaval2404:imagepicker:2.1'
+
+    implementation 'com.paypal.checkout:android-sdk:0.6.2'
 
 }

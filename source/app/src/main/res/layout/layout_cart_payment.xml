@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="type"
+            type="androidx.databinding.ObservableInt" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,7 +21,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_width="@dimen/_30sdp"
             android:layout_height="@dimen/_30sdp"
-            android:src="@drawable/cash"/>
+            android:src="@{type == 1 ? @drawable/cash : @drawable/paypal}"/>
 
         <TextView
             app:layout_constraintStart_toEndOf="@id/lcp_type"
@@ -30,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="#3C4858"
-            android:text="Tiền mặt"
+            android:text="@{type == 1 ? `Tiền mặt` : `Paypal`}"
             android:textSize="@dimen/_12ssp"
             style="@style/sfmedium"/>
         <ImageView

@@ -6,6 +6,7 @@ import q.sdm.databinding.ActivityOrderCompleteBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.main.MainActivity;
+import q.sdm.ui.main.cart.order.history.OrderHistoryActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,7 +44,11 @@ implements View.OnClickListener {
         startActivity(it);
     }
 
-    private void navigateToOrder(){}
+    private void navigateToOrder(){
+        Intent it = new Intent(this, OrderHistoryActivity.class);
+        startActivity(it);
+        finish();
+    }
 
 
     @Override
