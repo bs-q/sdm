@@ -8,6 +8,8 @@ import okhttp3.RequestBody;
 import q.sdm.data.model.api.ResponseListObj;
 import q.sdm.data.model.api.ResponseWrapper;
 import q.sdm.data.model.api.request.LoginRequest;
+import q.sdm.data.model.api.request.account.ResetPasswordRequest;
+import q.sdm.data.model.api.request.account.UpdatePasswordRequest;
 import q.sdm.data.model.api.request.account.UpdateProfileRequest;
 import q.sdm.data.model.api.request.address.CreateAddressRequest;
 import q.sdm.data.model.api.request.order.CreateOrderRequest;
@@ -17,6 +19,8 @@ import q.sdm.data.model.api.response.DataWrapper;
 import q.sdm.data.model.api.response.EmptyResponse;
 import q.sdm.data.model.api.response.LoginResponse;
 import q.sdm.data.model.api.response.account.ProfileResponse;
+import q.sdm.data.model.api.response.account.ResetPasswordResponse;
+import q.sdm.data.model.api.response.account.UpdatePasswordResponse;
 import q.sdm.data.model.api.response.address.AddressResponse;
 import q.sdm.data.model.api.response.category.CategoryResponse;
 import q.sdm.data.model.api.response.order.OrderHistoryDetailResponse;
@@ -91,4 +95,9 @@ public interface ApiService {
     @GET("/v1/orders/client-get-orders/{id}")
     Observable<ResponseWrapper<OrderHistoryDetailResponse>> orderHistoryDetail(@Path("id") Long id);
 
+    @POST("/v1/account/request_forget_password")
+    Observable<ResponseWrapper<ResetPasswordResponse>> resetPassword(@Body ResetPasswordRequest request);
+
+    @POST("/v1/account/forget_password")
+    Observable<ResponseWrapper<UpdatePasswordResponse>> updatePassword(@Body UpdatePasswordRequest request);
 }

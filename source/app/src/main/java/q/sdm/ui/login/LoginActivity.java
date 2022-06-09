@@ -4,11 +4,14 @@ import static q.sdm.constant.Constants.VALID_EMAIL_ADDRESS_REGEX;
 
 import q.sdm.R;
 import q.sdm.BR;
+import q.sdm.data.model.api.response.account.ProfileResponse;
 import q.sdm.databinding.ActivityLoginBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.activity.BaseCallback;
+import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.base.activity.BaseViewModel;
+import q.sdm.ui.base.activity.MessageWrapper;
 import q.sdm.ui.main.MainActivity;
 import q.sdm.ui.recovery.RecoveryActivity;
 import q.sdm.ui.register.RegisterActivity;
@@ -58,15 +61,15 @@ implements View.OnClickListener {
         profile();
     }
     private void profile(){
-        viewModel.profile(new BaseCallback() {
+        viewModel.profile(new BaseRequestCallback<ProfileResponse>() {
             @Override
-            public void doSuccess() {
+            public void doSuccess(ProfileResponse profileResponse) {
                 navigateToMainScreen();
             }
 
             @Override
             public void doError(Throwable throwable, BaseViewModel viewModel) {
-                BaseCallback.super.doError(throwable, viewModel);
+                BaseRequestCallback.super.doError(throwable,viewModel);
                 setupForm();
             }
         });
@@ -87,7 +90,7 @@ implements View.OnClickListener {
         viewModel.email.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-                viewModel.valid.set(viewModel.email.get().length() == 11);
+                viewModel.valid.set(viewModel.email.get().trim().length() == 10);
             }
         });
         viewBinding.password.input.setOnFocusChangeListener((v, hasFocus) -> {
@@ -120,18 +123,17 @@ implements View.OnClickListener {
         }
     }
     private void doLogin(){
-        viewModel.login(new BaseCallback() {
+        viewModel.login(new BaseRequestCallback<ProfileResponse>() {
             @Override
-            public void doSuccess() {
+            public void doSuccess(ProfileResponse profileResponse) {
                 viewModel.hideLoading();
                 navigateToMainScreen();
             }
 
             @Override
-            public void doFail() {
-                BaseCallback.super.doFail();
+            public void doFail(String message, String code) {
                 viewModel.hideLoading();
-                viewModel.showErrorMessage("Sai số điện thoại hoặc mật khẩu");
+                viewModel.showErrorMessage(message);
             }
         });
     }

@@ -76,9 +76,9 @@ public class UpdateReceiverSheet extends BaseSheet<SheetUpdateReceiverBinding,Up
             viewModel.showErrorMessage("Vui lòng nhập số điện thoại người nhận");
             return false;
         }
-        Regex regex = new  Regex("^[0-9]{11}$");
+        Regex regex = new  Regex("^[0-9]{10}$");
         if ( !regex.matches(viewModel.receiverPhone.get())) {
-            viewModel.showErrorMessage("Số điện thoại không hợp lệ. Số điện thoại phải bao gồm 11 chữ số");
+            viewModel.showErrorMessage("Số điện thoại không hợp lệ. Số điện thoại phải bao gồm 10 chữ số");
             return false;
         }
         return true;

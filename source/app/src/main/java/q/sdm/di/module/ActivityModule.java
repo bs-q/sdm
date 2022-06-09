@@ -32,6 +32,7 @@ import q.sdm.ui.main.cart.order.history.OrderHistoryViewModel;
 import q.sdm.ui.product.ProductDetailViewModel;
 import q.sdm.ui.recovery.RecoveryViewModel;
 import q.sdm.ui.recovery.complete.RecoveryCompleteViewModel;
+import q.sdm.ui.recovery.input.InputPasswordViewModel;
 import q.sdm.ui.register.RegisterViewModel;
 import q.sdm.ui.register.complete.RegisterCompleteViewModel;
 import q.sdm.ui.register.verify.VerifyViewModel;
@@ -245,5 +246,13 @@ public class ActivityModule {
         Supplier<OrderDetailViewModel> supplier = () -> new OrderDetailViewModel(repository, (MVVMApplication) application);
         ViewModelProviderFactory<OrderDetailViewModel> factory = new ViewModelProviderFactory<>(OrderDetailViewModel.class, supplier);
         return new ViewModelProvider(activity, factory).get(OrderDetailViewModel.class);
+    }
+
+    @Provides
+    @ActivityScope
+    InputPasswordViewModel provideInputPasswordViewModel(Repository repository, Context application) {
+        Supplier<InputPasswordViewModel> supplier = () -> new InputPasswordViewModel(repository, (MVVMApplication) application);
+        ViewModelProviderFactory<InputPasswordViewModel> factory = new ViewModelProviderFactory<>(InputPasswordViewModel.class, supplier);
+        return new ViewModelProvider(activity, factory).get(InputPasswordViewModel.class);
     }
 }

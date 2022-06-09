@@ -11,11 +11,13 @@ import androidx.databinding.Observable;
 
 import q.sdm.BR;
 import q.sdm.R;
+import q.sdm.data.model.api.response.account.ResetPasswordResponse;
 import q.sdm.databinding.ActivityRecoveryPasswordBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
-import q.sdm.ui.login.LoginActivity;
-import q.sdm.ui.main.MainActivity;
+import q.sdm.ui.base.activity.BaseRequestCallback;
+import q.sdm.ui.base.activity.MessageWrapper;
+import q.sdm.ui.register.verify.VerifyActivity;
 
 public class RecoveryActivity extends BaseActivity<ActivityRecoveryPasswordBinding,RecoveryViewModel>
 implements View.OnClickListener {
@@ -59,8 +61,21 @@ implements View.OnClickListener {
     }
 
     private void recoveryPassword(){
-        Intent it = new Intent(this, LoginActivity.class);
-        it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        startActivity(it);
+        viewModel.requestRecovery(new BaseRequestCallback<ResetPasswordResponse>() {
+            @Override
+            public void doSuccess(ResetPasswordResponse response) {
+                Intent it = new Intent(RecoveryActivity.this, VerifyActivity.class);
+                myApplication().setIdHash(response.getIdHash());
+                myApplication().setEmail(viewModel.email.get());
+                startActivity(it);
+                finish();
+            }
+
+            @Override
+            public void doFail(String message, String code) {
+                BaseRequestCallback.super.doFail(message, code);
+                viewModel.showErrorMessage(message);
+            }
+        });
     }
 }

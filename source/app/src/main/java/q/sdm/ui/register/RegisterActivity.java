@@ -65,7 +65,7 @@ implements View.OnClickListener {
         viewModel.email.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-                viewModel.valid.set(viewModel.email.get().length() == 11);
+                viewModel.valid.set(viewModel.email.get().trim().length() == 10);
             }
         });
         viewBinding.password.input.setOnFocusChangeListener((v, hasFocus) -> {
@@ -97,6 +97,10 @@ implements View.OnClickListener {
         if (v.getId() == R.id.toggle){
             viewModel.toggle.set(!viewModel.toggle.get());
         } else if (v.getId() == R.id.register_btn){
+            if (viewModel.password.get().trim().length()<8){
+                viewModel.showErrorMessage("Mật khẩu phải có ít nhất 8 kí tự");
+                return;
+            }
             viewModel.register(new BaseCallback() {
                 @Override
                 public void doSuccess() {

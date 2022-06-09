@@ -1,5 +1,6 @@
 package q.sdm.ui.register.verify;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.KeyEvent;
@@ -11,9 +12,12 @@ import androidx.databinding.Observable;
 
 import eu.davidea.flexibleadapter.databinding.BR;
 import q.sdm.R;
+import q.sdm.data.model.api.response.account.ResetPasswordResponse;
 import q.sdm.databinding.ActivityVerifyBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
+import q.sdm.ui.base.activity.BaseRequestCallback;
+import q.sdm.ui.recovery.input.InputPasswordActivity;
 import q.sdm.utils.DeviceUtils;
 
 public class VerifyActivity extends BaseActivity<ActivityVerifyBinding,VerifyViewModel> implements View.OnClickListener {
@@ -147,6 +151,21 @@ public class VerifyActivity extends BaseActivity<ActivityVerifyBinding,VerifyVie
     }
     @Override
     public void onClick(View v) {
+        if (v.getId() == viewBinding.verifySendMessage.getId()){
+            sendOtp();
+        } else if(v.getId() == viewBinding.verifyBtn.getId()){
+            Intent it = new Intent(this, InputPasswordActivity.class);
+            myApplication().setOtp(viewModel.getOtp());
+            startActivity(it);
+        }
+    }
+    private void sendOtp(){
+        viewModel.resendReset(new BaseRequestCallback<ResetPasswordResponse>() {
+            @Override
+            public void doSuccess(ResetPasswordResponse response) {
+                viewModel.showSuccessMessage("Đã gửi lại otp");
 
+            }
+        });
     }
 }

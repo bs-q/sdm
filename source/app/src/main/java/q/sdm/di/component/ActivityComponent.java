@@ -21,6 +21,7 @@ import q.sdm.ui.main.cart.order.history.OrderHistoryActivity;
 import q.sdm.ui.product.ProductDetailActivity;
 import q.sdm.ui.recovery.RecoveryActivity;
 import q.sdm.ui.recovery.complete.RecoveryCompleteActivity;
+import q.sdm.ui.recovery.input.InputPasswordActivity;
 import q.sdm.ui.register.RegisterActivity;
 import q.sdm.ui.register.complete.RegisterCompleteActivity;
 import q.sdm.ui.register.verify.VerifyActivity;
@@ -75,5 +76,7 @@ public interface ActivityComponent {
     void inject(OrderHistoryActivity activity);
 
     void inject(OrderDetailActivity activity);
+
+    void inject(InputPasswordActivity activity);
 }
 

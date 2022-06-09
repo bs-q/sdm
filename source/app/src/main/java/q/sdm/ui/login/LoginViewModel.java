@@ -8,7 +8,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import q.sdm.MVVMApplication;
 import q.sdm.data.Repository;
 import q.sdm.data.model.api.request.LoginRequest;
+import q.sdm.data.model.api.response.account.ProfileResponse;
 import q.sdm.ui.base.activity.BaseCallback;
+import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.base.activity.BaseViewModel;
 
 public class LoginViewModel extends BaseViewModel {
@@ -30,7 +32,7 @@ public class LoginViewModel extends BaseViewModel {
     public LoginViewModel(Repository repository, MVVMApplication application) {
         super(repository, application);
     }
-    public void login(BaseCallback callback){
+    public void login(BaseRequestCallback<ProfileResponse> callback){
         showLoading();
         LoginRequest request = new LoginRequest();
         request.setPhoneOrEmail(email.get());
@@ -42,11 +44,11 @@ public class LoginViewModel extends BaseViewModel {
                         repository.setToken(response.getData().getToken());
                         profile(callback);
                     } else {
-                        callback.doFail();
+                        callback.doFail(response.getMessage(), response.getCode());
                     }
                 },throwable -> callback.doError(throwable,this));
     }
-    public void profile(BaseCallback callback){
+    public void profile(BaseRequestCallback<ProfileResponse> callback){
         compositeDisposable.add(repository.getApiService().profile()
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
@@ -54,7 +56,9 @@ public class LoginViewModel extends BaseViewModel {
                 response -> {
                     if (response.isResult()){
                         application.setProfileResponse(response.getData());
-                        callback.doSuccess();
+                        callback.doSuccess(response.getData());
+                    } else {
+                        callback.doFail(response.getMessage(), response.getCode());
                     }
                 },throwable -> {
                     showSplashScreen.set(false);

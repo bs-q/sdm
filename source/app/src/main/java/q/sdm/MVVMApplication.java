@@ -65,6 +65,19 @@ public class MVVMApplication extends Application{
     @Getter
     @Setter
     private CategoryResponse selectedCategory;
+
+
+    // recovery flow
+    @Getter
+    @Setter
+    private String idHash;
+    @Getter
+    @Setter
+    private String otp;
+
+    @Getter
+    @Setter
+    private String email;
     @Override
     public void onCreate() {
         super.onCreate();

@@ -11,13 +11,14 @@ import q.sdm.data.model.api.ApiModelUtils;
 import q.sdm.data.model.api.ResponseWrapper;
 import q.sdm.ui.base.fragment.BaseFragmentViewModel;
 import q.sdm.ui.base.fragment.BaseSheetViewModel;
+import q.sdm.utils.ErrorUtils;
 import retrofit2.HttpException;
 import timber.log.Timber;
 
 public interface BaseRequestCallback <T>{
+
     void doSuccess(T response);
     default void doFail(String message,String code) {
-
     }
     default void doError(Throwable throwable,BaseViewModel viewModel){
         String message = null;
