@@ -53,7 +53,7 @@
                 android:textColor="@{ContextCompat.getColor(context,order.getColor)}"
                 style="@style/sfregular"
                 android:textSize="@dimen/_11ssp"
-                android:text="@{order.ordersAddress}"/>
+                android:text="@{order.ordersAddress ?? `Mua tại cửa hàng`}"/>
             <TextView
                 android:layout_marginTop="@dimen/_3sdp"
                 android:layout_marginEnd="@dimen/_4sdp"

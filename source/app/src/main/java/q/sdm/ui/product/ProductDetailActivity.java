@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.TextView;
 
@@ -116,7 +117,12 @@ implements View.OnClickListener {
     @BindingAdapter("html_text")
     public static void setHtmlText(WebView view, String source) {
         if (source == null) return;;
-        view.loadDataWithBaseURL(null,source, "text/html; charset=utf-8", "UTF-8", null);
+
+        view.loadDataWithBaseURL(null,getHtmlData(source), "text/html; charset=utf-8", "UTF-8", null);
+    }
+    private static String getHtmlData(String bodyHTML) {
+        String head = "<head><style>img{max-width: 100%; width:auto; height: auto;}</style></head>";
+        return "<html>" + head + "<body>" + bodyHTML + "</body></html>";
     }
     @BindingAdapter("strike")
     public static void bindStrikeText(TextView view, boolean strike) {

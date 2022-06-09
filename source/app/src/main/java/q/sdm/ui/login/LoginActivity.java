@@ -15,6 +15,7 @@ import q.sdm.ui.base.activity.MessageWrapper;
 import q.sdm.ui.main.MainActivity;
 import q.sdm.ui.recovery.RecoveryActivity;
 import q.sdm.ui.register.RegisterActivity;
+import q.sdm.utils.ErrorUtils;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -133,7 +134,7 @@ implements View.OnClickListener {
             @Override
             public void doFail(String message, String code) {
                 viewModel.hideLoading();
-                viewModel.showErrorMessage(message);
+                viewModel.showErrorMessage(ErrorUtils.getMessageFromError(code));
             }
         });
     }

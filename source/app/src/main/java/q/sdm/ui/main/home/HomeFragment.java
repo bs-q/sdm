@@ -70,18 +70,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (!recyclerView.canScrollVertically(1)&& viewModel.productList!=null && viewModel.productList.hasNext()) { //1 for down
-                   if (!stopFetch){
+                if (!recyclerView.canScrollVertically(1) && !stopFetch && viewModel.productList!=null && viewModel.productList.hasNext()) { //1 for down
                        viewModel.getProducts(10, viewModel.productList.getNext(), new BaseRequestCallback<List<ProductResponse>>() {
                            @Override
                            public void doSuccess(List<ProductResponse> response) {
-                               stopFetch = true;
                                int positionStart = homeAdapter.productResponseList.size()+1;
                                homeAdapter.notifyItemRangeInserted(positionStart,response.size());
                                binding.rv.smoothScrollBy(0,300, new AccelerateDecelerateInterpolator());
+                               stopFetch = true;
                            }
                        });
-                   }
 
                 }
             }
@@ -89,7 +87,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         observeCart();
         getCategory();
         getProductsFirstTime();
-        setScrollableLocation();
+//        setScrollableLocation();
     }
     private void setScrollableLocation(){
         binding.locationCart.location.setMovementMethod(new ScrollingMovementMethod());

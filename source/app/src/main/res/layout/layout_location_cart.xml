@@ -27,17 +27,23 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:textSize="@dimen/_15ssp"
+            android:textSize="@dimen/_13ssp"
             app:layout_constraintEnd_toStartOf="@id/cart"
             android:drawablePadding="@dimen/_3sdp"
+            android:ellipsize="marquee"
+            android:scrollHorizontally="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:marqueeRepeatLimit="marquee_forever"
             android:drawableStart="@drawable/location"
             android:layout_marginEnd="@dimen/_10sdp"
             android:textColor="@color/black"
             android:text="@{location}"
-            android:maxLines="1"
-            android:scrollHorizontally="true"
+            android:singleLine="true"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content">
+            <requestFocus/>
+        </TextView>
 
         <ImageView
             android:layout_marginVertical="@dimen/_6sdp"

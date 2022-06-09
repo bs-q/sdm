@@ -35,7 +35,7 @@
             android:id="@+id/fc_customer_address"
             android:textColor="#7E8389"
             style="@style/sfregular"
-            android:text="@{order.ordersAddress}"
+            android:text="@{order.ordersAddress ?? `Mua tại cửa hàng`}"
             android:textSize="@dimen/_10ssp"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="@dimen/_6sdp"

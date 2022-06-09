@@ -4,12 +4,15 @@ import static q.sdm.constant.Constants.VALID_EMAIL_ADDRESS_REGEX;
 
 import q.sdm.R;
 import q.sdm.BR;
+import q.sdm.data.model.api.response.register.RegisterResponse;
 import q.sdm.databinding.ActivityRegisterBinding;
 import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.activity.BaseCallback;
+import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.login.LoginActivity;
 import q.sdm.ui.register.verify.VerifyActivity;
+import q.sdm.utils.ErrorUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -101,11 +104,16 @@ implements View.OnClickListener {
                 viewModel.showErrorMessage("Mật khẩu phải có ít nhất 8 kí tự");
                 return;
             }
-            viewModel.register(new BaseCallback() {
+            viewModel.register(new BaseRequestCallback<RegisterResponse>() {
                 @Override
-                public void doSuccess() {
+                public void doSuccess(RegisterResponse response) {
                     navigateToLogin();
 //                    navigateToVerify();
+                }
+
+                @Override
+                public void doFail(String message,String code) {
+                    viewModel.showErrorMessage(ErrorUtils.getMessageFromError(code));
                 }
             });
         } else if (v.getId() == R.id.login_btn){
@@ -122,12 +130,5 @@ implements View.OnClickListener {
         startActivity(it);
         finish();
     }
-    private void register(){
-        viewModel.register(new BaseCallback() {
-            @Override
-            public void doSuccess() {
 
-            }
-        });
-    }
 }

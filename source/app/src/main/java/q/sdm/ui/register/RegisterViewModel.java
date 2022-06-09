@@ -8,7 +8,9 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import q.sdm.MVVMApplication;
 import q.sdm.data.Repository;
 import q.sdm.data.model.api.request.register.RegisterRequest;
+import q.sdm.data.model.api.response.register.RegisterResponse;
 import q.sdm.ui.base.activity.BaseCallback;
+import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.base.activity.BaseViewModel;
 
 public class RegisterViewModel extends BaseViewModel {
@@ -34,7 +36,7 @@ public class RegisterViewModel extends BaseViewModel {
     public RegisterViewModel(Repository repository, MVVMApplication application) {
         super(repository, application);
     }
-    public void register(BaseCallback callback){
+    public void register(BaseRequestCallback<RegisterResponse> callback){
         showLoading();
         RegisterRequest request = new RegisterRequest();
         request.setCustomerFullName(name.get());
@@ -46,9 +48,10 @@ public class RegisterViewModel extends BaseViewModel {
                 .subscribe(response->{
                     if (response.isResult()){
                         hideLoading();
-                        callback.doSuccess();
+                        callback.doSuccess(response.getData());
                     } else {
-                        callback.doFail();
+                        hideLoading();
+                        callback.doFail(response.getMessage(), response.getMessage());
                     }
 
                 },throwable -> {
