@@ -65,12 +65,14 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
                     viewBinding.getRoot().postDelayed(()->{
                         viewModel.hideLoading();
                         viewModel.showErrorMessage("Bạn đã huỷ thanh toán");
+                        inPaypal = false;
                     },300);
 
                 } else if (s.equals("er")) {
                     viewBinding.getRoot().postDelayed(()->{
                         viewModel.hideLoading();
                         viewModel.showErrorMessage("Có lỗi xảy ra vui lòng thử lại");
+                        inPaypal = false;
                     },300);
                 }
 
@@ -79,6 +81,7 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
     }
 
     private void handlePaypalSuccess(){
+        inPaypal = false;
         viewModel.createOrder(new BaseRequestCallback<Boolean>() {
             @Override
             public void doSuccess(Boolean response) {
@@ -147,6 +150,7 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
     @Override
     protected void onResume() {
         super.onResume();
+        if (inPaypal) return;
         viewModel.updateCart(new BaseDbCallback<Boolean>() {
             @Override
             public void doSuccess(Boolean response) {
@@ -183,6 +187,7 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
     private void doPaypalPayment(){
         viewModel.createPaypalOrder();
     }
+    private boolean inPaypal = false;
     private void checkout(){
         if (viewModel.receiverAddress.get().equals("...")) {
             viewModel.showErrorMessage("Vui lòng cập nhật địa chỉ giao hàng để tiếp tục đặt hàng");
@@ -190,6 +195,7 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
         }
         if (viewModel.selectedPayment.get() == 2) {
             viewModel.showLoading();
+            inPaypal = true;
             doPaypalPayment();
             return;
         }

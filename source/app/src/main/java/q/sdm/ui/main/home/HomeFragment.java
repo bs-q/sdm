@@ -66,18 +66,23 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
         binding.rv.setLayoutManager(staggeredGridLayoutManager);
         binding.rv.setAdapter(homeAdapter);
         binding.rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            boolean stopFetch = false;
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (!recyclerView.canScrollVertically(1)&& viewModel.productList!=null && viewModel.productList.hasNext()) { //1 for down
-                    viewModel.getProducts(10, viewModel.productList.getNext(), new BaseRequestCallback<List<ProductResponse>>() {
-                        @Override
-                        public void doSuccess(List<ProductResponse> response) {
-                            int positionStart = homeAdapter.productResponseList.size()+1;
-                            homeAdapter.notifyItemRangeInserted(positionStart,response.size());
-                            binding.rv.smoothScrollBy(0,300, new AccelerateDecelerateInterpolator());
-                        }
-                    });
+                   if (!stopFetch){
+                       viewModel.getProducts(10, viewModel.productList.getNext(), new BaseRequestCallback<List<ProductResponse>>() {
+                           @Override
+                           public void doSuccess(List<ProductResponse> response) {
+                               stopFetch = true;
+                               int positionStart = homeAdapter.productResponseList.size()+1;
+                               homeAdapter.notifyItemRangeInserted(positionStart,response.size());
+                               binding.rv.smoothScrollBy(0,300, new AccelerateDecelerateInterpolator());
+                           }
+                       });
+                   }
+
                 }
             }
         });

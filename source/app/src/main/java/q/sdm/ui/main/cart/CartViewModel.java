@@ -20,15 +20,20 @@ import com.paypal.checkout.createorder.ShippingPreference;
 import com.paypal.checkout.createorder.UserAction;
 import com.paypal.checkout.order.Amount;
 import com.paypal.checkout.order.AppContext;
+import com.paypal.checkout.order.BreakDown;
 import com.paypal.checkout.order.Capture;
 import com.paypal.checkout.order.CaptureOrderResult;
+import com.paypal.checkout.order.Items;
 import com.paypal.checkout.order.OnCaptureComplete;
 import com.paypal.checkout.order.Order;
 import com.paypal.checkout.order.PurchaseUnit;
 import com.paypal.checkout.order.Shipping;
+import com.paypal.checkout.order.UnitAmount;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.function.ToDoubleFunction;
 import java.util.stream.Collectors;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -57,7 +62,7 @@ public class CartViewModel extends BaseViewModel {
     public ObservableField<String> receiverPhone = new ObservableField<>("");
     public ObservableField<String> receiverAddress = new ObservableField<>("");
     LiveData<List<ProductEntity>> productEntityLiveData;
-    public MutableLiveData<String> message = new MutableLiveData<String>();
+    public MutableLiveData<String> message = new MutableLiveData<>();
 
     public CartViewModel(Repository repository, MVVMApplication application) {
         super(repository, application);
@@ -93,21 +98,55 @@ public class CartViewModel extends BaseViewModel {
             @Override
             public void create(@NonNull CreateOrderActions createOrderActions) {
                 ArrayList<PurchaseUnit> purchaseUnits = new ArrayList<>();
+                List<Items> items = new ArrayList<>();
+                for (ProductEntity i :
+                        productEntityLiveData.getValue()) {
+                    items.add(new Items.Builder()
+                            .name(i.name)
+                            .quantity(String.valueOf(i.amount))
+                            .unitAmount(new UnitAmount.Builder()
+                                    .currencyCode(CurrencyCode.USD)
+                                    .value(String.format(Locale.US,"%.2f",(i.price-i.price*i.sale/100)/23000))
+                                    .build())
+                            .build());
+                }
+
+                double sumBeforeTax = items.stream().mapToDouble(new ToDoubleFunction<Items>() {
+                    @Override
+                    public double applyAsDouble(Items value) {
+                        return Double.parseDouble(value.getUnitAmount().getValue());
+                    }
+                }).sum();
+                double tax = sumBeforeTax * 0.1;
+                items.add(new Items.Builder()
+                        .name("VAT")
+                        .quantity(String.valueOf(1))
+                        .unitAmount(new UnitAmount.Builder()
+                                .currencyCode(CurrencyCode.USD)
+                                .value(String.format(Locale.US,"%.2f",tax))
+                                .build())
+                        .build());
+                Double sumAfterTax = sumBeforeTax + tax;
                 purchaseUnits.add(
                         new PurchaseUnit.Builder()
-                                .amount(
-                                        new Amount.Builder()
-                                                .currencyCode(CurrencyCode.USD)
-                                                .value("22")
-                                                .build()
-                                )
+                                .items(items)
+                                .amount(new Amount.Builder()
+                                        .currencyCode(CurrencyCode.USD)
+                                        .breakdown(new BreakDown.Builder().itemTotal(
+                                                new UnitAmount.Builder()
+                                                        .value(String.format(Locale.US,"%.2f",sumAfterTax))
+                                                        .currencyCode(CurrencyCode.USD).build()
+                                        ).build())
+                                        .value(String.format(Locale.US,"%.2f",sumAfterTax))
+                                        .build())
                                 .build()
                 );
 
                 Order order = new Order.Builder().intent(OrderIntent.CAPTURE)
                         .appContext(
                         new AppContext.Builder().userAction(UserAction.PAY_NOW).shippingPreference(ShippingPreference.NO_SHIPPING).build())
-                        .purchaseUnitList(purchaseUnits).build();
+                        .purchaseUnitList(purchaseUnits)
+                        .build();
                 createOrderActions.create(order,orderId ->{
 
                 });
