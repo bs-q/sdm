@@ -3,8 +3,11 @@ package q.sdm.ui.main.home;
 import android.content.Intent;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.List;
@@ -12,6 +15,7 @@ import java.util.List;
 import q.sdm.BR;
 import q.sdm.R;
 import q.sdm.data.model.api.response.category.CategoryResponse;
+import q.sdm.data.model.api.response.order.OrderHistoryResponse;
 import q.sdm.data.model.api.response.product.ProductResponse;
 import q.sdm.data.model.db.ProductEntity;
 import q.sdm.databinding.FragmentHomeBinding;
@@ -61,7 +65,22 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
 
         binding.rv.setLayoutManager(staggeredGridLayoutManager);
         binding.rv.setAdapter(homeAdapter);
-
+        binding.rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (!recyclerView.canScrollVertically(1)&& viewModel.productList!=null && viewModel.productList.hasNext()) { //1 for down
+                    viewModel.getProducts(10, viewModel.productList.getNext(), new BaseRequestCallback<List<ProductResponse>>() {
+                        @Override
+                        public void doSuccess(List<ProductResponse> response) {
+                            int positionStart = homeAdapter.productResponseList.size()+1;
+                            homeAdapter.notifyItemRangeInserted(positionStart,response.size());
+                            binding.rv.smoothScrollBy(0,300, new AccelerateDecelerateInterpolator());
+                        }
+                    });
+                }
+            }
+        });
         observeCart();
         getCategory();
         getProductsFirstTime();

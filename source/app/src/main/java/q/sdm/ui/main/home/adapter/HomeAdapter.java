@@ -24,7 +24,7 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
         void productItemClick(ProductResponse productResponse);
     }
 
-    List<ProductResponse> productResponseList = new ArrayList<>();
+    public List<ProductResponse> productResponseList = new ArrayList<>();
     List<CategoryResponse> categoryResponseList = new ArrayList<>();
     CategoryAdapter categoryAdapter;
 
@@ -67,6 +67,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.HomeAdapterVie
     public void onBindViewHolder(@NonNull HomeAdapterViewHolder holder, int position) {
         int viewType = holder.getItemViewType();
         if (viewType == 0) {
+            if (holder.layoutCategoryBarBinding.rv.getAdapter()!=null) {
+                return;
+            }
             StaggeredGridLayoutManager.LayoutParams layoutParams = new StaggeredGridLayoutManager.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.setFullSpan(true);
             holder.itemView.setLayoutParams(layoutParams);

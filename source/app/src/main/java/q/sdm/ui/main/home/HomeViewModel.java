@@ -9,8 +9,10 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import q.sdm.MVVMApplication;
 import q.sdm.data.Repository;
+import q.sdm.data.model.api.ResponseListObj;
 import q.sdm.data.model.api.response.address.AddressResponse;
 import q.sdm.data.model.api.response.category.CategoryResponse;
+import q.sdm.data.model.api.response.order.OrderHistoryResponse;
 import q.sdm.data.model.api.response.product.ProductResponse;
 import q.sdm.data.model.db.ProductEntity;
 import q.sdm.ui.base.activity.BaseRequestCallback;
@@ -19,6 +21,7 @@ import timber.log.Timber;
 
 public class HomeViewModel extends BaseFragmentViewModel {
     LiveData<List<ProductEntity>> productEntityLiveData;
+    ResponseListObj<ProductResponse> productList;
 
     public HomeViewModel(Repository repository, MVVMApplication application) {
         super(repository, application);
@@ -51,7 +54,12 @@ public class HomeViewModel extends BaseFragmentViewModel {
                 .subscribe(
                         response -> {
                             if (response.isResult()) {
-                                callback.doSuccess(response.getData().getData());
+                                if (productList == null) {
+                                    productList = response.getData();
+                                } else {
+                                    productList.copy(response.getData());
+                                }
+                                callback.doSuccess(productList.getData());
                             } else {
                                 callback.doFail(response.getMessage(), response.getCode());
                             }

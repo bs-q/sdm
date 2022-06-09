@@ -20,6 +20,9 @@ import com.paypal.checkout.createorder.ShippingPreference;
 import com.paypal.checkout.createorder.UserAction;
 import com.paypal.checkout.order.Amount;
 import com.paypal.checkout.order.AppContext;
+import com.paypal.checkout.order.Capture;
+import com.paypal.checkout.order.CaptureOrderResult;
+import com.paypal.checkout.order.OnCaptureComplete;
 import com.paypal.checkout.order.Order;
 import com.paypal.checkout.order.PurchaseUnit;
 import com.paypal.checkout.order.Shipping;
@@ -68,8 +71,16 @@ public class CartViewModel extends BaseViewModel {
                 ,"q.sdm://paypalpay"
                 ,CurrencyCode.USD
                 ,UserAction.PAY_NOW));
+
         PayPalCheckout.registerCallbacks(approval -> {
-            message.postValue("ss");
+
+            approval.getOrderActions().capture(new OnCaptureComplete() {
+                @Override
+                public void onCaptureComplete(@NonNull CaptureOrderResult captureOrderResult) {
+
+                    message.postValue("ss");
+                }
+            });
         },()->{
             message.postValue("cc");
         },errorInfo -> {
