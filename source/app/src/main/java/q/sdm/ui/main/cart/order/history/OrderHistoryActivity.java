@@ -57,8 +57,10 @@ public class OrderHistoryActivity extends BaseActivity<ActivityOrderHistoryBindi
         viewModel.getOrderHistory(10, 0, new BaseRequestCallback<List<OrderHistoryResponse>>() {
             @Override
             public void doSuccess(List<OrderHistoryResponse> response) {
-                orderHistoryAdapter.orderHistoryResponses = response;
-                orderHistoryAdapter.notifyDataSetChanged();
+                if (response != null && !response.isEmpty()){
+                    orderHistoryAdapter.orderHistoryResponses = response;
+                    orderHistoryAdapter.notifyDataSetChanged();
+                }
             }
         });
     }
@@ -77,8 +79,10 @@ public class OrderHistoryActivity extends BaseActivity<ActivityOrderHistoryBindi
                     viewModel.getOrderHistory(10, viewModel.orderList.getNext(), new BaseRequestCallback<List<OrderHistoryResponse>>() {
                         @Override
                         public void doSuccess(List<OrderHistoryResponse> response) {
-                            orderHistoryAdapter.orderHistoryResponses = response;
-                            orderHistoryAdapter.notifyDataSetChanged();
+                            if (response != null && !response.isEmpty()) {
+                                orderHistoryAdapter.orderHistoryResponses = response;
+                                orderHistoryAdapter.notifyDataSetChanged();
+                            }
                         }
                     });
                 }

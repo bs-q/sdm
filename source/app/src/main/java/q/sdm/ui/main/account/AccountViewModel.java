@@ -10,5 +10,6 @@ public class AccountViewModel extends BaseFragmentViewModel {
     }
     public void logout(){
         repository.getSharedPreferences().setToken(null);
+        application.getCustomerLocation().set("...");
     }
 }

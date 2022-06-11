@@ -7,6 +7,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import q.sdm.MVVMApplication;
 import q.sdm.data.Repository;
+import q.sdm.data.model.api.response.EmptyResponse;
 import q.sdm.data.model.api.response.address.AddressResponse;
 import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.base.activity.BaseViewModel;
@@ -31,6 +32,24 @@ public class LocationViewModel extends BaseViewModel {
                     callback.doError(throwable,this);
                 }
         ));
+    }
+    public void deleteAddress(Long id , BaseRequestCallback<EmptyResponse> callback){
+        showLoading();
+        compositeDisposable.add(repository.getApiService()
+        .deleteAddress(id).subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread()).subscribe(
+                response->{
+                    if (response.isResult()){
+                        hideLoading();
+                        callback.doSuccess(response.getData());
+                    } else {
+                        hideLoading();
+                        callback.doFail(response.getMessage(), response.getCode());
+                    }
+                },throwable -> {
+                    callback.doError(throwable,this);
+                        }
+                ));
     }
     public void saveAddress(AddressResponse addressResponse){
         repository.getSharedPreferences().setCurrentLocation(addressResponse.getId());

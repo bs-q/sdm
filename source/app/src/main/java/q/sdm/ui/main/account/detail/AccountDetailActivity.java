@@ -17,6 +17,7 @@ import q.sdm.ui.main.account.request.RequestPasswordSheet;
 import timber.log.Timber;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -70,7 +71,15 @@ implements View.OnClickListener {
             navigateToEditEmail();
         } else if (v.getId() == viewBinding.passwordLayer.getId()) {
             navigateToEditPassword();
+        } else if (v.getId() == viewBinding.exclamation.getId()){
+            showUpdateMailDialog();
         }
+    }
+    private void showUpdateMailDialog(){
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setMessage("Vui lòng cập nhật email sử dụng tính năng tìm lại mật khẩu")
+                .create();
+        alertDialog.show();
     }
     private void navigateToEditPassword(){
         Intent it = new Intent(this, UpdatePasswordActivity.class);

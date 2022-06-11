@@ -30,6 +30,7 @@ import q.sdm.data.model.api.response.province.ProvinceResponse;
 import q.sdm.data.model.api.response.register.RegisterResponse;
 import q.sdm.data.model.api.response.upload.UploadResponse;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
@@ -100,4 +101,7 @@ public interface ApiService {
 
     @POST("/v1/account/forget_password")
     Observable<ResponseWrapper<UpdatePasswordResponse>> updatePassword(@Body UpdatePasswordRequest request);
+
+    @DELETE("/v1/addresses/delete/{id}")
+    Observable<ResponseWrapper<EmptyResponse>> deleteAddress(@Path("id") Long addressId);
 }

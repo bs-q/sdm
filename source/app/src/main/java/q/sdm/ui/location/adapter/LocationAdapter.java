@@ -15,6 +15,7 @@ import q.sdm.R;
 import q.sdm.data.model.api.response.address.AddressResponse;
 import q.sdm.databinding.LayoutAddLocationBinding;
 import q.sdm.databinding.LayoutLocationItemBinding;
+import q.sdm.packages.swipe.ViewBinderHelper;
 
 public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.LocationAdapterViewHolder> {
 
@@ -22,8 +23,13 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
     public interface LocationAdapterCallback{
         void addLocation();
         void setDefaultLocation(AddressResponse addressResponse);
+        void deleteLocation(AddressResponse addressResponse);
     }
     public LocationAdapterCallback callback;
+    private final ViewBinderHelper binderHelper = new ViewBinderHelper();
+    public LocationAdapter(){
+        binderHelper.setOpenOnlyOne(true);
+    }
     @NonNull
     @Override
     public LocationAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -51,11 +57,15 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
             holder.layoutAddLocationBinding.executePendingBindings();
         } else {
             holder.layoutLocationItemBinding.setLocation(addressResponseList.get(position));
+            binderHelper.bind(holder.layoutLocationItemBinding.swipeLayout, addressResponseList.get(position).getId().toString());
             holder.layoutLocationItemBinding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     callback.setDefaultLocation(holder.layoutLocationItemBinding.getLocation());
                 }
+            });
+            holder.layoutLocationItemBinding.delete.setOnClickListener((v)->{
+                callback.deleteLocation(holder.layoutLocationItemBinding.getLocation());
             });
             holder.layoutLocationItemBinding.executePendingBindings();
         }

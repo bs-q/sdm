@@ -14,6 +14,7 @@
         <variable
             name="product"
             type="q.sdm.data.model.api.response.product.ProductResponse" />
+        <import type="android.view.View"/>
     </data>
     <FrameLayout
         android:background="@drawable/cart_edit_background"
@@ -60,7 +61,7 @@
                         android:maxLines="2"
                         android:id="@+id/pd_name"
                         android:textSize="@dimen/_14ssp"
-                        android:textColor="#666666"
+                        android:textColor="#424242"
                         style="@style/sfbold"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -71,20 +72,48 @@
                         app:layout_constraintTop_toBottomOf="@id/pd_name"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginBottom="@dimen/_4sdp"
-                        app:layout_constraintEnd_toEndOf="parent"
                         android:maxLines="2"
-                        android:id="@+id/pd_money"
+                        android:id="@+id/pd_money_sale"
                         android:textSize="@dimen/_16ssp"
                         android:textColor="@color/primary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/money_format(product.productPrice*(((double)1)-(double)(product.saleoff/100)))}"
+                        />
+                    <TextView
+                        android:visibility="@{product.saleoff == 0 ? View.GONE : View.VISIBLE}"
+                        style="@style/sfmedium"
+                        android:layout_marginHorizontal="@dimen/_6sdp"
+                        app:layout_constraintTop_toTopOf="@id/pd_money_sale"
+                        app:layout_constraintBottom_toBottomOf="@id/pd_money_sale"
+                        app:layout_constraintStart_toEndOf="@id/pd_money_sale"
+                        android:maxLines="2"
+                        android:id="@+id/pd_money_real"
+                        android:textSize="@dimen/_12ssp"
+                        android:textColor="#424242"
+                        app:strike="@{true}"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/money_format(product.productPrice),default=`100000`}"/>
+                    <TextView
+                        style="@style/sfmedium"
+                        android:layout_marginHorizontal="@dimen/_6sdp"
+                        app:layout_constraintTop_toBottomOf="@id/pd_money_sale"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginBottom="@dimen/_4sdp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:maxLines="2"
+                        android:id="@+id/instock"
+                        android:textSize="@dimen/_8ssp"
+                        android:textColor="#7E8389"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@{@string/money_format(product.productPrice)}"/>
-
+                        android:text="@{`Số sản phẩm trong kho: ` + String.valueOf(product.quantityInStock),default=`Số sản phẩm trong kho: `}"/>
 
                     <WebView
                         android:layout_marginTop="@dimen/_16sdp"
                         android:layout_marginHorizontal="@dimen/_6sdp"
-                        app:layout_constraintTop_toBottomOf="@id/pd_money"
+                        app:layout_constraintTop_toBottomOf="@id/instock"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:id="@+id/pd_description"
@@ -102,7 +131,7 @@
                         android:layout_height="@dimen/_200sdp"
                         android:layout_marginTop="@dimen/_16sdp"
                         android:layout_marginHorizontal="@dimen/_6sdp"
-                        app:layout_constraintTop_toBottomOf="@id/pd_money"
+                        app:layout_constraintTop_toBottomOf="@id/instock"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent">
                         <include layout="@layout/layout_preview_description"/>
@@ -111,7 +140,7 @@
             </androidx.core.widget.NestedScrollView>
             <ImageView
                 android:id="@+id/close"
-                android:onClick="@{(v)->a.onClick(v)}"
+                android:onClick="@{(v)->a.dismiss()}"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:layout_marginStart="@dimen/_6sdp"
                 android:layout_width="@dimen/_16sdp"

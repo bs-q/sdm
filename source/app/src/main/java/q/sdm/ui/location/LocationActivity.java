@@ -13,6 +13,7 @@ import java.util.List;
 
 import q.sdm.BR;
 import q.sdm.R;
+import q.sdm.data.model.api.response.EmptyResponse;
 import q.sdm.data.model.api.response.address.AddressResponse;
 import q.sdm.databinding.ActivityAddressesBinding;
 import q.sdm.databinding.ActivityLoginBinding;
@@ -21,6 +22,7 @@ import q.sdm.ui.address.AddAddressActivity;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.location.adapter.LocationAdapter;
+import q.sdm.utils.ErrorUtils;
 
 public class LocationActivity extends BaseActivity<ActivityAddressesBinding,LocationViewModel>
         implements View.OnClickListener, LocationAdapter.LocationAdapterCallback {
@@ -112,5 +114,34 @@ public class LocationActivity extends BaseActivity<ActivityAddressesBinding,Loca
                 .create()
                 ;
         alertDialog.show();
+    }
+
+    @Override
+    public void deleteLocation(AddressResponse addressResponse) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
+                .setTitle("Xoá địa chỉ giao hàng")
+                .setMessage("Bạn có muốn xoá địa chỉ giao hàng này không?")
+                .setPositiveButton("Có",(dialog,id)->{
+                    deleteAddress(addressResponse);
+                })
+                .setNegativeButton("Không",(dialog,id)->{
+                    dialog.dismiss();
+                })
+                .create();
+        alertDialog.show();
+    }
+    private void deleteAddress(AddressResponse addressResponse) {
+        viewModel.deleteAddress(addressResponse.getId(), new BaseRequestCallback<EmptyResponse>() {
+            @Override
+            public void doSuccess(EmptyResponse response) {
+                locationAdapter.addressResponseList.remove(addressResponse);
+                locationAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void doFail(String message, String code) {
+                viewModel.showErrorMessage(ErrorUtils.getMessageFromError(code));
+            }
+        });
     }
 }

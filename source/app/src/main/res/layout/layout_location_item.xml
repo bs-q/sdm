@@ -7,7 +7,30 @@
             name="location"
             type="q.sdm.data.model.api.response.address.AddressResponse" />
     </data>
+    <q.sdm.packages.swipe.SwipeRevealLayout
+        android:id="@+id/swipe_layout"
+        app:minDistRequestDisallowParent="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_7sdp"
+        android:layout_marginVertical="@dimen/_3sdp"
+        app:dragEdge="right"
+        app:mode="same_level">
 
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/delete"
+        app:cardBackgroundColor="@android:color/holo_red_dark"
+        app:contentPaddingLeft="@dimen/_15sdp"
+        app:contentPaddingRight="@dimen/_15sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        >
+        <ImageView
+            android:layout_gravity="center"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:src="@drawable/ic_delete" />
+    </com.google.android.material.card.MaterialCardView>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -40,5 +63,5 @@
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintTop_toBottomOf="@id/address"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </q.sdm.packages.swipe.SwipeRevealLayout>
 </layout>

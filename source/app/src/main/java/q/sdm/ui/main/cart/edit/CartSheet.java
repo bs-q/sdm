@@ -67,11 +67,15 @@ public class CartSheet extends BaseSheet<ActivityEditCartBinding,CartSheetViewMo
         viewModel.quantityString.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-                Integer amount = Integer.valueOf(viewModel.quantityString.get());
+                int amount;
+                if (viewModel.quantityString.get().isEmpty()) {
+                    amount = 1;
+                } else {
+                    amount = Integer.parseInt(viewModel.quantityString.get());
+                }
                 if (amount>myApplication().getEditProduct().quantityInStock) {
                     viewModel.quantity.set(myApplication().getEditProduct().quantityInStock);
                     viewModel.quantityString.set(String.valueOf(myApplication().getEditProduct().quantityInStock));
-                    binding.aecQuantity.clearFocus();
                 } else {
                     viewModel.quantity.set(amount);
                 }
@@ -81,9 +85,9 @@ public class CartSheet extends BaseSheet<ActivityEditCartBinding,CartSheetViewMo
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 //You can identify which key pressed buy checking keyCode value with KeyEvent.KEYCODE_
-                if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
-                    if (viewModel.quantityString.get().length()==1) return true;
-                }
+//                if (keyCode == KeyEvent.KEYCODE_DEL && event.getAction() == KeyEvent.ACTION_DOWN) {
+//                    if (viewModel.quantityString.get().length()==1) return true;
+//                }
                 return false;
             }
         });

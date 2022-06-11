@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <import type="android.view.View"/>
         <variable
             name="a"
             type="q.sdm.ui.main.account.detail.AccountDetailActivity" />
@@ -239,6 +239,17 @@
                         android:layout_alignParentEnd="true"
                         android:rotation="90"
                         android:src="@drawable/arrow" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:tint="@color/primary"
+                        android:background="@color/white"
+                        android:onClick="@{(v)->a.onClick(v)}"
+                        android:visibility="@{profile.customerEmail == null ? View.VISIBLE : View.INVISIBLE}"
+                        android:id="@+id/exclamation"
+                        android:layout_centerVertical="true"
+                        android:layout_width="@dimen/_14sdp"
+                        android:layout_height="@dimen/_14sdp"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/exclamation_mark" />
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/_1sdp"

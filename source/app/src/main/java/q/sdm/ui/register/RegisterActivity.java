@@ -11,6 +11,7 @@ import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.activity.BaseCallback;
 import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.login.LoginActivity;
+import q.sdm.ui.register.complete.RegisterCompleteActivity;
 import q.sdm.ui.register.verify.VerifyActivity;
 import q.sdm.utils.ErrorUtils;
 
@@ -107,8 +108,7 @@ implements View.OnClickListener {
             viewModel.register(new BaseRequestCallback<RegisterResponse>() {
                 @Override
                 public void doSuccess(RegisterResponse response) {
-                    navigateToLogin();
-//                    navigateToVerify();
+                    navigateToRegisterComplete();
                 }
 
                 @Override
@@ -119,6 +119,11 @@ implements View.OnClickListener {
         } else if (v.getId() == R.id.login_btn){
             navigateToLogin();
         }
+    }
+    private void navigateToRegisterComplete(){
+        Intent it = new Intent(this, RegisterCompleteActivity.class);
+        startActivity(it);
+        finish();
     }
     private void navigateToVerify(){
         Intent it = new Intent(this, VerifyActivity.class);
