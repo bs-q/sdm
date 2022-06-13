@@ -18,6 +18,7 @@ import timber.log.Timber;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -58,7 +59,7 @@ implements View.OnClickListener {
         viewBinding.setVm(viewModel);
         viewBinding.setProfile(myApplication().getProfileResponse());
         viewModel.username.set(myApplication().getProfileResponse().getCustomerFullName());
-        ImageBindingAdapter.setAvatarImage(viewBinding.acdAvatar,myApplication().getProfileResponse().getAvatar());
+//        ImageBindingAdapter.setAvatarImage(viewBinding.acdAvatar,myApplication().getProfileResponse().getAvatar());
     }
 
     @Override
@@ -125,13 +126,13 @@ implements View.OnClickListener {
        currentUri = img;
        RequestPasswordSheet requestPasswordSheet = new RequestPasswordSheet(currentUri,myApplication().getProfileResponse().getCustomerFullName());
        requestPasswordSheet.show(getSupportFragmentManager(),"REQUEST_PWD");
-
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         viewBinding.setProfile(myApplication().getProfileResponse());
+        ImageBindingAdapter.setAvatarImage(viewBinding.acdAvatar,myApplication().getProfileResponse().getAvatar());
         viewBinding.executePendingBindings();
     }
 

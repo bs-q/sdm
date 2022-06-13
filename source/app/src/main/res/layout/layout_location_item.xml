@@ -32,6 +32,7 @@
             android:src="@drawable/ic_delete" />
     </com.google.android.material.card.MaterialCardView>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView

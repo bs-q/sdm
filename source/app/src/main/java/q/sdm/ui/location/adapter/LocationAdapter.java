@@ -58,7 +58,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.Locati
         } else {
             holder.layoutLocationItemBinding.setLocation(addressResponseList.get(position));
             binderHelper.bind(holder.layoutLocationItemBinding.swipeLayout, addressResponseList.get(position).getId().toString());
-            holder.layoutLocationItemBinding.getRoot().setOnClickListener(new View.OnClickListener() {
+            holder.layoutLocationItemBinding.root.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     callback.setDefaultLocation(holder.layoutLocationItemBinding.getLocation());
