@@ -56,12 +56,12 @@ public class VerifyViewModel extends BaseViewModel {
     }
     public void startTimer(){
         lockResend.set(true);
-        compositeDisposable.add(Observable.interval(30, TimeUnit.SECONDS,
+        compositeDisposable.add(Observable.intervalRange(0,31,0,1, TimeUnit.SECONDS,
                 Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribe(
                     response ->{
                         Long remain = 30 - response;
                         String remainString = String.valueOf(remain);
-                        String remainParse = "00:00:"+remainString+"s";
+                        String remainParse = (remain >= 10 ? "00:00:" : "00:00:0") + remainString + "s";
                         countdown.set(remainParse);
                     },throwable -> {
 

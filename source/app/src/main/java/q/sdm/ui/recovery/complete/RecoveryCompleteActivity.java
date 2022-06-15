@@ -1,7 +1,10 @@
 package q.sdm.ui.recovery.complete;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import q.sdm.BR;
 import q.sdm.R;
@@ -28,10 +31,24 @@ implements View.OnClickListener {
     }
 
     @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewBinding.setA(this);
+        viewBinding.setVm(viewModel);
+    }
+
+    @Override
     public void onClick(View v) {
         navigateToLogin();
     }
     private void navigateToLogin(){
+        Intent it = new Intent(this, LoginActivity.class);
+        it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        startActivity(it);
+    }
+
+    @Override
+    public void onBackPressed() {
         Intent it = new Intent(this, LoginActivity.class);
         it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(it);

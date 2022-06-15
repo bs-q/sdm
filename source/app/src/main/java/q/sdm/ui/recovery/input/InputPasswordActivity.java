@@ -10,6 +10,7 @@ import q.sdm.di.component.ActivityComponent;
 import q.sdm.ui.base.activity.BaseActivity;
 import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.login.LoginActivity;
+import q.sdm.ui.recovery.complete.RecoveryCompleteActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -47,7 +48,7 @@ implements View.OnClickListener {
         viewModel.password.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable sender, int propertyId) {
-                viewModel.validPassword.set(viewModel.password.get().trim().length()>8);
+                viewModel.validPassword.set(viewModel.password.get().trim().length()>=8);
             }
         });
     }
@@ -57,9 +58,9 @@ implements View.OnClickListener {
         viewModel.updatePassword(new BaseRequestCallback<UpdatePasswordResponse>() {
             @Override
             public void doSuccess(UpdatePasswordResponse response) {
-                Intent it = new Intent(InputPasswordActivity.this, LoginActivity.class);
-                it.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                Intent it = new Intent(InputPasswordActivity.this, RecoveryCompleteActivity.class);
                 startActivity(it);
+                finish();
             }
 
             @Override
