@@ -20,8 +20,9 @@
 
         <ImageView
             android:id="@+id/register_complete_img"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_bias=".35"
             app:layout_constraintVertical_bias=".2"
             app:layout_constraintWidth_percent=".6"
             app:layout_constraintDimensionRatio="W,274:242"
