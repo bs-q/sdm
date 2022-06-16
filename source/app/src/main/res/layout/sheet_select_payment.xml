@@ -33,7 +33,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
         <ImageView
-
+            android:onClick="@{(v)->a.dismiss()}"
             android:id="@+id/close"
             android:layout_marginTop="@dimen/_6sdp"
             android:layout_marginStart="@dimen/_6sdp"
