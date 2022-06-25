@@ -160,8 +160,6 @@
                 android:layout_height="wrap_content"
                 />
             <RelativeLayout
-                android:focusable="true"
-                android:focusableInTouchMode="true"
                 android:onClick="@{(v)->a.onClick(v)}"
                 android:layout_marginHorizontal="@dimen/_14sdp"
                 android:id="@+id/address_layer"
@@ -181,11 +179,6 @@
                     android:layout_marginVertical="@dimen/_4sdp"
                     android:layout_marginEnd="@dimen/_16sdp"
                     android:background="@android:color/transparent"
-                    android:clickable="false"
-                    android:enabled="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:inputType="textPersonName"
                     android:text="@{vm.receiverAddress}"
                     android:textColor="#424242"
                     android:textSize="@dimen/_14ssp" />
