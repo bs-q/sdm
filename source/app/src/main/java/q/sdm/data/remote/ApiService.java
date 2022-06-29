@@ -28,6 +28,7 @@ import q.sdm.data.model.api.response.order.OrderHistoryResponse;
 import q.sdm.data.model.api.response.product.ProductResponse;
 import q.sdm.data.model.api.response.province.ProvinceResponse;
 import q.sdm.data.model.api.response.register.RegisterResponse;
+import q.sdm.data.model.api.response.setting.SettingResponse;
 import q.sdm.data.model.api.response.upload.UploadResponse;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -104,4 +105,10 @@ public interface ApiService {
 
     @DELETE("/v1/addresses/delete/{id}")
     Observable<ResponseWrapper<EmptyResponse>> deleteAddress(@Path("id") Long addressId);
+
+    @GET("/v1/settings/store-info")
+    Observable<ResponseWrapper<DataWrapper<List<SettingResponse>>>> getSetting();
+
+    @GET("/v1/orders/client-cancel-orders/{id}")
+    Observable<ResponseWrapper<EmptyResponse>> cancelOrder(@Path("id") Long id);
 }

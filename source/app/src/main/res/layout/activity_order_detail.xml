@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.view.View"/>
         <variable
             name="defaultName"
             type="String" />
@@ -124,6 +126,7 @@
             app:vat="@{vm.vat}"
             app:sale="@{vm.sale}"
             app:reduce="@{vm.reduce}"
+            app:vatPercent="@{vm.vatPercent}"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             layout="@layout/layout_pre_calculate"
@@ -179,8 +182,33 @@
             layout="@layout/layout_cart_payment_detail"
             android:id="@+id/fc_payment"
             android:layout_marginHorizontal="@dimen/_14sdp"
+            app:layout_constraintBottom_toTopOf="@id/cancel_btn"
             android:layout_marginBottom="@dimen/_14sdp"
             app:layout_constraintBottom_toBottomOf="parent"/>
+        <RelativeLayout
+            android:visibility="@{(vm.canCancelOrder || order.ordersState == 4) ? View.VISIBLE : View.GONE}"
+            android:onClick="@{(v)->a.onClick(v)}"
+            android:clickable="@{vm.canCancelOrder ? true : false}"
+            android:layout_marginBottom="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/cancel_btn"
+            android:background="@drawable/login_btn_active"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_34sdp"
+            android:layout_marginHorizontal="@dimen/_14sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginVertical="@dimen/_3sdp"
+                android:text="@{order.ordersState == 4 ? `Đơn hàng đã bị huỷ`: `Huỷ đơn`}"
+                android:textColor='@color/login_text_active'
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

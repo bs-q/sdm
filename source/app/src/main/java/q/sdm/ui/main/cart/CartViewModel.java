@@ -53,6 +53,8 @@ import timber.log.Timber;
 public class CartViewModel extends BaseViewModel {
     public ObservableDouble total = new ObservableDouble(0);
     public ObservableDouble vat = new ObservableDouble(0);
+    public ObservableField<String> vatPercent = new ObservableField<String>("0");
+
     public ObservableDouble reduce = new ObservableDouble(0);
     public ObservableField<String> sale = new ObservableField<>("0");
     public ObservableInt selectedPayment = new ObservableInt(1);

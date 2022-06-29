@@ -29,7 +29,7 @@ public class OrderHistoryResponse {
         } else if (ordersState == ORDERS_STATE_DONE) {
             return R.color.order_green;
         }
-        return R.color.black;
+        return R.color.primary;
     }
     public String getStateMessage(){
         if (ordersState == ORDERS_STATE_CREATED) {
@@ -41,7 +41,7 @@ public class OrderHistoryResponse {
         } else if (ordersState == ORDERS_STATE_DONE) {
             return "Hoàn tất";
         }
-        return "Đang chờ";
+        return "Đã huỷ";
     }
 
     public static final Integer ORDERS_STATE_CREATED = 0;

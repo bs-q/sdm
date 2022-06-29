@@ -15,6 +15,7 @@ import q.sdm.ui.product.ProductDetailActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
@@ -23,7 +24,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding,OrderDetailViewModel> implements OrderDetailAdapter.OrderDetailAdapterCallback {
+public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding,OrderDetailViewModel> implements OrderDetailAdapter.OrderDetailAdapterCallback
+, View.OnClickListener {
 
     public static OrderHistoryDetailResponse historyDetailResponse;
     private OrderDetailAdapter adapter;
@@ -62,6 +64,7 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
         viewBinding.setA(this);
         viewBinding.setVm(viewModel);
         setupCartAdapter();
+        viewModel.checkCancelTime();
     }
     private void setupCartAdapter(){
         adapter = new OrderDetailAdapter();
@@ -78,7 +81,8 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
         viewModel.total.set(viewModel.totalAndVat.get()/1.1/(1-(double)historyDetailResponse.getOrdersSaleOff()/100));
         viewModel.sale.set(String.valueOf(historyDetailResponse.getOrdersSaleOff()));
         viewModel.reduce.set(viewModel.total.get()*historyDetailResponse.getOrdersSaleOff()/100);
-        viewModel.vat.set((viewModel.total.get()-viewModel.reduce.get())*0.1);
+        viewModel.vat.set((viewModel.total.get()-viewModel.reduce.get())*historyDetailResponse.getOrdersVat()/100);
+        viewModel.vatPercent.set(String.valueOf(historyDetailResponse.getOrdersVat().intValue()));
         adapter.productEntities = productEntityList;
         adapter.callback = this;
         viewBinding.fcRv.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
@@ -89,4 +93,13 @@ public class OrderDetailActivity extends BaseActivity<ActivityOrderDetailBinding
     public void productCallback(ProductEntity productEntity) {
     }
 
+    @Override
+    public void onClick(View v) {
+        viewModel.cancelOrder(new BaseRequestCallback<Boolean>() {
+            @Override
+            public void doSuccess(Boolean response) {
+                finish();
+            }
+        });
+    }
 }

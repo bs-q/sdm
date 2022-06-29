@@ -15,6 +15,9 @@
         <variable
             name="vat"
             type="androidx.databinding.ObservableDouble" />
+        <variable
+            name="vatPercent"
+            type="String" />
     </data>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -96,7 +99,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 style="@style/sfmedium"
                 android:textColor="#333333"
-                android:text="VAT:"
+                android:text="@{`VAT (`+vatPercent+`%):`}"
                 android:textSize="@dimen/_12ssp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

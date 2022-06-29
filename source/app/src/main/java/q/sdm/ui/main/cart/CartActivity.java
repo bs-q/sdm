@@ -137,7 +137,8 @@ public class CartActivity extends BaseActivity<FragmentCartBinding, CartViewMode
                 viewModel.total.set(total);
                 viewModel.reduce.set(total*myApplication().getProfileResponse().getSaleOff()/100);
                 viewModel.sale.set(String.valueOf(myApplication().getProfileResponse().getSaleOff()));
-                viewModel.vat.set((total+viewModel.reduce.get())*0.1);
+                viewModel.vat.set((total+viewModel.reduce.get())*myApplication().getVat()/100);
+                viewModel.vatPercent.set(String.valueOf(myApplication().getVat().intValue()));
                 viewModel.totalAndVat.set(total+viewModel.vat.get());
                 cartAdapter.notifyDataSetChanged();
             }

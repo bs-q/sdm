@@ -9,9 +9,12 @@ import q.sdm.MVVMApplication;
 import q.sdm.data.Repository;
 import q.sdm.data.model.api.request.LoginRequest;
 import q.sdm.data.model.api.response.account.ProfileResponse;
+import q.sdm.data.model.api.response.setting.SettingResponse;
+import q.sdm.ui.base.MyClosure;
 import q.sdm.ui.base.activity.BaseCallback;
 import q.sdm.ui.base.activity.BaseRequestCallback;
 import q.sdm.ui.base.activity.BaseViewModel;
+import timber.log.Timber;
 
 public class LoginViewModel extends BaseViewModel {
     public ObservableField<String> email = new ObservableField<>("");
@@ -31,6 +34,35 @@ public class LoginViewModel extends BaseViewModel {
     public ObservableBoolean showSplashScreen = new ObservableBoolean(true);
     public LoginViewModel(Repository repository, MVVMApplication application) {
         super(repository, application);
+        getSetting(()->{});
+    }
+
+    public void getSetting(MyClosure closure){
+        compositeDisposable.add(repository.getApiService().getSetting().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).subscribe(
+                        response->{
+                            if (response.isResult()) {
+                                SettingResponse time = response.getData().getData().stream().filter(s->s.getKey().equals(
+                                        SettingResponse.ORDERS_LIMIT_CANCEL_TIME
+                                )).findFirst().orElse(null);
+                                if (time != null) {
+                                    application.setTimeLimit(Long.valueOf(time.getValue()));
+                                    Timber.d("get time success");
+
+                                }
+                                SettingResponse vat = response.getData().getData().stream().filter(s->s.getKey().equals(
+                                        SettingResponse.VAT_CLIENT
+                                )).findFirst().orElse(null);
+                                if (time != null) {
+                                    application.setVat(Double.valueOf(vat.getValue()));
+                                    Timber.d("get vat success");
+                                }
+                                closure.run();
+                            }
+                        },throwable -> {
+                            Timber.d(throwable);
+                        }
+                ));
     }
     public void login(BaseRequestCallback<ProfileResponse> callback){
         showLoading();

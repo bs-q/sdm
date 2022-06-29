@@ -78,6 +78,14 @@ public class MVVMApplication extends Application{
     @Getter
     @Setter
     private String email;
+
+    @Getter
+    @Setter
+    private Double vat;
+
+    @Getter
+    @Setter
+    private Long timeLimit = 0L;
     @Override
     public void onCreate() {
         super.onCreate();
