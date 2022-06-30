@@ -16,6 +16,7 @@ import q.sdm.ui.main.cart.order.history.adapter.OrderHistoryAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,6 +83,7 @@ public class OrderHistoryActivity extends BaseActivity<ActivityOrderHistoryBindi
                             if (response != null && !response.isEmpty()) {
                                 orderHistoryAdapter.orderHistoryResponses = response;
                                 orderHistoryAdapter.notifyDataSetChanged();
+                                viewBinding.rv.smoothScrollBy(0,300, new AccelerateDecelerateInterpolator());
                             }
                         }
                     });

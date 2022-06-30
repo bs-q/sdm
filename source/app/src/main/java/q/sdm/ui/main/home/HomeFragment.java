@@ -76,7 +76,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding,HomeViewModel
                            public void doSuccess(List<ProductResponse> response) {
                                int positionStart = homeAdapter.productResponseList.size()+1;
                                homeAdapter.notifyItemRangeInserted(positionStart,response.size());
-                               binding.rv.smoothScrollBy(0,300, new AccelerateDecelerateInterpolator());
+                               binding.rv.smoothScrollBy(0,500, new AccelerateDecelerateInterpolator());
                                stopFetch = true;
                            }
                        });
