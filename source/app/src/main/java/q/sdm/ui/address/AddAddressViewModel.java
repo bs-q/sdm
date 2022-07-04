@@ -30,7 +30,7 @@ public class AddAddressViewModel extends BaseViewModel {
 
     public boolean checkForm(){
         if (provinceId == null) {
-            showErrorMessage("Bạn chưa chọn Tình/Thành");
+            showErrorMessage("Bạn chưa chọn Tỉnh/Thành");
             return false;
         }
         if (districtId == null) {

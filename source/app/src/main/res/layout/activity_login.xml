@@ -77,7 +77,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="@dimen/_12ssp"
-                            android:text="Nhập mail và mật khẩu của bạn"
+                            android:text="Nhập số điện thoại và mật khẩu của bạn"
                             android:textStyle="bold"
                             android:textColor="@color/gray"/>
                     </LinearLayout>
