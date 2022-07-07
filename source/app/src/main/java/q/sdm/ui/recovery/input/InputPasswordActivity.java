@@ -66,7 +66,7 @@ implements View.OnClickListener {
             @Override
             public void doFail(String message, String code) {
                 BaseRequestCallback.super.doFail(message, code);
-                viewModel.showErrorMessage(message);
+                viewModel.showErrorMessage("Mã OTP không đúng");
             }
         });
     }
