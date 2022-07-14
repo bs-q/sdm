@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 import q.sdm.MVVMApplication;
 import q.sdm.data.Repository;
 import q.sdm.data.model.db.ProductEntity;
@@ -23,5 +25,12 @@ public class ProductAddedViewModel extends BaseViewModel {
 
     public ProductAddedViewModel(Repository repository, MVVMApplication application) {
         super(repository, application);
+    }
+
+    public void deleteProduct(ProductEntity productEntity) {
+        compositeDisposable.add(repository.getSqliteService().deleteProduct(productEntity)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe());
     }
 }

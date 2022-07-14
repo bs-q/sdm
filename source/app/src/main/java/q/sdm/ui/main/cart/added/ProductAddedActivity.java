@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.List;
 
 public class ProductAddedActivity extends BaseActivity<ActivityProductAddedBinding,ProductAddedViewModel>
-implements View.OnClickListener {
+        implements View.OnClickListener, ProductAddedAdapter.ProductAddedAdapterCallback {
 
     private ProductAddedAdapter productAddedAdapter;
 
@@ -51,7 +51,7 @@ implements View.OnClickListener {
         setupCartAdapter();
     }
     private void setupCartAdapter(){
-        productAddedAdapter = new ProductAddedAdapter();
+        productAddedAdapter = new ProductAddedAdapter(this);
         viewModel.observeProductsInCart();
         viewModel.productEntityLiveData.observe(this, new Observer<List<ProductEntity>>() {
             @Override
@@ -87,5 +87,10 @@ implements View.OnClickListener {
         Intent it = new Intent(this, CartActivity.class);
         startActivity(it);
         finish();
+    }
+
+    @Override
+    public void delete(ProductEntity productEntity) {
+        viewModel.deleteProduct(productEntity);
     }
 }

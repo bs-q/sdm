@@ -39,7 +39,7 @@
             app:layout_constraintStart_toEndOf="@id/thumbnail"
             app:layout_constraintTop_toTopOf="parent"
             android:textSize="@dimen/_12ssp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/delete"
             android:layout_marginTop="@dimen/_6sdp"
             android:textColor="#424242"
             style="@style/sfmedium"
@@ -48,6 +48,15 @@
             android:layout_width="0dp"
             android:id="@+id/name"
             android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:id="@+id/delete"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:src="@drawable/delete_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
         <TextView
             android:layout_marginTop="@dimen/_4sdp"
             android:paddingVertical="@dimen/_3sdp"

@@ -19,7 +19,13 @@ import q.sdm.databinding.LayoutProductItemBinding;
 public class ProductAddedAdapter extends RecyclerView.Adapter<ProductAddedAdapter.ProductAddedAdapterViewHolder> {
 
     public List<ProductEntity> productEntities = new ArrayList<>();
-
+    public interface ProductAddedAdapterCallback{
+        void delete(ProductEntity productEntity);
+    }
+    public ProductAddedAdapter(ProductAddedAdapterCallback callback){
+        this.callback = callback;
+    }
+    private ProductAddedAdapterCallback callback;
     @NonNull
     @Override
     public ProductAddedAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,6 +38,9 @@ public class ProductAddedAdapter extends RecyclerView.Adapter<ProductAddedAdapte
     @Override
     public void onBindViewHolder(@NonNull ProductAddedAdapterViewHolder holder, int position) {
         holder.layoutProductAddedBinding.setProduct(productEntities.get(position));
+        holder.layoutProductAddedBinding.delete.setOnClickListener(v->{
+            callback.delete(productEntities.get(position));
+        });
         holder.layoutProductAddedBinding.executePendingBindings();
     }
 
